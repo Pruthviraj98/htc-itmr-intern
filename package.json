@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chart.js": "^2.8.0",
+    "connect-form": "^0.2.1",
+    "consolidate": "^0.15.1",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "date-utils": "^1.2.21",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "html": "^1.0.0",
+    "moment": "^2.24.0",
+    "mustache": "^3.0.1",
+    "mysql": "^2.17.1",
+    "package.json": "^2.0.1",
+    "path": "^0.12.7",
+    "socket.io": "^2.2.0"
+  }
+}
