@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>socket.io - chart.js example</title>
+</head>
+<body>
+  <h1>Temperature</h1>
+  <canvas id="chart" width="400" height="150"></canvas>
+  <script type="text/javascript "src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script type="text/javascript">
+
+
+  //value for x-axis
+  var classifications = ['zero', 'one', 'two'];
+  //colours for each bar
+  var colouarray = ['red', 'green', 'yellow'];
+  //Let's initialData[] be the initial data set
+  var initialData = [10000, 20000, 30000];
+  //Let's updatedDataSet[] be the array to hold the upadted data set with every update call
+  var updatedDataSet;
+  /*Creating the bar chart*/
+  var ctx = document.getElementById("chart");
+
+  var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: 'Prediction',
+        data: initialData
+      }]
+    },
+    //redraw: {true},
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            max: 300000,
+            stepSize: 20000,
+          }
+        }]
+      }
+    }
+  });
+
+  /*Function to update the bar chart*/
+
+
+  /*Updating the bar chart with updated data in every second. */
+  setInterval(function() {
+    var socket = io.connect('http://localhost:3000'); //connect to server
+    console.log("calling after 3 seconds");
+    var dat=1;
+    socket.on('temp', function(data) { //As a temp data is received
+      // console.log(JSON.parse(this.data));
+        // console.log(data);
+        dat=JSON.parse(data);
+        var newVal=dat.class;
+        console.log(newVal);
+        chart.data.datasets.push({
+          data: newVal
+        });
+        chart.update(); //Update the graph.
+    });
+  }, 3000);
+
+
+</script>
+</body>
+</html>
