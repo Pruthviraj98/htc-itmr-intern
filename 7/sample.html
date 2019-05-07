@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Chart-mysql demo</title>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script>
+      // code to draw graph
+
+      function gData() {
+        $.get("http://localhost:3000/sample", function(result, status) {
+          alert(result);
+          var barData = {
+            labels:result[0],
+            datasets: [
+              {
+                label: 'Models frequencies',
+                fillColor: '#382765',
+                data: result[1]
+              }
+            ]
+          };
+         var context = document.getElementById('clients').getContext('2d');
+        //  var clientsChart = new Chart(context).Bar(barData);
+
+         var clientsChart = new Chart(context,{
+           type: 'line',
+           data: barData,
+           options: {
+               tooltips: {
+                   mode: 'dataset'
+               }
+           }
+          });
+        });
+     }
+    </script>
+  </head>
+
+  <body>
+    <h1>Frequencies</h1>
+    <button id="Get_Graph" onclick="gData(); return false">Get Graph<button/>
+    <canvas id="clients" width=3000 height=2000></canvas>
+  </body>
+</html>
