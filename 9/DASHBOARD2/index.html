@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<table style = "width:100%">
+<tr>
+<td>
+  MACHINE 1
+  <canvas id="chart1" width = "300" height = "270"></canvas>
+<td>
+  MACHINE 2
+  <canvas id="chart2" width = "300" height = "270"></canvas>
+<td>
+  MACHINE 3
+  <canvas id="chart3" width = "300" height = "270"></canvas>
+<td>
+  MACHINE 4
+  <canvas id="chart4" width = "300" height = "270"></canvas>
+</tr>
+<tr>
+<td>
+  MACHINE 5
+  <canvas id="chart5" width = "300" height = "270"></canvas>
+<td>
+  MACHINE 6
+  <canvas id="chart6" width = "300" height = "270"></canvas>
+<td>
+  MACHINE 7
+  <canvas id="chart7" width = "300" height = "270"></canvas>
+<td>
+  MACHINE 8
+  <canvas id="chart8" width = "300" height = "270"></canvas>
+</tr>
+</table>
+<style>
+body
+{
+  background-color: #cccccc;
+}
+</style>
+<script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script type="text/javascript">
+var socket = io.connect('http://localhost:3000/');
+
+var classifications = ['zero', 'one', 'two'];
+var colouarray = ['yellow', 'blue', 'red'];
+
+var initialData = [0, 0, 0];
+
+var ctx1 = document.getElementById("chart1");
+var ctx2 = document.getElementById("chart2");
+var ctx3 = document.getElementById("chart3");
+var ctx4 = document.getElementById("chart4");
+var ctx5 = document.getElementById("chart5");
+var ctx6 = document.getElementById("chart6");
+var ctx7 = document.getElementById("chart7");
+var ctx8 = document.getElementById("chart8");
+
+var data1= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 1",
+    data: initialData
+  }]
+}
+
+var data2= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 2",
+    data: initialData
+  }]
+}
+
+var data3= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 3",
+    data: initialData
+  }]
+}
+
+var data4= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 4",
+    data: initialData
+  }]
+}
+
+var data5= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 5",
+    data: initialData
+  }]
+}
+
+var data6= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 6",
+    data: initialData
+  }]
+}
+
+var data7= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 7",
+    data: initialData
+  }]
+}
+
+var data8= {
+  labels: classifications,
+  datasets: [{
+    backgroundColor: colouarray,
+    label: "Machine 8",
+    data: initialData
+  }]
+}
+
+var socket = io.connect('http://localhost:3000/');
+socket.on('temp', function(data) { //As a temp data is received
+    dat=JSON.parse(data);
+
+
+    var data1= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 1",
+        data: dat['zerOneTwo1']
+      }]
+    }
+    var chart1 = new Chart(ctx1, {
+    type: 'bar',
+    data: data1,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data2= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 2",
+        data: dat['zerOneTwo2']
+      }]
+    }
+    var chart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: data2,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data3= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 3",
+        data: dat['zerOneTwo3']
+      }]
+    }
+    var chart3 = new Chart(ctx3, {
+    type: 'bar',
+    data: data3,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data4= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 4",
+        data: dat['zerOneTwo4']
+      }]
+    }
+    var chart4 = new Chart(ctx4, {
+    type: 'bar',
+    data: data4,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data5= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 5",
+        data: dat['zerOneTwo5']
+      }]
+    }
+    var chart5 = new Chart(ctx5, {
+    type: 'bar',
+    data: data5,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data6= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 6",
+        data: dat['zerOneTwo6']
+      }]
+    }
+    var chart6 = new Chart(ctx6, {
+    type: 'bar',
+    data: data6,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data7= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 7",
+        data: dat['zerOneTwo7']
+      }]
+    }
+    var chart7 = new Chart(ctx7, {
+    type: 'bar',
+    data: data7,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+
+    var data8= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "Machine 8",
+        data: dat['zerOneTwo8']
+      }]
+    }
+    var chart8 = new Chart(ctx8, {
+    type: 'bar',
+    data: data8,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 80000,
+                  stepSize: 20000,
+                }
+              }]
+            }
+            }
+    });
+});
+</script>
+</body>
+</html>
