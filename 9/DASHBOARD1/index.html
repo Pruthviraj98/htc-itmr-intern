@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<table style = "width:100%">
+<tr>
+<td>
+  MACHINE 1
+  <canvas id="chart1" width = "300" height = "300"></canvas>
+<td>
+  MACHINE 2
+  <canvas id="chart2" width = "300" height = "300"></canvas>
+<td>
+  MACHINE 3
+  <canvas id="chart3" width = "300" height = "300"></canvas>
+<td>
+  MACHINE 4
+  <canvas id="chart4" width = "300" height = "300"></canvas>
+</tr>
+<tr>
+<td>
+  MACHINE 5
+  <canvas id="chart5" width = "300" height = "300"></canvas>
+<td>
+  MACHINE 6
+  <canvas id="chart6" width = "300" height = "300"></canvas>
+<td>
+  MACHINE 7
+  <canvas id="chart7" width = "300" height = "300"></canvas>
+<td>
+  MACHINE 8
+  <canvas id="chart8" width = "300" height = "300"></canvas>
+</tr>
+</table>
+<style>
+body
+{
+  background-color: #cccccc;
+}
+</style>
+<script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script type="text/javascript">
+
+//rolling data vizz starts here..............
+var data1 = {
+   labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+   datasets: [{
+     label: "Line Graph of oil Leaks",
+     backgroundColor:"rgba(255,255,0, 0.6)",
+     fillColor: "rgba(255, 255, 255, 0.5)",
+     strokeColor: "rgba(255, 255, 255, 0.5)",
+     pointColor: "rgba(255, 255, 255, 0.5)",
+     pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+     pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+     pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+   },{
+     label: "Line Graph of Water Leaks",
+     backgroundColor:"rgba(236, 236, 236, 0.3)",
+     fillColor: "rgba(236, 236, 236, 0.3)",
+     strokeColor: "rgba(236, 236, 236, 1)",
+     pointColor: "rgba(236, 236, 236, 1)",
+     pointStrokeColor: "rgba(236, 236, 236, 1)",
+     pointHighlightFill: "rgba(236, 236, 236, 1)",
+     pointHighlightStroke: "rgba(236, 236, 236, 1)",
+     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+   }]
+ };
+
+ var options1 = {
+   animation: false,
+   scaleOverride: false,
+   scaleSteps: 1,
+   scaleStepWidth: 2,
+ };
+
+ var ctx1 = document.getElementById("chart1");
+ var myLineChart1 = new Chart(ctx1, {
+     type: 'line',
+     data: data1,
+     options: options1
+ });
+
+
+ //rolling data vizz starts here..............
+ var data2 = {
+    labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+    datasets: [{
+      label: "Line Graph of oil Leaks",
+      backgroundColor:"rgba(255,255,0, 0.6)",
+      fillColor: "rgba(255, 255, 255, 0.5)",
+      strokeColor: "rgba(255, 255, 255, 0.5)",
+      pointColor: "rgba(255, 255, 255, 0.5)",
+      pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+      pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+      pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+    },{
+      label: "Line Graph of Water Leaks",
+      backgroundColor:"rgba(236, 236, 236, 0.3)",
+      fillColor: "rgba(236, 236, 236, 0.3)",
+      strokeColor: "rgba(236, 236, 236, 1)",
+      pointColor: "rgba(236, 236, 236, 1)",
+      pointStrokeColor: "rgba(236, 236, 236, 1)",
+      pointHighlightFill: "rgba(236, 236, 236, 1)",
+      pointHighlightStroke: "rgba(236, 236, 236, 1)",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+    }]
+  };
+
+  var options2 = {
+    animation: false,
+    scaleOverride: false,
+    scaleSteps: 1,
+    scaleStepWidth: 2,
+  };
+
+  var ctx2 = document.getElementById("chart2");
+  var myLineChart2 = new Chart(ctx2, {
+      type: 'line',
+      data: data2,
+      options: options2
+  });
+
+  //rolling data vizz starts here..............
+  var data3 = {
+     labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+     datasets: [{
+       label: "Line Graph of oil Leaks",
+       backgroundColor:"rgba(255,255,0, 0.6)",
+       fillColor: "rgba(255, 255, 255, 0.5)",
+       strokeColor: "rgba(255, 255, 255, 0.5)",
+       pointColor: "rgba(255, 255, 255, 0.5)",
+       pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+       pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+       pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+     },{
+       label: "Line Graph of Water Leaks",
+       backgroundColor:"rgba(236, 236, 236, 0.3)",
+       fillColor: "rgba(236, 236, 236, 0.3)",
+       strokeColor: "rgba(236, 236, 236, 1)",
+       pointColor: "rgba(236, 236, 236, 1)",
+       pointStrokeColor: "rgba(236, 236, 236, 1)",
+       pointHighlightFill: "rgba(236, 236, 236, 1)",
+       pointHighlightStroke: "rgba(236, 236, 236, 1)",
+       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+     }]
+   };
+
+   var options3 = {
+     animation: false,
+     scaleOverride: false,
+     scaleSteps: 1,
+     scaleStepWidth: 2,
+   };
+
+   var ctx3 = document.getElementById("chart3");
+   var myLineChart3 = new Chart(ctx3, {
+       type: 'line',
+       data: data3,
+       options: options3
+   });
+
+   //rolling data vizz starts here..............
+   var data4 = {
+      labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+      datasets: [{
+        label: "Line Graph of oil Leaks",
+        backgroundColor:"rgba(255,255,0, 0.6)",
+        fillColor: "rgba(255, 255, 255, 0.5)",
+        strokeColor: "rgba(255, 255, 255, 0.5)",
+        pointColor: "rgba(255, 255, 255, 0.5)",
+        pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+        pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+        pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+      },{
+        label: "Line Graph of Water Leaks",
+        backgroundColor:"rgba(236, 236, 236, 0.3)",
+        fillColor: "rgba(236, 236, 236, 0.3)",
+        strokeColor: "rgba(236, 236, 236, 1)",
+        pointColor: "rgba(236, 236, 236, 1)",
+        pointStrokeColor: "rgba(236, 236, 236, 1)",
+        pointHighlightFill: "rgba(236, 236, 236, 1)",
+        pointHighlightStroke: "rgba(236, 236, 236, 1)",
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+      }]
+    };
+
+    var options4 = {
+      animation: false,
+      scaleOverride: false,
+      scaleSteps: 1,
+      scaleStepWidth: 2,
+    };
+
+    var ctx4 = document.getElementById("chart4");
+    var myLineChart4 = new Chart(ctx4, {
+        type: 'line',
+        data: data4,
+        options: options4
+    });
+
+    //rolling data vizz starts here..............
+    var data5 = {
+       labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+       datasets: [{
+         label: "Line Graph of oil Leaks",
+         backgroundColor:"rgba(255,255,0, 0.6)",
+         fillColor: "rgba(255, 255, 255, 0.5)",
+         strokeColor: "rgba(255, 255, 255, 0.5)",
+         pointColor: "rgba(255, 255, 255, 0.5)",
+         pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+         pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+         pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+       },{
+         label: "Line Graph of Water Leaks",
+         backgroundColor:"rgba(236, 236, 236, 0.3)",
+         fillColor: "rgba(236, 236, 236, 0.3)",
+         strokeColor: "rgba(236, 236, 236, 1)",
+         pointColor: "rgba(236, 236, 236, 1)",
+         pointStrokeColor: "rgba(236, 236, 236, 1)",
+         pointHighlightFill: "rgba(236, 236, 236, 1)",
+         pointHighlightStroke: "rgba(236, 236, 236, 1)",
+         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+       }]
+     };
+
+     var options5 = {
+       animation: false,
+       scaleOverride: false,
+       scaleSteps: 1,
+       scaleStepWidth: 2,
+     };
+
+     var ctx5 = document.getElementById("chart5");
+     var myLineChart5 = new Chart(ctx5, {
+         type: 'line',
+         data: data5,
+         options: options5
+     });
+
+     //rolling data vizz starts here..............
+     var data6 = {
+        labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+        datasets: [{
+          label: "Line Graph of oil Leaks",
+          backgroundColor:"rgba(255,255,0, 0.6)",
+          fillColor: "rgba(255, 255, 255, 0.5)",
+          strokeColor: "rgba(255, 255, 255, 0.5)",
+          pointColor: "rgba(255, 255, 255, 0.5)",
+          pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+          pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+          pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+        },{
+          label: "Line Graph of Water Leaks",
+          backgroundColor:"rgba(236, 236, 236, 0.3)",
+          fillColor: "rgba(236, 236, 236, 0.3)",
+          strokeColor: "rgba(236, 236, 236, 1)",
+          pointColor: "rgba(236, 236, 236, 1)",
+          pointStrokeColor: "rgba(236, 236, 236, 1)",
+          pointHighlightFill: "rgba(236, 236, 236, 1)",
+          pointHighlightStroke: "rgba(236, 236, 236, 1)",
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+        }]
+      };
+
+      var options6 = {
+        animation: false,
+        scaleOverride: false,
+        scaleSteps: 1,
+        scaleStepWidth: 2,
+      };
+
+      var ctx6 = document.getElementById("chart6");
+      var myLineChart6 = new Chart(ctx6, {
+          type: 'line',
+          data: data6,
+          options: options6
+      });
+
+      //rolling data vizz starts here..............
+      var data7 = {
+         labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+         datasets: [{
+           label: "Line Graph of oil Leaks",
+           backgroundColor:"rgba(255,255,0, 0.6)",
+           fillColor: "rgba(255, 255, 255, 0.5)",
+           strokeColor: "rgba(255, 255, 255, 0.5)",
+           pointColor: "rgba(255, 255, 255, 0.5)",
+           pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+           pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+           pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+         },{
+           label: "Line Graph of Water Leaks",
+           backgroundColor:"rgba(236, 236, 236, 0.3)",
+           fillColor: "rgba(236, 236, 236, 0.3)",
+           strokeColor: "rgba(236, 236, 236, 1)",
+           pointColor: "rgba(236, 236, 236, 1)",
+           pointStrokeColor: "rgba(236, 236, 236, 1)",
+           pointHighlightFill: "rgba(236, 236, 236, 1)",
+           pointHighlightStroke: "rgba(236, 236, 236, 1)",
+           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+         }]
+       };
+
+       var options7 = {
+         animation: false,
+         scaleOverride: false,
+         scaleSteps: 1,
+         scaleStepWidth: 2,
+       };
+
+       var ctx7 = document.getElementById("chart7");
+       var myLineChart7 = new Chart(ctx7, {
+           type: 'line',
+           data: data7,
+           options: options7
+       });
+
+       //rolling data vizz starts here..............
+       var data8 = {
+          labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+          datasets: [{
+            label: "Line Graph of oil Leaks",
+            backgroundColor:"rgba(255,255,0, 0.6)",
+            fillColor: "rgba(255, 255, 255, 0.5)",
+            strokeColor: "rgba(255, 255, 255, 0.5)",
+            pointColor: "rgba(255, 255, 255, 0.5)",
+            pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+            pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+            pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+          },{
+            label: "Line Graph of Water Leaks",
+            backgroundColor:"rgba(236, 236, 236, 0.3)",
+            fillColor: "rgba(236, 236, 236, 0.3)",
+            strokeColor: "rgba(236, 236, 236, 1)",
+            pointColor: "rgba(236, 236, 236, 1)",
+            pointStrokeColor: "rgba(236, 236, 236, 1)",
+            pointHighlightFill: "rgba(236, 236, 236, 1)",
+            pointHighlightStroke: "rgba(236, 236, 236, 1)",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+          }]
+        };
+
+        var options8 = {
+          animation: false,
+          scaleOverride: false,
+          scaleSteps: 1,
+          scaleStepWidth: 2,
+        };
+
+        var ctx8 = document.getElementById("chart8");
+        var myLineChart8 = new Chart(ctx8, {
+            type: 'line',
+            data: data8,
+            options: options8
+        });
+
+
+ setInterval(function() {
+   setData(data1.datasets[0].data,
+          data2.datasets[0].data,
+          data3.datasets[0].data,
+          data4.datasets[0].data,
+          data5.datasets[0].data,
+          data6.datasets[0].data,
+          data7.datasets[0].data,
+          data8.datasets[0].data,
+          data1.datasets[1].data,
+          data2.datasets[1].data,
+          data3.datasets[1].data,
+          data4.datasets[1].data,
+          data5.datasets[1].data,
+          data6.datasets[1].data,
+          data7.datasets[1].data,
+          data8.datasets[1].data,
+          data1.labels,
+          data2.labels,
+          data3.labels,
+          data4.labels,
+          data5.labels,
+          data6.labels,
+          data7.labels,
+          data8.labels
+          );
+          var myLineChart1 = new Chart(ctx1, {
+              type: 'line',
+              data: data1,
+              options: options1
+          });
+          var myLineChart2 = new Chart(ctx2, {
+              type: 'line',
+              data: data2,
+              options: options2
+          });
+          var myLineChart3 = new Chart(ctx3, {
+              type: 'line',
+              data: data3,
+              options: options3
+          });
+          var myLineChart4 = new Chart(ctx4, {
+              type: 'line',
+              data: data4,
+              options: options4
+          });
+          var myLineChart5 = new Chart(ctx5, {
+              type: 'line',
+              data: data5,
+              options: options5
+          });
+          var myLineChart6 = new Chart(ctx6, {
+              type: 'line',
+              data: data6,
+              options: options6
+          });
+          var myLineChart7 = new Chart(ctx7, {
+              type: 'line',
+              data: data7,
+              options: options7
+          });
+          var myLineChart8 = new Chart(ctx8, {
+              type: 'line',
+              data: data8,
+              options: options8
+          });
+ }, 3000);
+var a=0;
+ function setData(dataa1, dataa2, dataa3, dataa4, dataa5, dataa6, dataa7,dataa8,
+                  dataa11, dataa21, dataa31, dataa41, dataa51, dataa61, dataa71,dataa81,
+                  labels1, labels2, labels3, labels4, labels5, labels6, labels7, labels8){
+   var socket = io();
+   var socket = io.connect('http://localhost:3000');
+     console.log("calling after 3 seconds");
+     socket.on('temp', function(data) { //As a temp data is received
+         dat=JSON.parse(data);
+         var newVal1=dat["OL1"];
+         var newVal2=dat["OL2"];
+         var newVal3=dat["OL3"];
+         var newVal4=dat["OL4"];
+         var newVal5=dat["OL5"];
+         var newVal6=dat["OL6"];
+         var newVal7=dat["OL7"];
+         var newVal8=dat["OL8"];
+
+         var newVal11=dat["WL1"];
+         var newVal21=dat["WL2"];
+         var newVal31=dat["WL3"];
+         var newVal41=dat["WL4"];
+         var newVal51=dat["WL5"];
+         var newVal61=dat["WL6"];
+         var newVal71=dat["WL7"];
+         var newVal81=dat["WL8"];
+
+
+         var lab1=dat["day1"];
+         var lab2=dat["day2"];
+         var lab3=dat["day3"];
+         var lab4=dat["day4"];
+         var lab5=dat["day5"];
+         var lab6=dat["day6"];
+         var lab7=dat["day7"];
+         var lab8=dat["day8"];
+
+   //       //console.log("the value is==== "+ newVal[0]);
+        dataa1.push(newVal1[0]);
+                dataa1.shift();
+        dataa2.push(newVal2[0]);
+                dataa2.shift();
+        dataa3.push(newVal3[0]);
+                dataa3.shift();
+        dataa4.push(newVal4[0]);
+                dataa4.shift();
+        dataa5.push(newVal5[0]);
+                dataa5.shift();
+        dataa6.push(newVal6[0]);
+                dataa6.shift();
+        dataa7.push(newVal7[0]);
+                dataa7.shift();
+        dataa8.push(newVal8[0]);
+                dataa8.shift();
+
+        dataa11.push(newVal11[0]);
+                dataa11.shift();
+        dataa21.push(newVal21[0]);
+                dataa21.shift();
+        dataa31.push(newVal31[0]);
+                dataa31.shift();
+        dataa41.push(newVal41[0]);
+                dataa41.shift();
+        dataa51.push(newVal51[0]);
+                dataa51.shift();
+        dataa61.push(newVal61[0]);
+                dataa61.shift();
+        dataa71.push(newVal71[0]);
+                dataa71.shift();
+        dataa81.push(newVal81[0]);
+                dataa81.shift();
+
+
+
+        labels1.push(lab1[0]);
+        labels1.shift();
+        labels2.push(lab2[0]);
+        labels2.shift();
+        labels3.push(lab3[0]);
+        labels3.shift();
+        labels4.push(lab4[0]);
+        labels4.shift();
+        labels5.push(lab5[0]);
+        labels5.shift();
+        labels6.push(lab6[0]);
+        labels6.shift();
+        labels7.push(lab7[0]);
+        labels7.shift();
+        labels8.push(lab8[0]);
+        labels8.shift();
+ });
+ }
+</script>
+</body>
+</html>
