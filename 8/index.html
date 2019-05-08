@@ -1,78 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>socket.io - chart.js example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.button {
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 15px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
 </head>
 <body>
-  <h1>Temperature</h1>
-  <canvas id="chart" width="400" height="150"></canvas>
-  <script type="text/javascript "src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script type="text/javascript">
+<table style = "width:100%">
+<tr>
+<td>
+<button class="button"><span>Based on the machine </span></button>
+<br/>
+<button class="button"><span>Based on the model </span></button>
+</td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+<td><canvas id="chart1" width = "300" height = "300"></canvas>
 
-  //value for x-axis
-  var classifications = ['zero', 'one', 'two'];
-  //colours for each bar
-  var colouarray = ['red', 'green', 'yellow'];
-  //Let's initialData[] be the initial data set
-  var initialData = [10000, 20000, 30000];
-  //Let's updatedDataSet[] be the array to hold the upadted data set with every update call
-  var updatedDataSet;
-  /*Creating the bar chart*/
-  var ctx = document.getElementById("chart");
+<td><img src = "" alt = "chart2" width = "300" height = "300" border="5"></td>
+<td><img src = "" alt = "chart3" width = "300" height = "300" border="5"></td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+</table>
+<canvas id="chart" width = "1270" height = "300"></canvas>
+<style>
+body
+{
+  background-color: #cccccc;
+}
 
-  var chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: classifications,
-      datasets: [{
-        backgroundColor: colouarray,
-        label: 'Prediction',
-        data: initialData
-      }]
-    },
-    //redraw: {true},
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            min: 0,
-            max: 300000,
-            stepSize: 20000,
-          }
-        }]
-      }
-    }
-  });
+</style>
+<script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script type="text/javascript">
+//static data viz starts here................
 
-  /*Function to update the bar chart*/
+var classifications1 = ['zero', 'one', 'two'];
+var colouarray1 = ['red', 'green', 'yellow'];
+var initialData1 = [0, 0, 0];
+var socket1 = io.connect('http://localhost:3000/');
+var ctx1 = document.getElementById("chart1");
+var data1= {
+  labels: classifications1,
+  datasets: [{
+    backgroundColor: colouarray1,
+    label: 'Classifications',
+    data: initialData1
+  }]
+}
+setData1(data1.datasets[0].data);
+function setData1(dataa){
+  socket1.on('temp1', function(data) { //As a temp data is received
+      dat=JSON.parse(data);
+//      var newVal=dat["class"];
+      // var lab=dat["labels"];
+      // var nextLabName = lab[0];
+      // dataa.push(newVal[0]);
+      // labels.shift();
+      // dataa.shift();
 
-
-  /*Updating the bar chart with updated data in every second. */
-  setInterval(function() {
-    var socket = io.connect('http://localhost:3000'); //connect to server
-    console.log("calling after 3 seconds");
-    var dat=1;
-    socket.on('temp', function(data) { //As a temp data is received
-      // console.log(JSON.parse(this.data));
-        // console.log(data);
-        dat=JSON.parse(data);
-        var newVal=dat.class;
-        console.log(newVal);
-        chart.data.datasets.push({
-          data: newVal
-        });
-        chart.update(); //Update the graph.
+      var chart1 = new Chart(ctx1, {
+      type: 'bar',
+      data: dat,
+      options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 300000,
+                    stepSize: 20000,
+                  }
+                }]
+              }
+              }
+      });
     });
-  }, 3000);
+}
 
 
+
+//rolling data vizz starts here..............
+var data = {
+   labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+   datasets: [{
+     label: "Line Graph of Leaks",
+     fillColor: "rgba(220,220,220,0.2)",
+     strokeColor: "rgba(220,220,220,1)",
+     pointColor: "rgba(220,220,220,1)",
+     pointStrokeColor: "#fff",
+     pointHighlightFill: "#fff",
+     pointHighlightStroke: "rgba(220,220,220,1)",
+     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+   }]
+ };
+ var options = {
+   animation: false,
+   scaleOverride: false,
+   scaleSteps: 1,
+   scaleStepWidth: 2,
+ };
+ var ctx = document.getElementById("chart");
+ // var myLineChart = new Chart(ctx).Line(data, options);
+ var myLineChart = new Chart(ctx, {
+     type: 'line',
+     data: data,
+     options: options
+ });
+ setInterval(function() {
+   setData(data.datasets[0].data, data.labels);
+   var myLineChart = new Chart(ctx, {
+       type: 'line',
+       data: data,
+       options: options
+   });
+   // var myLineChart = new Chart(ctx).Line(data, options);
+ }, 1000);
+
+ function setData(dataa, labels) {
+   var socket = io();
+   var socket = io.connect('http://localhost:3000');
+     console.log("calling after 3 seconds");
+     socket.on('temp', function(data) { //As a temp data is received
+         dat=JSON.parse(data);
+         var newVal=dat["class"];
+         var lab=dat["labels"];
+         var nextLabName = lab[0];
+   //       //console.log("the value is==== "+ newVal[0]);
+         dataa.push(newVal[0]);
+         labels.push(nextLabName);
+         labels.shift();
+         dataa.shift();
+ });
+ }
 </script>
 </body>
 </html>
