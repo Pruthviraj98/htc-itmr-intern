@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>LEAKO</title>
+      <meta charset="utf-8">
+   </head>
+   <body>
+
+     <table style = "width:100%">
+     <tr>
+     <td>
+       <center>Select Machine number<br>
+  		 <button onclick="buttonClicked1()">Machine 1</button><br>
+       <button onclick="buttonClicked2()">Machine 2</button><br>
+       <button onclick="buttonClicked3()">Machine 3</button><br>
+       <button onclick="buttonClicked4()">Machine 4</button><br>
+       <button onclick="buttonClicked5()">Machine 5</button><br>
+       <button onclick="buttonClicked6()">Machine 6</button><br>
+       <button onclick="buttonClicked7()">Machine 7</button><br>
+       <button onclick="buttonClicked8()">Machine 8</button><br>
+      </center>
+    </td>
+     <td>
+       <center>Leak Test Status For selected Machine</center>
+       <canvas id="chart" width = "300" height = "270"></canvas>
+    </td>
+     <td>
+       <center> Average of Water and Oil Leaks of selected Machine</center>
+       <canvas id="chart2" width = "300" height = "270"></canvas>
+     </td>
+     <td>
+       <center>Select Machine number<br>
+  		 <button onclick="buttonClicked11()">Machine 1</button><br>
+       <button onclick="buttonClicked22()">Machine 2</button><br>
+       <button onclick="buttonClicked33()">Machine 3</button><br>
+       <button onclick="buttonClicked44()">Machine 4</button><br>
+       <button onclick="buttonClicked55()">Machine 5</button><br>
+       <button onclick="buttonClicked66()">Machine 6</button><br>
+       <button onclick="buttonClicked77()">Machine 7</button><br>
+       <button onclick="buttonClicked88()">Machine 8</button><br>
+       </center>
+      </td>
+     </tr>
+     <tr>
+     <td>
+       yet to add
+       <canvas id="chart5" width = "300" height = "270"></canvas>
+     </td>
+     <td colspan="2">
+       Oil and Water Leak Rates
+       <canvas id="chart3" width = "600" height = "250"></canvas>
+     </td>
+     <td>
+       yet to add
+       <canvas id="chart8" width = "300" height = "270"></canvas>
+    </td>
+     </tr>
+     </table>
+
+     </body>
+     <script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+     <script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+     <script type="text/javascript">
+			 var socket = io.connect('http://localhost:3000/');
+       setInterval(function() {
+         autoUpdate3();
+       }, 3000);
+			 function buttonClicked1(){
+			   socket.emit('clicked1');
+			 }function buttonClicked2(){
+			   socket.emit('clicked2');
+			 }function buttonClicked3(){
+			   socket.emit('clicked3');
+			 }function buttonClicked4(){
+			   socket.emit('clicked4');
+			 }function buttonClicked5(){
+			   socket.emit('clicked5');
+			 }function buttonClicked6(){
+			   socket.emit('clicked6');
+			 }function buttonClicked7(){
+			   socket.emit('clicked7');
+			 }function buttonClicked8(){
+			   socket.emit('clicked8');
+       }function buttonClicked11(){
+ 			   socket.emit('clicked9');
+ 			 }function buttonClicked22(){
+ 			   socket.emit('clicked10');
+ 			 }function buttonClicked33(){
+ 			   socket.emit('clicked11');
+ 			 }function buttonClicked44(){
+ 			   socket.emit('clicked12');
+ 			 }function buttonClicked55(){
+ 			   socket.emit('clicked13');
+ 			 }function buttonClicked66(){
+ 			   socket.emit('clicked14');
+ 			 }function buttonClicked77(){
+ 			   socket.emit('clicked15');
+ 			 }function buttonClicked88(){
+ 			   socket.emit('clicked16');
+ 			 }function autoUpdate3(){
+ 			   socket.emit('auto');
+ 			 }
+
+			 //when we receive buttonUpdate, do this
+       var classifications = ['zero', 'one', 'two'];
+       var colouarray = ['yellow', 'blue', 'red'];
+       var ctx1 = document.getElementById("chart");
+       var iniData=[0,0,0];
+       var data1= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine vs Classification",
+           data: iniData
+         }]
+       }
+       var chart1 = new Chart(ctx1, {
+       type: 'bar',
+       data: data1,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10
+                   }
+                 }]
+               }
+               }
+       });
+
+//avg charts
+//when we receive buttonUpdate2, do this
+          var classifications2 = ['Oil Leakage', 'Water Leakage'];
+          var colouarray2 = ['black', 'green'];
+          var ctx2 = document.getElementById("chart2");
+          var iniData2=[0,0];
+          var data2= {
+            labels: classifications2,
+            datasets: [{
+              backgroundColor: colouarray2,
+              label: "Machine vs Classification",
+              data: iniData2
+            }]
+
+          }
+          var chart2 = new Chart(ctx2, {
+          type: 'bar',
+          data: data2,
+          options: {
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 5,
+                        stepSize: 0.5
+                      }
+                    }]
+                  }
+                  }
+          });
+
+//rolling date
+          var data3= {
+             labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+             datasets: [{
+               label: "Line Graph of oil Leaks",
+               backgroundColor:"rgba(255,255,0, 0.6)",
+               fillColor: "rgba(255, 255, 255, 0.5)",
+               strokeColor: "rgba(255, 255, 255, 0.5)",
+               pointColor: "rgba(255, 255, 255, 0.5)",
+               pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+               pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+               pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+               data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+             },{
+               label: "Line Graph of Water Leaks",
+               backgroundColor:"rgba(236, 236, 236, 0.3)",
+               fillColor: "rgba(236, 236, 236, 0.3)",
+               strokeColor: "rgba(236, 236, 236, 1)",
+               pointColor: "rgba(236, 236, 236, 1)",
+               pointStrokeColor: "rgba(236, 236, 236, 1)",
+               pointHighlightFill: "rgba(236, 236, 236, 1)",
+               pointHighlightStroke: "rgba(236, 236, 236, 1)",
+               data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+             }]
+           };
+           var options3 = {
+             animation: false,
+             scaleOverride: false,
+             scaleSteps: 1,
+             scaleStepWidth: 2,
+           };
+           var ctx3 = document.getElementById("chart3");
+           var myLineChart = new Chart(ctx3, {
+               type: 'line',
+               data: data3,
+               options: options3
+           });
+
+       socket.on('buttonUpdate', function(dat){
+         chart1.data.datasets[0].data=dat;
+         chart1.update();
+			 });
+
+
+       socket.on('buttonUpdate2', function(dat){
+         chart2.data.datasets[0].data=dat;
+         chart2.update();
+      });
+
+      socket.on('autoUpdate', function(dat){
+        console.log(dat);
+        myLineChart.data.datasets[0].data=dat["WL"];
+        myLineChart.data.labels=dat["mach"];;
+     });
+		</script>
+</html>
