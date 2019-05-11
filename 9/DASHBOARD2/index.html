@@ -3,35 +3,189 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<style>
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+td {
+  padding: 15px;
+}
+.foo {
+  float: left;
+  width: 40px;
+  height: 10px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 2);
+}
+
+.yellow {
+  background: #efff13;
+}
+
+
+.blue {
+  background: #2213ff;
+}
+
+.red {
+  background: #ff1313;
+}
+</style>
 <body>
 <table style = "width:100%">
 <tr>
 <td>
-  MACHINE 1
-  <canvas id="chart1" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+<center>    MACHINE 1 </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart1" width = "300" height = "270"></canvas>
+  </div>
+</div>
 <td>
-  MACHINE 2
-  <canvas id="chart2" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+<center>    MACHINE 2 </center>
+      <div class = "w3-display-container w3-white" style = "height:400px;">
+       <div class = "w3-display-topright">
+        <div class="foo blue"></div>
+        <font size="1">--Success</font>
+        <p></p>
+        <div class="foo yellow"></div>
+        <font size="1">--Abort</font>
+        <p></p>
+        <div class="foo red"></div>
+        <font size="1">--Fail</font>
+        <p></p>
+       </div>
+       <canvas id="chart2" width = "300" height = "270"></canvas>
+      </div>
+    </div>
+ </td>
 <td>
-  MACHINE 3
-  <canvas id="chart3" width = "300" height = "270"></canvas>
+
+  <div class="w3-container">
+<center>  MACHINE 3 </center>
+      <div class = "w3-display-container w3-white" style = "height:400px;">
+       <div class = "w3-display-topright">
+        <div class="foo blue"></div>
+        <font size="1">--Success</font>
+        <p></p>
+        <div class="foo yellow"></div>
+        <font size="1">--Abort</font>
+        <p></p>
+        <div class="foo red"></div>
+        <font size="1">--Fail</font>
+        <p></p>
+       </div>
+       <canvas id="chart3" width = "300" height = "270"></canvas>
+      </div>
+  </div>
+</td>
 <td>
-  MACHINE 4
-  <canvas id="chart4" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+<center>  MACHINE 4 </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart4" width = "300" height = "270"></canvas>
+  </div>
+  </div>
 </tr>
 <tr>
 <td>
-  MACHINE 5
-  <canvas id="chart5" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+<center>  MACHINE 5 </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+    <canvas id="chart5" width = "300" height = "270"></canvas>
+   </div>
+  </div>
+  </div>
+</td>
 <td>
-  MACHINE 6
-  <canvas id="chart6" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+  <center>MACHINE 6</center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+    <canvas id="chart6" width = "300" height = "270"></canvas>
+   </div>
+  </div>
+  </div>
+</td>
 <td>
-  MACHINE 7
-  <canvas id="chart7" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+    <div class = "w3-display-container w3-white" style = "height:400px;">
+      <center>MACHINE 7</center>
+     <div class = "w3-display-topright">
+      <div class="foo blue"></div>
+      <font size="1">--Success</font>
+      <p></p>
+      <div class="foo yellow"></div>
+      <font size="1">--Abort</font>
+      <p></p>
+      <div class="foo red"></div>
+      <font size="1">--Fail</font>
+      <p></p>
+     </div>
+     <canvas id="chart7" width = "300" height = "270"></canvas>
+    </div>
+  </div>
 <td>
-  MACHINE 8
-  <canvas id="chart8" width = "300" height = "270"></canvas>
+  <div class="w3-container">
+    <center>MACHINE 8 </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart8" width = "300" height = "270"></canvas>
+  </div>
+  </div>
 </tr>
 </table>
 <style>
@@ -46,8 +200,8 @@ body
 <script type="text/javascript">
 var socket = io.connect('http://localhost:3000/');
 
-var classifications = ['zero', 'one', 'two'];
-var colouarray = ['yellow', 'blue', 'red'];
+var classifications = ['one(Success)','zero(Abort)','two(Failiure)'];
+var colouarray = [ 'blue','yellow', 'red'];
 
 var initialData = [0, 0, 0];
 
@@ -60,77 +214,6 @@ var ctx6 = document.getElementById("chart6");
 var ctx7 = document.getElementById("chart7");
 var ctx8 = document.getElementById("chart8");
 
-var data1= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 1",
-    data: initialData
-  }]
-}
-
-var data2= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 2",
-    data: initialData
-  }]
-}
-
-var data3= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 3",
-    data: initialData
-  }]
-}
-
-var data4= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 4",
-    data: initialData
-  }]
-}
-
-var data5= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 5",
-    data: initialData
-  }]
-}
-
-var data6= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 6",
-    data: initialData
-  }]
-}
-
-var data7= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 7",
-    data: initialData
-  }]
-}
-
-var data8= {
-  labels: classifications,
-  datasets: [{
-    backgroundColor: colouarray,
-    label: "Machine 8",
-    data: initialData
-  }]
-}
 
 var socket = io.connect('http://localhost:3000/');
 socket.on('temp', function(data) { //As a temp data is received
@@ -144,6 +227,7 @@ socket.on('temp', function(data) { //As a temp data is received
         label: "Machine 1",
         data: dat['zerOneTwo1']
       }]
+
     }
     var chart1 = new Chart(ctx1, {
     type: 'bar',

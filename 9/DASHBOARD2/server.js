@@ -42,8 +42,8 @@ io.on('connection',function (dat) {
       x1=100*(a1/(a1+b1+c1));
       y1=100*(b1/(a1+b1+c1));
       z1=100*(c1/(a1+b1+c1));
-      numbers1.push(x1);
       numbers1.push(y1);
+      numbers1.push(x1);
       numbers1.push(z1);
       console.log(numbers1);
 
@@ -54,8 +54,8 @@ io.on('connection',function (dat) {
       x2=100*(a2/(a2+b2+c2));
       y2=100*(b2/(a2+b2+c2));
       z2=100*(c2/(a2+b2+c2));
-      numbers2.push(x2);
       numbers2.push(y2);
+      numbers2.push(x2);
       numbers2.push(z2);
       console.log(numbers2);
 
@@ -66,8 +66,8 @@ io.on('connection',function (dat) {
       x3=100*(a3/(a3+b3+c3));
       y3=100*(b3/(a3+b3+c3));
       z3=100*(c3/(a3+b3+c3));
-      numbers3.push(x3);
       numbers3.push(y3);
+      numbers3.push(x3);
       numbers3.push(z3);
       console.log(numbers3);
 
@@ -80,8 +80,8 @@ io.on('connection',function (dat) {
       x4=100*(a4/(a4+b4+c4));
       y4=100*(b4/(a4+b4+c4));
       z4=100*(c4/(a4+b4+c4));
-      numbers4.push(x4);
       numbers4.push(y4);
+      numbers4.push(x4);
       numbers4.push(z4);
       console.log(numbers4);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
 
@@ -92,8 +92,8 @@ io.on('connection',function (dat) {
       x5=100*(a5/(a5+b5+c5));
       y5=100*(b5/(a5+b5+c5));
       z5=100*(c5/(a5+b5+c5));
-      numbers5.push(x5);
       numbers5.push(y5);
+      numbers5.push(x5);
       numbers5.push(z5);
       console.log(numbers5);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
 
@@ -104,8 +104,8 @@ io.on('connection',function (dat) {
       x6=100*(a6/(a6+b6+c6));
       y6=100*(b6/(a6+b4+c6));
       z6=100*(c6/(a6+b4+c6));
-      numbers6.push(x6);
       numbers6.push(y6);
+      numbers6.push(x6);
       numbers6.push(z6);
       console.log(numbers6);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
 
@@ -116,8 +116,8 @@ io.on('connection',function (dat) {
       x7=100*(a7/(a7+b7+c7));
       y7=100*(b7/(a7+b7+c7));
       z7=100*(c7/(a7+b7+c7));
-      numbers7.push(x7);
       numbers7.push(y7);
+      numbers7.push(x7);
       numbers7.push(z7);
       console.log(numbers7);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
 
@@ -128,8 +128,8 @@ io.on('connection',function (dat) {
       x8=100*(a8/(a8+b8+c8));
       y8=100*(b8/(a8+b8+c8));
       z8=100*(c8/(a8+b8+c8));
-      numbers8.push(x8);
       numbers8.push(y8);
+      numbers8.push(x8);
       numbers8.push(z8);
       console.log(numbers8);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
 
