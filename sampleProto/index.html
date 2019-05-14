@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    table, th, td {
+      border: 2px solid black;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 1px;
+    }
+    .foo {
+      float: right;
+      width: 40px;
+      height: 10px;
+      margin: 5px;
+      border: 1px solid rgba(0, 0, 0, 2);
+    }
+
+    .yellow {
+      background: #efff13;
+    }
+
+
+    .blue {
+      background: #2213ff;
+    }
+
+    .red {
+      background: #ff1313;
+    }
+    body {
+      font-family: "Lato", sans-serif;
+    }
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* On mouse-over */
+.sidenav a:hover{
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.w3-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 60px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #e7e7e7;
+  font-size: 20px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <br><br><br>
+  <button class="w3-button" id="one">Dashboard-I
+  </button><br><br>
+  <button class="w3-button"  id="two">Dashboard-II
+  </button><br><br>
+  <button class="w3-button" id="three">Dashboard-III
+  </button><br><br>
+  <button class="w3-button"  id="four">Dashboard-IV
+  </button>
+</div>
+
+<div class="main">
+  <table style = "width:100%">
+  <tr>
+    <td>
+      <div class="w3-container">
+      <div class = "w3-display-container w3-white" style = "height:280px;">
+       <div class = "w3-display-topright">
+         <div class="foo blue"><font size="1">--Success</font></div><br>
+         <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+         <div class="foo red"><font size="1">--Fail</font></div><br>
+       </div>
+       <canvas id="chart1" width = "200" height = "200"></canvas>
+      </div>
+      </div>
+    </td>
+  <td>
+    <div class="w3-container">
+    <div class = "w3-display-container w3-white" style = "height:280px;">
+     <div class = "w3-display-topright">
+      <div class="foo blue"><font size="1">--Success</font></div><br>
+      <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+      <div class="foo red"><font size="1">--Fail</font></div><br>
+     </div>
+     <canvas id="chart2" width = "200" height = "200"></canvas>
+    </div>
+    </div>
+  </td>
+  <td>
+    <div class="w3-container">
+        <div class = "w3-display-container w3-white" style = "height:280px;">
+         <div class = "w3-display-topright">
+          <div class="foo blue"><font size="1">--Success</font></div><br>
+          <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+          <div class="foo red"><font size="1">--Fail</font></div><br>
+         </div>
+         <canvas id="chart3" width = "200" height = "200"></canvas>
+        </div>
+    </div>
+  </td>
+  <td>
+    <div class="w3-container">
+    <div class = "w3-display-container w3-white" style = "height:280px;">
+     <div class = "w3-display-topright">
+      <div class="foo blue"><font size="1">--Success</font></div><br>
+      <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+      <div class="foo red"><font size="1">--Fail</font></div><br>
+     </div>
+     <canvas id="chart4" width = "200" height = "200"></canvas>
+    </div>
+    </div>
+  </td>
+  <tr>
+    <td>
+      <div class="w3-container">
+      <div class = "w3-display-container w3-white" style = "height:280px;">
+       <div class = "w3-display-topright">
+        <div class="foo blue"><font size="1">--Success</font></div><br>
+        <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+        <div class="foo red"><font size="1">--Fail</font></div><br>
+       </div>
+       <canvas id="chart5" width = "200" height = "200"></canvas>
+      </div>
+      </div>
+    </td>
+  <td>
+    <div class="w3-container">
+    <div class = "w3-display-container w3-white" style = "height:280px;">
+     <div class = "w3-display-topright">
+       <div class="foo blue"><font size="1">--Success</font></div><br>
+       <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+       <div class="foo red"><font size="1">--Fail</font></div><br>
+     </div>
+     <canvas id="chart6" width = "200" height = "200"></canvas>
+    </div>
+    </div>
+  </td>
+  <td>
+    <div class="w3-container">
+      <div class = "w3-display-container w3-white" style = "height:280px;">
+       <div class = "w3-display-topright">
+         <div class="foo blue"><font size="1">--Success</font></div><br>
+         <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+         <div class="foo red"><font size="1">--Fail</font></div><br>
+       </div>
+       <canvas id="chart7" width = "200" height = "200"></canvas>
+      </div>
+    </div>
+  </td>
+  <td>
+    <div class="w3-container">
+    <div class = "w3-display-container w3-white" style = "height:280px;">
+     <div class = "w3-display-topright">
+       <div class="foo blue"><font size="1">--Success</font></div><br>
+       <div class="foo yellow"> <font size="1">--Abort</font></div><br>
+       <div class="foo red"><font size="1">--Fail</font></div><br>
+     </div>
+     <canvas id="chart8" width = "200" height = "200"></canvas>
+    </div>
+    </div>
+  </td>
+  </tr>
+  </table>
+</div>
+ <script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+ <script>
+ var ctx1 = document.getElementById("chart1");
+ var ctx2 = document.getElementById("chart2");
+ var ctx3 = document.getElementById("chart3");
+ var ctx4 = document.getElementById("chart4");
+ var ctx5 = document.getElementById("chart5");
+ var ctx6 = document.getElementById("chart6");
+ var ctx7 = document.getElementById("chart7");
+ var ctx8 = document.getElementById("chart8");
+
+ document.getElementById("one").addEventListener("click", function1);
+ document.getElementById("two").addEventListener("click", function2);
+ document.getElementById("three").addEventListener("click", function3);
+ document.getElementById("four").addEventListener("click", function4);
+
+var calling =0;
+ function function1(){
+
+   calling=1;
+   var socket = io.connect('http://localhost:3000/', {query: "foo1=bar1"});
+   var classifications = ['one(Success)','zero(Abort)','two(Failiure)'];
+   var colouarray = [ 'blue','yellow', 'red'];
+   var initialData = [0, 0, 0];
+
+   if(calling==1){
+   socket.on('temp', function(data) {
+       dat=JSON.parse(data);
+       var data1= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 1",
+           data: dat['zerOneTwo1']
+         }]
+       }
+       var chart1 = new Chart(ctx1, {
+       type: 'bar',
+       data: data1,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+
+       var data2= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 2",
+           data: dat['zerOneTwo2']
+         }]
+       }
+       var chart2 = new Chart(ctx2, {
+       type: 'bar',
+       data: data2,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+             }
+       });
+
+       var data3= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 3",
+           data: dat['zerOneTwo3']
+         }]
+       }
+       var chart3 = new Chart(ctx3, {
+       type: 'bar',
+       data: data3,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+
+       var data4= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 4",
+           data: dat['zerOneTwo4']
+         }]
+       }
+       var chart4 = new Chart(ctx4, {
+       type: 'bar',
+       data: data4,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+
+       var data5= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 5",
+           data: dat['zerOneTwo5']
+         }]
+       }
+       var chart5 = new Chart(ctx5, {
+       type: 'bar',
+       data: data5,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+
+       var data6= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 6",
+           data: dat['zerOneTwo6']
+         }]
+       }
+       var chart6 = new Chart(ctx6, {
+       type: 'bar',
+       data: data6,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+
+       var data7= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 7",
+           data: dat['zerOneTwo7']
+         }]
+       }
+       var chart7 = new Chart(ctx7, {
+       type: 'bar',
+       data: data7,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+
+       var data8= {
+         labels: classifications,
+         datasets: [{
+           backgroundColor: colouarray,
+           label: "Machine 8",
+           data: dat['zerOneTwo8']
+         }]
+       }
+       var chart8 = new Chart(ctx8, {
+       type: 'bar',
+       data: data8,
+       options: {
+               scales: {
+                 yAxes: [{
+                   ticks: {
+                     beginAtZero: true,
+                     min: 0,
+                     max: 100,
+                     stepSize: 10,
+                   }
+                 }]
+               },
+               tooltips: {enabled: false},
+               hover: {mode: null}
+               }
+       });
+   });
+ }
+}
+ function function2(){
+   calling=2;
+   var data1 = {
+      labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+      datasets: [{
+        label: "Line Graph of oil Leaks",
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'red',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'red',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+      },{
+        label: "Line Graph of Water Leaks",
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'purple',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+      }]
+    };
+
+    var options1 = {
+      animation: false,
+      scaleOverride: false,
+      scaleSteps: 1,
+      scaleStepWidth: 2,
+      tooltips: {enabled: false},
+      hover: {mode: null}
+    };
+    var myLineChart1 = new Chart(ctx1, {
+        type: 'line',
+        data: data1,
+        options: options1
+    });
+
+
+    var data2 = {
+       labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+       datasets: [{
+         label: "Line Graph of oil Leaks",
+         lineTension: 0.3,
+         fill: false,
+         borderColor: 'red',
+         backgroundColor: 'transparent',
+         pointBorderColor: 'red',
+         pointBackgroundColor: 'lightgreen',
+         pointRadius: 5,
+         pointHoverRadius: 15,
+         pointHitRadius: 30,
+         pointBorderWidth: 2,
+         pointStyle: 'rect',
+         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+       },{
+         label: "Line Graph of Water Leaks",
+         lineTension: 0.3,
+         fill: false,
+         borderColor: 'purple',
+         backgroundColor: 'transparent',
+         pointBorderColor: 'purple',
+         pointBackgroundColor: 'lightgreen',
+         pointRadius: 5,
+         pointHoverRadius: 15,
+         pointHitRadius: 30,
+         pointBorderWidth: 2,
+         pointStyle: 'rect',
+         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+       }]
+     };
+     var options2 = {
+       animation: false,
+       scaleOverride: false,
+       scaleSteps: 1,
+       scaleStepWidth: 2,
+       tooltips: {enabled: false},
+       hover: {mode: null}
+
+     };
+     var myLineChart2 = new Chart(ctx2, {
+         type: 'line',
+         data: data2,
+         options: options2
+     });
+
+     var data3 = {
+        labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+        datasets: [{
+          label: "Line Graph of oil Leaks",
+          lineTension: 0.3,
+          fill: false,
+          borderColor: 'red',
+          backgroundColor: 'transparent',
+          pointBorderColor: 'red',
+          pointBackgroundColor: 'lightgreen',
+          pointRadius: 5,
+          pointHoverRadius: 15,
+          pointHitRadius: 30,
+          pointBorderWidth: 2,
+          pointStyle: 'rect',
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+        },{
+          label: "Line Graph of Water Leaks",
+          lineTension: 0.3,
+          fill: false,
+          borderColor: 'purple',
+          backgroundColor: 'transparent',
+          pointBorderColor: 'purple',
+          pointBackgroundColor: 'lightgreen',
+          pointRadius: 5,
+          pointHoverRadius: 15,
+          pointHitRadius: 30,
+          pointBorderWidth: 2,
+          pointStyle: 'rect',
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+        }]
+      };
+      var options3 = {
+        animation: false,
+        scaleOverride: false,
+        scaleSteps: 1,
+        scaleStepWidth: 2,
+        tooltips: {enabled: false},
+        hover: {mode: null}
+
+      };
+      var myLineChart3 = new Chart(ctx3, {
+          type: 'line',
+          data: data3,
+          options: options3
+      });
+
+      var data4 = {
+         labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+         datasets: [{
+           label: "Line Graph of oil Leaks",
+           lineTension: 0.3,
+           fill: false,
+           borderColor: 'red',
+           backgroundColor: 'transparent',
+           pointBorderColor: 'red',
+           pointBackgroundColor: 'lightgreen',
+           pointRadius: 5,
+           pointHoverRadius: 15,
+           pointHitRadius: 30,
+           pointBorderWidth: 2,
+           pointStyle: 'rect',
+           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+         },{
+           label: "Line Graph of Water Leaks",
+           lineTension: 0.3,
+           fill: false,
+           borderColor: 'purple',
+           backgroundColor: 'transparent',
+           pointBorderColor: 'purple',
+           pointBackgroundColor: 'lightgreen',
+           pointRadius: 5,
+           pointHoverRadius: 15,
+           pointHitRadius: 30,
+           pointBorderWidth: 2,
+           pointStyle: 'rect',
+           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+         }]
+       };
+       var options4 = {
+         animation: false,
+         scaleOverride: false,
+         scaleSteps: 1,
+         scaleStepWidth: 2,
+         tooltips: {enabled: false},
+         hover: {mode: null}
+
+       };
+       var myLineChart4 = new Chart(ctx4, {
+           type: 'line',
+           data: data4,
+           options: options4
+       });
+
+       var data5 = {
+          labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+          datasets: [{
+            label: "Line Graph of oil Leaks",
+            lineTension: 0.3,
+            fill: false,
+            borderColor: 'red',
+            backgroundColor: 'transparent',
+            pointBorderColor: 'red',
+            pointBackgroundColor: 'lightgreen',
+            pointRadius: 5,
+            pointHoverRadius: 15,
+            pointHitRadius: 30,
+            pointBorderWidth: 2,
+            pointStyle: 'rect',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+          },{
+            label: "Line Graph of Water Leaks",
+            lineTension: 0.3,
+            fill: false,
+            borderColor: 'purple',
+            backgroundColor: 'transparent',
+            pointBorderColor: 'purple',
+            pointBackgroundColor: 'lightgreen',
+            pointRadius: 5,
+            pointHoverRadius: 15,
+            pointHitRadius: 30,
+            pointBorderWidth: 2,
+            pointStyle: 'rect',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+          }]
+        };
+
+        var options5 = {
+          animation: false,
+          scaleOverride: false,
+          scaleSteps: 1,
+          scaleStepWidth: 2,
+          tooltips: {enabled: false},
+          hover: {mode: null}
+        };
+        var myLineChart5 = new Chart(ctx5, {
+            type: 'line',
+            data: data5,
+            options: options5
+        });
+
+        var data6 = {
+           labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+           datasets: [{
+             label: "Line Graph of oil Leaks",
+             lineTension: 0.3,
+             fill: false,
+             borderColor: 'red',
+             backgroundColor: 'transparent',
+             pointBorderColor: 'red',
+             pointBackgroundColor: 'lightgreen',
+             pointRadius: 5,
+             pointHoverRadius: 15,
+             pointHitRadius: 30,
+             pointBorderWidth: 2,
+             pointStyle: 'rect',
+             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+           },{
+             label: "Line Graph of Water Leaks",
+             lineTension: 0.3,
+             fill: false,
+             borderColor: 'purple',
+             backgroundColor: 'transparent',
+             pointBorderColor: 'purple',
+             pointBackgroundColor: 'lightgreen',
+             pointRadius: 5,
+             pointHoverRadius: 15,
+             pointHitRadius: 30,
+             pointBorderWidth: 2,
+             pointStyle: 'rect',
+             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+           }]
+         };
+         var options6 = {
+           animation: false,
+           scaleOverride: false,
+           scaleSteps: 1,
+           scaleStepWidth: 2,
+           tooltips: {enabled: false},
+           hover: {mode: null}
+         };
+         var myLineChart6 = new Chart(ctx6, {
+             type: 'line',
+             data: data6,
+             options: options6
+         });
+
+         var data7 = {
+            labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+            datasets: [{
+              label: "Line Graph of oil Leaks",
+              lineTension: 0.3,
+              fill: false,
+              borderColor: 'red',
+              backgroundColor: 'transparent',
+              pointBorderColor: 'red',
+              pointBackgroundColor: 'lightgreen',
+              pointRadius: 5,
+              pointHoverRadius: 15,
+              pointHitRadius: 30,
+              pointBorderWidth: 2,
+              pointStyle: 'rect',
+              data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+            },{
+              label: "Line Graph of Water Leaks",
+              lineTension: 0.3,
+              fill: false,
+              borderColor: 'purple',
+              backgroundColor: 'transparent',
+              pointBorderColor: 'purple',
+              pointBackgroundColor: 'lightgreen',
+              pointRadius: 5,
+              pointHoverRadius: 15,
+              pointHitRadius: 30,
+              pointBorderWidth: 2,
+              pointStyle: 'rect',
+              data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+            }]
+          };
+          var options7 = {
+            animation: false,
+            scaleOverride: false,
+            scaleSteps: 1,
+            scaleStepWidth: 2,
+            tooltips: {enabled: false},
+            hover: {mode: null}
+          };
+         var myLineChart7 = new Chart(ctx7, {
+              type: 'line',
+              data: data7,
+              options: options7
+          });
+
+          var data8 = {
+             labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
+             datasets: [{
+               label: "Line Graph of oil Leaks",
+               lineTension: 0.3,
+               fill: false,
+               borderColor: 'red',
+               backgroundColor: 'transparent',
+               pointBorderColor: 'red',
+               pointBackgroundColor: 'lightgreen',
+               pointRadius: 5,
+               pointHoverRadius: 15,
+               pointHitRadius: 30,
+               pointBorderWidth: 2,
+               pointStyle: 'rect',
+               data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+             },{
+               label: "Line Graph of Water Leaks",
+               lineTension: 0.3,
+               fill: false,
+               borderColor: 'purple',
+               backgroundColor: 'transparent',
+               pointBorderColor: 'purple',
+               pointBackgroundColor: 'lightgreen',
+               pointRadius: 5,
+               pointHoverRadius: 15,
+               pointHitRadius: 30,
+               pointBorderWidth: 2,
+               pointStyle: 'rect',
+               data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
+             }]
+           };
+           var options8 = {
+             animation: false,
+             scaleOverride: true,
+             scaleSteps: 1,
+             scaleStepWidth: 2,
+             tooltips: {enabled: false},
+             hover: {mode: null}
+           };
+           var myLineChart8 = new Chart(ctx8, {
+               type: 'line',
+               data: data8,
+               options: options8
+           });
+
+           setInterval(function() {
+             setData(data1.datasets[0].data,
+                    data2.datasets[0].data,
+                    data3.datasets[0].data,
+                    data4.datasets[0].data,
+                    data5.datasets[0].data,
+                    data6.datasets[0].data,
+                    data7.datasets[0].data,
+                    data8.datasets[0].data,
+                    data1.datasets[1].data,
+                    data2.datasets[1].data,
+                    data3.datasets[1].data,
+                    data4.datasets[1].data,
+                    data5.datasets[1].data,
+                    data6.datasets[1].data,
+                    data7.datasets[1].data,
+                    data8.datasets[1].data,
+                    data1.labels,
+                    data2.labels,
+                    data3.labels,
+                    data4.labels,
+                    data5.labels,
+                    data6.labels,
+                    data7.labels,
+                    data8.labels
+                    );
+                    var myLineChart1 = new Chart(ctx1, {
+                        type: 'line',
+                        data: data1,
+                        options: options1
+                    });
+                    var myLineChart2 = new Chart(ctx2, {
+                        type: 'line',
+                        data: data2,
+                        options: options2
+                    });
+                    var myLineChart3 = new Chart(ctx3, {
+                        type: 'line',
+                        data: data3,
+                        options: options3
+                    });
+                    var myLineChart4 = new Chart(ctx4, {
+                        type: 'line',
+                        data: data4,
+                        options: options4
+                    });
+                    var myLineChart5 = new Chart(ctx5, {
+                        type: 'line',
+                        data: data5,
+                        options: options5
+                    });
+                    var myLineChart6 = new Chart(ctx6, {
+                        type: 'line',
+                        data: data6,
+                        options: options6
+                    });
+                    var myLineChart7 = new Chart(ctx7, {
+                        type: 'line',
+                        data: data7,
+                        // options: options7
+                    });
+                    var myLineChart8 = new Chart(ctx8, {
+                        type: 'line',
+                        data: data8,
+                        options: options8
+                    });
+           }, 3000);
+          var a=0;
+           function setData(dataa1, dataa2, dataa3, dataa4, dataa5, dataa6, dataa7,dataa8,
+                            dataa11, dataa21, dataa31, dataa41, dataa51, dataa61, dataa71,dataa81,
+                            labels1, labels2, labels3, labels4, labels5, labels6, labels7, labels8){
+             var socket = io();
+
+               var socket = io.connect('http://localhost:3000',{ query: "foo1=bar2" });
+              console.log("calling after 3 seconds");
+             if(calling==2){
+               socket.on('temp1', function(data) {
+                   datDyn=JSON.parse(data);
+                   dat1=datDyn["datDyn"][0];
+                   dat2=datDyn["datDyn"][1];
+                   dat3=datDyn["datDyn"][2];
+                   dat4=datDyn["datDyn"][3];
+                   dat5=datDyn["datDyn"][4];
+                   dat6=datDyn["datDyn"][5];
+                   dat7=datDyn["datDyn"][6];
+                   dat8=datDyn["datDyn"][7];
+
+                   var newVal1=dat1["O_LeakRate"];
+                   var newVal2=dat2["O_LeakRate"];
+                   var newVal3=dat3["O_LeakRate"];
+                   var newVal4=dat4["O_LeakRate"];
+                   var newVal5=dat5["O_LeakRate"];
+                   var newVal6=dat6["O_LeakRate"];
+                   var newVal7=dat7["O_LeakRate"];
+                   var newVal8=dat8["O_LeakRate"];
+
+                   var newVal11=dat1["W_LeakRate"];
+                   var newVal21=dat2["W_LeakRate"];
+                   var newVal31=dat3["W_LeakRate"];
+                   var newVal41=dat4["W_LeakRate"];
+                   var newVal51=dat5["W_LeakRate"];
+                   var newVal61=dat6["W_LeakRate"];
+                   var newVal71=dat7["W_LeakRate"];
+                   var newVal81=dat8["W_LeakRate"];
+
+                   var lab1=dat1["Leak_CreateDate"];
+                   var lab2=dat2["Leak_CreateDate"];
+                   var lab3=dat3["Leak_CreateDate"];
+                   var lab4=dat4["Leak_CreateDate"];
+                   var lab5=dat5["Leak_CreateDate"];
+                   var lab6=dat6["Leak_CreateDate"];
+                   var lab7=dat7["Leak_CreateDate"];
+                   var lab8=dat8["Leak_CreateDate"];
+
+             //       //console.log("the value is==== "+ newVal[0]);
+                  dataa1.push(newVal1[0]);
+                          dataa1.shift();
+                  dataa2.push(newVal2[0]);
+                          dataa2.shift();
+                  dataa3.push(newVal3[0]);
+                          dataa3.shift();
+                  dataa4.push(newVal4[0]);
+                          dataa4.shift();
+                  dataa5.push(newVal5[0]);
+                          dataa5.shift();
+                  dataa6.push(newVal6[0]);
+                          dataa6.shift();
+                  dataa7.push(newVal7[0]);
+                          dataa7.shift();
+                  dataa8.push(newVal8[0]);
+                          dataa8.shift();
+
+                  dataa11.push(newVal11[0]);
+                          dataa11.shift();
+                  dataa21.push(newVal21[0]);
+                          dataa21.shift();
+                  dataa31.push(newVal31[0]);
+                          dataa31.shift();
+                  dataa41.push(newVal41[0]);
+                          dataa41.shift();
+                  dataa51.push(newVal51[0]);
+                          dataa51.shift();
+                  dataa61.push(newVal61[0]);
+                          dataa61.shift();
+                  dataa71.push(newVal71[0]);
+                          dataa71.shift();
+                  dataa81.push(newVal81[0]);
+                          dataa81.shift();
+
+
+
+                  labels1.push(lab1[0]);
+                  labels1.shift();
+                  labels2.push(lab2[0]);
+                  labels2.shift();
+                  labels3.push(lab3[0]);
+                  labels3.shift();
+                  labels4.push(lab4[0]);
+                  labels4.shift();
+                  labels5.push(lab5[0]);
+                  labels5.shift();
+                  labels6.push(lab6[0]);
+                  labels6.shift();
+                  labels7.push(lab7[0]);
+                  labels7.shift();
+                  labels8.push(lab8[0]);
+                  labels8.shift();
+           });
+
+         }
+  }
+}
+ function function3(){
+   alert("Yet to be built");
+   // document.getElementById('de').innerHTML="Yet to build";
+ }
+ function function4(){
+      alert("Yet to be built");
+   // document.getElementById('de').innerHTML="Yet to build";
+ }
+</script>
+
+</body>
+</html>
