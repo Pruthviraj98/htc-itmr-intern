@@ -1,8 +1,18 @@
-var express = require('express');
+var express = require('express'), http = require('http');
 var app = express();
-var server = app.listen(3000, () => { //Start the server, listening on port 4000.
-    console.log("Listening to requests on port 3000...");
-})
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(3000);
+
+
+
+
+
+// var express = require('express');
+// var app = express();
+// var server = app.listen(3000, () => { //Start the server, listening on port 4000.
+//     console.log("Listening to requests on port 3000...");
+// })
 
 var mysql= require('mysql');
 var path=require('path');
@@ -15,7 +25,7 @@ var connection = mysql.createConnection({
     multipleStatements: true
 });
 
-var io = require('socket.io').listen(server);
+// var io = require('socket.io').listen(server);
 
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, "index.html"));

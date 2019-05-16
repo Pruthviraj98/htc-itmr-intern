@@ -41,7 +41,7 @@ body
 }
 </style>
 <script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script type="text/javascript">
 
@@ -50,23 +50,31 @@ var data1 = {
    labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
    datasets: [{
      label: "Line Graph of oil Leaks",
-     backgroundColor:"rgba(255,255,0, 0.6)",
-     fillColor: "rgba(255, 255, 255, 0.5)",
-     strokeColor: "rgba(255, 255, 255, 0.5)",
-     pointColor: "rgba(255, 255, 255, 0.5)",
-     pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-     pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-     pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+     lineTension: 0.3,
+     fill: false,
+     borderColor: 'red',
+     backgroundColor: 'transparent',
+     pointBorderColor: 'red',
+     pointBackgroundColor: 'lightgreen',
+     pointRadius: 5,
+     pointHoverRadius: 15,
+     pointHitRadius: 30,
+     pointBorderWidth: 2,
+     pointStyle: 'rect',
      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
    },{
      label: "Line Graph of Water Leaks",
-     backgroundColor:"rgba(236, 236, 236, 0.3)",
-     fillColor: "rgba(236, 236, 236, 0.3)",
-     strokeColor: "rgba(236, 236, 236, 1)",
-     pointColor: "rgba(236, 236, 236, 1)",
-     pointStrokeColor: "rgba(236, 236, 236, 1)",
-     pointHighlightFill: "rgba(236, 236, 236, 1)",
-     pointHighlightStroke: "rgba(236, 236, 236, 1)",
+     lineTension: 0.3,
+     fill: false,
+     borderColor: 'purple',
+     backgroundColor: 'transparent',
+     pointBorderColor: 'purple',
+     pointBackgroundColor: 'lightgreen',
+     pointRadius: 5,
+     pointHoverRadius: 15,
+     pointHitRadius: 30,
+     pointBorderWidth: 2,
+     pointStyle: 'rect',
      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
    }]
  };
@@ -91,23 +99,47 @@ var data1 = {
     labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
     datasets: [{
       label: "Line Graph of oil Leaks",
-      backgroundColor:"rgba(255,255,0, 0.6)",
-      fillColor: "rgba(255, 255, 255, 0.5)",
-      strokeColor: "rgba(255, 255, 255, 0.5)",
-      pointColor: "rgba(255, 255, 255, 0.5)",
-      pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-      pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-      pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+      lineTension: 0.3,
+      fill: false,
+      borderColor: 'red',
+      backgroundColor: 'transparent',
+      pointBorderColor: 'red',
+      pointBackgroundColor: 'lightgreen',
+      pointRadius: 5,
+      pointHoverRadius: 15,
+      pointHitRadius: 30,
+      pointBorderWidth: 2,
+      pointStyle: 'rect',
+
+      // backgroundColor:"rgba(255,255,0, 0.6)",
+      // fillColor: "rgba(255, 255, 255, 0.5)",
+      // strokeColor: "rgba(255, 255, 255, 0.5)",
+      // pointColor: "rgba(255, 255, 255, 0.5)",
+      // pointStrokeColor: "rgba(255, 255, 255, 0.5)",
+      // pointHighlightFill: "rgba(255, 255, 255, 0.5)",
+      // pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
     },{
       label: "Line Graph of Water Leaks",
-      backgroundColor:"rgba(236, 236, 236, 0.3)",
-      fillColor: "rgba(236, 236, 236, 0.3)",
-      strokeColor: "rgba(236, 236, 236, 1)",
-      pointColor: "rgba(236, 236, 236, 1)",
-      pointStrokeColor: "rgba(236, 236, 236, 1)",
-      pointHighlightFill: "rgba(236, 236, 236, 1)",
-      pointHighlightStroke: "rgba(236, 236, 236, 1)",
+      lineTension: 0.3,
+      fill: false,
+      borderColor: 'purple',
+      backgroundColor: 'transparent',
+      pointBorderColor: 'purple',
+      pointBackgroundColor: 'lightgreen',
+      pointRadius: 5,
+      pointHoverRadius: 15,
+      pointHitRadius: 30,
+      pointBorderWidth: 2,
+      pointStyle: 'rect',
+
+      // backgroundColor:"rgba(236, 236, 236, 0.3)",
+      // fillColor: "rgba(236, 236, 236, 0.3)",
+      // strokeColor: "rgba(236, 236, 236, 1)",
+      // pointColor: "rgba(236, 236, 236, 1)",
+      // pointStrokeColor: "rgba(236, 236, 236, 1)",
+      // pointHighlightFill: "rgba(236, 236, 236, 1)",
+      // pointHighlightStroke: "rgba(236, 236, 236, 1)",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
     }]
   };
@@ -131,23 +163,31 @@ var data1 = {
      labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
      datasets: [{
        label: "Line Graph of oil Leaks",
-       backgroundColor:"rgba(255,255,0, 0.6)",
-       fillColor: "rgba(255, 255, 255, 0.5)",
-       strokeColor: "rgba(255, 255, 255, 0.5)",
-       pointColor: "rgba(255, 255, 255, 0.5)",
-       pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-       pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-       pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+       lineTension: 0.3,
+       fill: false,
+       borderColor: 'red',
+       backgroundColor: 'transparent',
+       pointBorderColor: 'red',
+       pointBackgroundColor: 'lightgreen',
+       pointRadius: 5,
+       pointHoverRadius: 15,
+       pointHitRadius: 30,
+       pointBorderWidth: 2,
+       pointStyle: 'rect',
        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
      },{
        label: "Line Graph of Water Leaks",
-       backgroundColor:"rgba(236, 236, 236, 0.3)",
-       fillColor: "rgba(236, 236, 236, 0.3)",
-       strokeColor: "rgba(236, 236, 236, 1)",
-       pointColor: "rgba(236, 236, 236, 1)",
-       pointStrokeColor: "rgba(236, 236, 236, 1)",
-       pointHighlightFill: "rgba(236, 236, 236, 1)",
-       pointHighlightStroke: "rgba(236, 236, 236, 1)",
+       lineTension: 0.3,
+       fill: false,
+       borderColor: 'purple',
+       backgroundColor: 'transparent',
+       pointBorderColor: 'purple',
+       pointBackgroundColor: 'lightgreen',
+       pointRadius: 5,
+       pointHoverRadius: 15,
+       pointHitRadius: 30,
+       pointBorderWidth: 2,
+       pointStyle: 'rect',
        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
      }]
    };
@@ -171,23 +211,31 @@ var data1 = {
       labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
       datasets: [{
         label: "Line Graph of oil Leaks",
-        backgroundColor:"rgba(255,255,0, 0.6)",
-        fillColor: "rgba(255, 255, 255, 0.5)",
-        strokeColor: "rgba(255, 255, 255, 0.5)",
-        pointColor: "rgba(255, 255, 255, 0.5)",
-        pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-        pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-        pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'red',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'red',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect',
         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
       },{
         label: "Line Graph of Water Leaks",
-        backgroundColor:"rgba(236, 236, 236, 0.3)",
-        fillColor: "rgba(236, 236, 236, 0.3)",
-        strokeColor: "rgba(236, 236, 236, 1)",
-        pointColor: "rgba(236, 236, 236, 1)",
-        pointStrokeColor: "rgba(236, 236, 236, 1)",
-        pointHighlightFill: "rgba(236, 236, 236, 1)",
-        pointHighlightStroke: "rgba(236, 236, 236, 1)",
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'purple',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect',
         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
       }]
     };
@@ -211,23 +259,31 @@ var data1 = {
        labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
        datasets: [{
          label: "Line Graph of oil Leaks",
-         backgroundColor:"rgba(255,255,0, 0.6)",
-         fillColor: "rgba(255, 255, 255, 0.5)",
-         strokeColor: "rgba(255, 255, 255, 0.5)",
-         pointColor: "rgba(255, 255, 255, 0.5)",
-         pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-         pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-         pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+         lineTension: 0.3,
+         fill: false,
+         borderColor: 'red',
+         backgroundColor: 'transparent',
+         pointBorderColor: 'red',
+         pointBackgroundColor: 'lightgreen',
+         pointRadius: 5,
+         pointHoverRadius: 15,
+         pointHitRadius: 30,
+         pointBorderWidth: 2,
+         pointStyle: 'rect',
          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
        },{
          label: "Line Graph of Water Leaks",
-         backgroundColor:"rgba(236, 236, 236, 0.3)",
-         fillColor: "rgba(236, 236, 236, 0.3)",
-         strokeColor: "rgba(236, 236, 236, 1)",
-         pointColor: "rgba(236, 236, 236, 1)",
-         pointStrokeColor: "rgba(236, 236, 236, 1)",
-         pointHighlightFill: "rgba(236, 236, 236, 1)",
-         pointHighlightStroke: "rgba(236, 236, 236, 1)",
+         lineTension: 0.3,
+         fill: false,
+         borderColor: 'purple',
+         backgroundColor: 'transparent',
+         pointBorderColor: 'purple',
+         pointBackgroundColor: 'lightgreen',
+         pointRadius: 5,
+         pointHoverRadius: 15,
+         pointHitRadius: 30,
+         pointBorderWidth: 2,
+         pointStyle: 'rect',
          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
        }]
      };
@@ -251,23 +307,31 @@ var data1 = {
         labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
         datasets: [{
           label: "Line Graph of oil Leaks",
-          backgroundColor:"rgba(255,255,0, 0.6)",
-          fillColor: "rgba(255, 255, 255, 0.5)",
-          strokeColor: "rgba(255, 255, 255, 0.5)",
-          pointColor: "rgba(255, 255, 255, 0.5)",
-          pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-          pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-          pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+          lineTension: 0.3,
+          fill: false,
+          borderColor: 'red',
+          backgroundColor: 'transparent',
+          pointBorderColor: 'red',
+          pointBackgroundColor: 'lightgreen',
+          pointRadius: 5,
+          pointHoverRadius: 15,
+          pointHitRadius: 30,
+          pointBorderWidth: 2,
+          pointStyle: 'rect',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
         },{
           label: "Line Graph of Water Leaks",
-          backgroundColor:"rgba(236, 236, 236, 0.3)",
-          fillColor: "rgba(236, 236, 236, 0.3)",
-          strokeColor: "rgba(236, 236, 236, 1)",
-          pointColor: "rgba(236, 236, 236, 1)",
-          pointStrokeColor: "rgba(236, 236, 236, 1)",
-          pointHighlightFill: "rgba(236, 236, 236, 1)",
-          pointHighlightStroke: "rgba(236, 236, 236, 1)",
+          lineTension: 0.3,
+          fill: false,
+          borderColor: 'purple',
+          backgroundColor: 'transparent',
+          pointBorderColor: 'purple',
+          pointBackgroundColor: 'lightgreen',
+          pointRadius: 5,
+          pointHoverRadius: 15,
+          pointHitRadius: 30,
+          pointBorderWidth: 2,
+          pointStyle: 'rect',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
         }]
       };
@@ -291,23 +355,31 @@ var data1 = {
          labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
          datasets: [{
            label: "Line Graph of oil Leaks",
-           backgroundColor:"rgba(255,255,0, 0.6)",
-           fillColor: "rgba(255, 255, 255, 0.5)",
-           strokeColor: "rgba(255, 255, 255, 0.5)",
-           pointColor: "rgba(255, 255, 255, 0.5)",
-           pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-           pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-           pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+           lineTension: 0.3,
+           fill: false,
+           borderColor: 'red',
+           backgroundColor: 'transparent',
+           pointBorderColor: 'red',
+           pointBackgroundColor: 'lightgreen',
+           pointRadius: 5,
+           pointHoverRadius: 15,
+           pointHitRadius: 30,
+           pointBorderWidth: 2,
+           pointStyle: 'rect',
            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
          },{
            label: "Line Graph of Water Leaks",
-           backgroundColor:"rgba(236, 236, 236, 0.3)",
-           fillColor: "rgba(236, 236, 236, 0.3)",
-           strokeColor: "rgba(236, 236, 236, 1)",
-           pointColor: "rgba(236, 236, 236, 1)",
-           pointStrokeColor: "rgba(236, 236, 236, 1)",
-           pointHighlightFill: "rgba(236, 236, 236, 1)",
-           pointHighlightStroke: "rgba(236, 236, 236, 1)",
+           lineTension: 0.3,
+           fill: false,
+           borderColor: 'purple',
+           backgroundColor: 'transparent',
+           pointBorderColor: 'purple',
+           pointBackgroundColor: 'lightgreen',
+           pointRadius: 5,
+           pointHoverRadius: 15,
+           pointHitRadius: 30,
+           pointBorderWidth: 2,
+           pointStyle: 'rect',
            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
          }]
        };
@@ -325,36 +397,54 @@ var data1 = {
            data: data7,
            options: options7
        });
+      //  myLineChart7.defaults.global.animationSteps = 50;
+      // myLineChart7.defaults.global.tooltipYPadding = 16;
+      // myLineChart7.defaults.global.tooltipCornerRadius = 0;
+      // myLineChart7.defaults.global.tooltipTitleFontStyle = "normal";
+      // myLineChart7.defaults.global.tooltipFillColor = "rgba(0,160,0,0.8)";
+      // myLineChart7.defaults.global.animationEasing = "easeOutBounce";
+      // myLineChart7.defaults.global.responsive = true;
+      // myLineChart7.defaults.global.scaleLineColor = "black";
+      // myLineChart7.defaults.global.scaleFontSize = 16;
+
 
        //rolling data vizz starts here..............
        var data8 = {
           labels: ["1", "2", "3", "4", "5", "6","7", "8", "9", "10", "11", "12"],
           datasets: [{
             label: "Line Graph of oil Leaks",
-            backgroundColor:"rgba(255,255,0, 0.6)",
-            fillColor: "rgba(255, 255, 255, 0.5)",
-            strokeColor: "rgba(255, 255, 255, 0.5)",
-            pointColor: "rgba(255, 255, 255, 0.5)",
-            pointStrokeColor: "rgba(255, 255, 255, 0.5)",
-            pointHighlightFill: "rgba(255, 255, 255, 0.5)",
-            pointHighlightStroke: "rgba(255, 255, 255, 0.5)",
+            lineTension: 0.3,
+            fill: false,
+            borderColor: 'red',
+            backgroundColor: 'transparent',
+            pointBorderColor: 'red',
+            pointBackgroundColor: 'lightgreen',
+            pointRadius: 5,
+            pointHoverRadius: 15,
+            pointHitRadius: 30,
+            pointBorderWidth: 2,
+            pointStyle: 'rect',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
           },{
             label: "Line Graph of Water Leaks",
-            backgroundColor:"rgba(236, 236, 236, 0.3)",
-            fillColor: "rgba(236, 236, 236, 0.3)",
-            strokeColor: "rgba(236, 236, 236, 1)",
-            pointColor: "rgba(236, 236, 236, 1)",
-            pointStrokeColor: "rgba(236, 236, 236, 1)",
-            pointHighlightFill: "rgba(236, 236, 236, 1)",
-            pointHighlightStroke: "rgba(236, 236, 236, 1)",
+            lineTension: 0.3,
+            fill: false,
+            borderColor: 'purple',
+            backgroundColor: 'transparent',
+            pointBorderColor: 'purple',
+            pointBackgroundColor: 'lightgreen',
+            pointRadius: 5,
+            pointHoverRadius: 15,
+            pointHitRadius: 30,
+            pointBorderWidth: 2,
+            pointStyle: 'rect',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
           }]
         };
 
         var options8 = {
           animation: false,
-          scaleOverride: false,
+          scaleOverride: true,
           scaleSteps: 1,
           scaleStepWidth: 2,
         };
@@ -365,8 +455,6 @@ var data1 = {
             data: data8,
             options: options8
         });
-
-
  setInterval(function() {
    setData(data1.datasets[0].data,
           data2.datasets[0].data,
@@ -426,7 +514,7 @@ var data1 = {
           var myLineChart7 = new Chart(ctx7, {
               type: 'line',
               data: data7,
-              options: options7
+              // options: options7
           });
           var myLineChart8 = new Chart(ctx8, {
               type: 'line',
