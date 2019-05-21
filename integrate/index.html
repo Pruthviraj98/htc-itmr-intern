@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <body>Dashboards
+   <button id="db1">Dashboard1</button>
+   <button id="db2">Dashboard2</button>
+
+   <br><br><br>
+   <h1>Here is the chart</h1>
+   <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+   </body>
+   <script src = "/socket.io/socket.io.js"></script>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<script>
+document.getElementById("db1").addEventListener("click", function1);
+document.getElementById("db2").addEventListener("click", function2);
+var socket1=null;
+var socket2=null;
+var inter1=null;
+var inter2=null;
+var classifications = ['one(Success)','zero(Abort)','two(Failiure)'];
+var colouarray = [ 'blue','yellow', 'red'];
+var initialData = [0, 0, 0];
+chart=null;
+var data1=null;
+      function function1(){
+            if(socket2!=null){
+                socket2.close();
+                clearInterval(inter2);
+                console.log('closing server2');
+              }
+            socket1 = io('/sock1', { forceNew: true });
+            socket1.on("temp", function(dat){
+            if(chart!=null){
+            chart = null;
+            }
+            chart = new CanvasJS.Chart("chartContainer", {
+                theme: "light2",
+                title:{
+                  text: "destroy() method"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "apple",  y: 10  },
+                          { label: "orange", y: 15  },
+                          { label: "banana", y: 25  },
+                          { label: "mango",  y: 30  },
+                          { label: "grape",  y: 28  }
+                        ]
+                      }
+                ]
+          });
+            chart.render();
+              console.log(dat);
+            });
+        }
+      function function2(){
+            if(socket1!=null){
+              socket1.close();
+              console.log('closing server1');
+            }
+            inter2=setInterval(function(){
+              socket2 = io('/sock2', { forceNew: true });
+              socket2.on("temp", function(dat){
+                if(chart!=null){
+                  chart = null;
+                }
+                chart = new CanvasJS.Chart("chartContainer", {
+                		theme: "light2",
+                		title:{
+                			text: "destroy() method"
+                		},
+                		data: [
+                		{
+                			type: "column",
+                			dataPoints: [
+                				{ label: "apple",  y: 42  },
+                				{ label: "orange", y: 78  },
+                				{ label: "banana", y: 56  },
+                				{ label: "mango",  y: 40  },
+                				{ label: "grape",  y: 18  }
+                			]
+                		}
+                		]
+              });
+            	chart.render();
+                console.log(dat);
+              });
+            },3000);
+       }
+   </script>
+</html>
