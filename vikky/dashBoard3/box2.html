@@ -1,0 +1,315 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="">
+    <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript ">
+window.onload = function () {
+  var dps1= [
+    { x: "MACHINE1", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE2", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE3", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE4", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE5", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE6", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE7", y: [2, 3, 5, 4, 6]},
+    { x: "MACHINE8", y: [2, 3, 5, 4, 6]},
+  ];
+  var dps= [
+    { x: "MACHINE1", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE2", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE3", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE4", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE5", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE6", y: [2, 3, 5, 4, 6] },
+    { x: "MACHINE7", y: [2, 3, 5, 4, 6]},
+    { x: "MACHINE8", y: [2, 3, 5, 4, 6]},
+  ];
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+    theme:"light",
+  	title:{
+  		text: "BOX PLOT WITH RESPECT TO OIL FOR ALL MACHINES"
+  	},
+  	axisX: {
+  		valueFormatString: "MACHINE"
+  	},
+  	axisY: {
+  		title: "LEAK_RATE"
+  	},
+  	data: [{
+  		type: "boxAndWhisker",
+      showInLegend: true,
+      xvalueFormatString: "MACHINE",
+  		yValueFormatString: "0.0",
+  		dataPoints:dps1
+  	}]
+  });
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+  	animationEnabled: true,
+    theme:"light",
+  	title:{
+  		text: "BOX PLOT WITH RESPECT TO WATER FOR ALL MACHINES"
+  	},
+  	axisX: {
+  		valueFormatString: "MACHINE"
+  	},
+  	axisY: {
+  		title: "LEAK_RATE"
+  	},
+  	data: [{
+  		type: "boxAndWhisker",
+      showInLegend: true,
+      xvalueFormatString: "MACHINE",
+  		yValueFormatString: "0.0",
+  		dataPoints:dps
+  	}]
+  });
+  chart.render();
+  chart1.render();
+
+var updateInterval = 1000;
+var updateChart = function () {
+var socket = io.connect('http://localhost:3000/');
+socket.on('temp', function(data) { //As a temp data is received
+    dat=JSON.parse(data);
+    // console.log(dat);
+    min1 =dat["min"];
+    med11 =dat["median11"];
+    med1 =dat["median1"];
+    med12 =dat["median12"];
+    max1 =dat["max1"];
+    min2 =dat["min2"];
+    med21 =dat["median21"];
+    med2 =dat["median2"];
+    med22 =dat["median22"];
+    max2 =dat["max2"];
+    min3 =dat["min3"];
+    med31 =dat["median31"];
+    med3 =dat["median3"];
+    med32 =dat["median32"];
+    max3 =dat["max3"];
+    min4 =dat["min4"];
+    med41 =dat["median41"];
+    med4 =dat["median4"];
+    med42 =dat["median42"];
+    max4 =dat["max4"];
+    min5 =dat["min5"];
+    med51 =dat["median51"];
+    med5 =dat["median5"];
+    med52 =dat["median52"];
+    max5 =dat["max5"];
+    min6 =dat["min6"];
+    med61 =dat["median61"];
+    med6 =dat["median6"];
+    med62 =dat["median62"];
+    max6 =dat["max6"];
+    min7 =dat["min7"];
+    med71 =dat["median71"];
+    med7 =dat["median7"];
+    med72 =dat["median72"];
+    max7 =dat["max7"];
+    min8 =dat["min8"];
+    med81 =dat["median81"];
+    med8 =dat["median8"];
+    med82 =dat["median82"];
+    max8 =dat["max8"];
+// console.log(dat["min1"]);
+    min11 =dat["min1"];
+    med111 =dat["median111"];
+    med211 =dat["median211"];
+    med112 =dat["median112"];
+    max11 =dat["max11"];
+    min12 =dat["min12"];
+    med121 =dat["median121"];
+    med212 =dat["median212"];
+    med122 =dat["median122"];
+    max12 =dat["max12"];
+    min13 =dat["min13"];
+    med131 =dat["median131"];
+    med13 =dat["median13"];
+    med132 =dat["median132"];
+    max13 =dat["max13"];
+    min14 =dat["min14"];
+    med141 =dat["median141"];
+    med14 =dat["median14"];
+    med142 =dat["median142"];
+    max14 =dat["max14"];
+    min15 =dat["min15"];
+    med151 =dat["median151"];
+    med15 =dat["median15"];
+    med152 =dat["median152"];
+    max15 =dat["max15"];
+    min16 =dat["min16"];
+    med161 =dat["median161"];
+    med16 =dat["median16"];
+    med162 =dat["median162"];
+    max16 =dat["max16"];
+    min17 =dat["min17"];
+    med171 =dat["median171"];
+    med17 =dat["median17"];
+    med172 =dat["median172"];
+    max17 =dat["max17"];
+    min18 =dat["min18"];
+    med181 =dat["median181"];
+    med18 =dat["median18"];
+    med182 =dat["median182"];
+    max18 =dat["max18"];
+    console.log(dat["median12"]);
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+
+    c=[]
+    c.push(0);
+    c.push(med11["o_LeakRate"]);
+    c.push(med12["o_LeakRate"]);
+    c.push(max1["o_LeakRate"]);
+    c.push(med1["o_LeakRate"]);
+    d=[]
+    d.push(min2["o_LeakRate"]);
+    d.push(med21["o_LeakRate"]);
+    d.push(med22["o_LeakRate"]);
+    d.push(max2["o_LeakRate"]);
+    d.push(med2["o_LeakRate"]);
+    e=[]
+    e.push(min3["o_LeakRate"]);
+    e.push(med31["o_LeakRate"]);
+    e.push(med32["o_LeakRate"]);
+    e.push(max3["o_LeakRate"]);
+    e.push(med3["o_LeakRate"]);
+    f=[]
+    f.push(min4["o_LeakRate"]);
+    f.push(med41["o_LeakRate"]);
+    f.push(med42["o_LeakRate"]);
+    f.push(max4["o_LeakRate"]);
+    f.push(med4["o_LeakRate"]);
+    g=[]
+    g.push(min5["o_LeakRate"]);
+    g.push(med51["o_LeakRate"]);
+    g.push(med52["o_LeakRate"]);
+    g.push(max5["o_LeakRate"]);
+    g.push(med5["o_LeakRate"]);
+    h=[]
+    h.push(min6["o_LeakRate"]);
+    h.push(med61["o_LeakRate"]);
+    h.push(med62["o_LeakRate"]);
+    h.push(max6["o_LeakRate"]);
+    h.push(med6["o_LeakRate"]);
+    i=[]
+    i.push(min7["o_LeakRate"]);
+    i.push(med71["o_LeakRate"]);
+    i.push(med72["o_LeakRate"]);
+    i.push(max7["o_LeakRate"]);
+    i.push(med7["o_LeakRate"]);
+    j=[]
+    j.push(min8["o_LeakRate"]);
+    j.push(med81["o_LeakRate"]);
+    j.push(med82["o_LeakRate"]);
+    j.push(max8["o_LeakRate"]);
+    j.push(med8["o_LeakRate"]);
+
+    k=[]
+    k.push(0);
+    k.push(med111["W_LeakRate"]);
+    k.push(med112["W_LeakRate"]);
+    k.push(max11["W_LeakRate"]);
+    k.push(med211["W_LeakRate"]);
+
+    l=[]
+    l.push(min12["W_LeakRate"]);
+    l.push(med121["W_LeakRate"]);
+    l.push(med122["W_LeakRate"]);
+    l.push(max12["W_LeakRate"]);
+    l.push(med212["W_LeakRate"]);
+
+    m=[]
+    m.push(min13["W_LeakRate"]);
+    m.push(med131["W_LeakRate"]);
+    m.push(med132["W_LeakRate"]);
+    m.push(max13["W_LeakRate"]);
+    m.push(med13["W_LeakRate"]);
+
+    n=[]
+    n.push(min14["W_LeakRate"]);
+    n.push(med141["W_LeakRate"]);
+    n.push(med142["W_LeakRate"]);
+    n.push(max14["W_LeakRate"]);
+    n.push(med14["W_LeakRate"]);
+    o=[]
+    o.push(min15["W_LeakRate"]);
+    o.push(med151["W_LeakRate"]);
+    o.push(med152["W_LeakRate"]);
+    o.push(max15["W_LeakRate"]);
+    o.push(med15["W_LeakRate"]);
+
+    p=[]
+    p.push(min16["W_LeakRate"]);
+    p.push(med161["W_LeakRate"]);
+    p.push(med162["W_LeakRate"]);
+    p.push(max16["W_LeakRate"]);
+    p.push(med16["W_LeakRate"]);
+
+    q=[]
+    q.push(min17["W_LeakRate"]);
+    q.push(med171["W_LeakRate"]);
+    q.push(med172["W_LeakRate"]);
+    q.push(max17["W_LeakRate"]);
+    q.push(med17["W_LeakRate"]);
+
+    r=[]
+    r.push(min18["W_LeakRate"]);
+    r.push(med181["W_LeakRate"]);
+    r.push(med182["W_LeakRate"]);
+    r.push(max18["W_LeakRate"]);
+    r.push(med18["W_LeakRate"]);
+    // console.log(d);
+    // console.log(e);
+    // console.log(f);
+    // console.log(g);
+    // console.log(h);
+    // console.log(i);
+     // console.log(l);
+    dps1.push({y:c});
+    dps1.push({y:d});
+    dps1.push({y:e});
+    dps1.push({y:f});
+    dps1.push({y:g});
+    dps1.push({y:h});
+    dps1.push({y:i});
+    dps1.push({y:j});
+    dps.push({y:k});
+    dps.push({y:l});
+    dps.push({y:m});
+    dps.push({y:n});
+    dps.push({y:o});
+    dps.push({y:p});
+    dps.push({y:q});
+    dps.push({y:r});
+});
+  chart.render();
+  chart1.render();
+};
+setInterval(function(){updateChart()}, updateInterval);
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script t6pe="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+</body>
+</html>
