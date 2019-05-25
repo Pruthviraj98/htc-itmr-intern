@@ -157,8 +157,11 @@ nsp2.on('connection', function(socket) {
         });
 });/////namespace end for db2
 
-var add_status = function (param) {
-
+var param=0;
+var add_status = function (r) {
+  if(r>0){
+    param++;
+  }
   var sql = "SELECT * FROM dat_oil_intern where MachineNumber=? ;"+
             "SELECT * FROM dat_oil_intern where MachineNumber=? ;"+
             "SELECT * FROM dat_oil_intern where MachineNumber=? ;"+
@@ -291,17 +294,34 @@ var add_status = function (param) {
     });
 };
 
+/// nsp3 to be defined...
+nsp3=io.of('/sock3');
+nsp3.on('connection', function(socket){
+      console.log("3 DB Conn");
+      socket.on('updateGraph', function(r){
+        add_status3(r);
+      });
+});/////namespace end for db3
+
+// add_status3(r){
+//
+// }
+
+
+
 var nsp4 = io.of('/sock4');
 nsp4.on('connection', function(socket) {
         console.log("4 DB Conn");
-        socket.on('updateGraph',function(r){
-            add_status2(r);
+        socket.on('updateGraph',function(rr){
+            add_status2(rr);
         });
-});/////namespace end for db2
+});/////namespace end for db4
 
-
-var add_status2 = function (r) {
-
+var r=0;
+var add_status2 = function (param) {
+  if(param>0){
+    r++;
+  }
   console.log(r);
     var sql="select hour(Leak_CreatedDate) as A,avg(O_LeakRate) as B from dat_oil_intern where machinenumber=? and day(Leak_CreatedDate)=? group by hour(Leak_CreatedDate) order by hour(Leak_CreatedDate) asc;"+
             "select hour(Leak_CreatedDate) as A,avg(O_LeakRate) as B from dat_oil_intern where machinenumber=? and day(Leak_CreatedDate)=? group by hour(Leak_CreatedDate) order by hour(Leak_CreatedDate) asc;"+
@@ -549,12 +569,13 @@ var add_status2 = function (r) {
                 "OL6": O6_leakage,
                 "OL7": O7_leakage,
                 "OL8": O8_leakage,};
-      console.log(obj);
       objs=JSON.stringify(obj);
       console.log(objs);
-      io.sockets.emit('temp', objs);
+      // io.socket.emit('temp', objs);
+      nsp4.emit('temp', objs);
       });
      connection.on('error', function(err) {
+              console.log(err);
               callback(false);
               return;
     });
