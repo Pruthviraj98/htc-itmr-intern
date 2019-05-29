@@ -1,0 +1,449 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="">
+    <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript ">
+window.onload = function () {
+  var dps1= [
+    { x: "MODEL K9K", y: [2, 3, 5, 4, 6] },
+    { x: "MODEL B4D", y: [2, 3, 5, 4, 6] },
+    { x: "MODEL H5FD", y: [2, 3, 5, 4, 6] },
+    { x: "MODEL GEN 2", y: [2, 3, 5, 4, 6] },
+    { x: "MODEL YL 7", y: [2, 3, 5, 4, 6] },
+    { x: "MODEL YL 1", y: [2, 3, 5, 4, 6] },
+    { x: "MODEL XFL 246", y: [2, 3, 5, 4, 6]},
+    { x: "MODEL 800 CC", y: [2, 3, 5, 4, 6]},
+    { x: "MODEL M&H", y: [2, 3, 5, 4, 6]},
+    { x: "MODEL X 302", y: [2, 3, 5, 4, 6]},
+    { x: "MODEL T 1.05 ", y: [2, 3, 5, 4, 6]},
+
+  ];
+  var dps= [
+    { x:  "MODEL K9K",  y: [2, 3, 5, 4, 6] },
+    { x:  "MODEL B4D",  y: [2, 3, 5, 4, 6] },
+    { x:  "MODEL H5FD", y: [2, 3, 5, 4, 6] },
+    { x:  "MODEL GEN 2", y: [2, 3, 5, 4, 6] },
+    { x:  "MODEL YL 7", y: [2, 3, 5, 4, 6] },
+    { x:  "MODEL YL 1", y: [2, 3, 5, 4, 6] },
+    { x:  "MODEL XFL 24", y: [2, 3, 5, 4, 6]},
+    { x: "MODEL 800 CC", y: [2, 3, 5, 4, 6]},
+    { x:  "MODEL M&H",  y: [2, 3, 5, 4, 6]},
+    { x: "MODEL X 302", y: [2, 3, 5, 4, 6]},
+    { x: "MODEL T 1.05 ", y: [2, 3, 5, 4, 6]},
+
+  ];
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+    theme:"light",
+  	title:{
+  		text: "BOX PLOT WITH RESPECT TO OIL FOR ALL MODELS"
+  	},
+  	axisX: {
+  		valueFormatString: "MACHINE"
+  	},
+  	axisY: {
+  		title: "LEAK_RATE"
+  	},
+  	data: [{
+  		type: "boxAndWhisker",
+      showInLegend: true,
+      xvalueFormatString: "MACHINE",
+  		yValueFormatString: "0.0",
+  		dataPoints:dps1
+  	}]
+  });
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+  	animationEnabled: true,
+    theme:"light",
+  	title:{
+  		text: "BOX PLOT WITH RESPECT TO WATER FOR ALL MODELS"
+  	},
+  	axisX: {
+  		valueFormatString: "MACHINE",
+  	},
+  	axisY: {
+  		title: "LEAK_RATE"
+  	},
+  	data: [{
+  		type: "boxAndWhisker",
+      showInLegend: true,
+      xvalueFormatString: "MACHINE",
+  		yValueFormatString: "0.0",
+  		dataPoints:dps
+  	}]
+  });
+  chart.render();
+  chart1.render();
+
+var updateInterval = 1000;
+var updateChart = function () {
+var socket = io.connect('http://localhost:3000/');
+socket.on('temp', function(data) { //As a temp data is received
+    dat=JSON.parse(data);
+    // console.log(dat);
+    min11 =dat["M111"];
+    med111 =dat["M112"];
+    med11 =dat["M113"];
+    med112 =dat["M114"];
+    max11 =dat["M115"];
+
+    // console.log(dat);
+    min12 =dat["M121"];
+    med121 =dat["M122"];
+    med12 =dat["M123"];
+    med122 =dat["M124"];
+    max12 =dat["M125"];
+    // console.log(dat);
+    min13 =dat["M131"];
+    med131 =dat["M132"];
+    med13 =dat["M133"];
+    med132 =dat["M134"];
+    max13 =dat["M135"];
+    // console.log(dat);
+    min14 =dat["M141"];
+    med141 =dat["M142"];
+    med14 =dat["M143"];
+    med142 =dat["M144"];
+    max14 =dat["M145"];
+    // console.log(dat);
+    min15 =dat["M151"];
+    med151 =dat["M152"];
+    med15 =dat["M153"];
+    med152 =dat["M154"];
+    max15 =dat["M155"];
+    // console.log(dat);
+    min16 =dat["M161"];
+    med161 =dat["M162"];
+    med16 =dat["M163"];
+    med162 =dat["M164"];
+    max16 =dat["M165"];
+    // console.log(dat);
+    min17 =dat["M171"];
+    med171 =dat["M172"];
+    med17 =dat["M173"];
+    med172 =dat["M174"];
+    max17 =dat["M175"];
+    // console.log(dat);
+    min18 =dat["M181"];
+    med181 =dat["M182"];
+    med18 =dat["M183"];
+    med182 =dat["M184"];
+    max18 =dat["M185"];
+    // console.log(dat);
+    min19 =dat["M191"];
+    med191 =dat["M192"];
+    med19 =dat["M193"];
+    med192 =dat["M194"];
+    max19 =dat["M195"];
+    // console.log(dat);
+    min110 =dat["M1101"];
+    med1101 =dat["M1102"];
+    med110 =dat["M1103"];
+    med1102 =dat["M1104"];
+    max110 =dat["M1105"];
+    // console.log(dat);
+    min111 =dat["M1111"];
+    med1111 =dat["M1112"];
+    med1115 =dat["M1113"];
+    med1112 =dat["M1114"];
+    max111 =dat["M1115"];
+    // console.log(dat);
+    min21 =dat["M211"];
+    med211 =dat["M215"];
+    med21 =dat["M214"];
+    med212 =dat["M213"];
+    max21 =dat["M212"];
+    // console.log(dat);
+    min22 =dat["M221"];
+    med221 =dat["M222"];
+    med22 =dat["M223"];
+    med222 =dat["M224"];
+    max22 =dat["M225"];
+    // console.log(dat);
+    min23 =dat["M231"];
+    med231 =dat["M232"];
+    med23 =dat["M233"];
+    med232 =dat["M234"];
+    max23 =dat["M235"];
+    // console.log(dat);
+    min24 =dat["M241"];
+    med241 =dat["M242"];
+    med24 =dat["M243"];
+    med242 =dat["M244"];
+    max24 =dat["M245"];
+    // console.log(dat);
+    min25 =dat["M251"];
+    med251 =dat["M252"];
+    med25 =dat["M253"];
+    med252 =dat["M254"];
+    max25 =dat["M255"];
+    // console.log(dat);
+    min26 =dat["M261"];
+    med261 =dat["M262"];
+    med26 =dat["M263"];
+    med262 =dat["M264"];
+    max26 =dat["M265"];
+    // console.log(dat);
+    min27 =dat["M271"];
+    med271 =dat["M272"];
+    med27 =dat["M273"];
+    med272 =dat["M274"];
+    max27 =dat["M275"];
+    // console.log(dat);
+    min28 =dat["M281"];
+    med281 =dat["M282"];
+    med28 =dat["M283"];
+    med282 =dat["M284"];
+    max28 =dat["M285"];
+
+    min29 =dat["M291"];
+    med291 =dat["M292"];
+    med29 =dat["M293"];
+    med292 =dat["M294"];
+    max29 =dat["M295"];
+
+    min210 =dat["M2101"];
+    med2101 =dat["M2102"];
+    med210 =dat["M2103"];
+    med2102 =dat["M2104"];
+    max210 =dat["M2105"];
+
+    min211 =dat["M2111"];
+    med2111 =dat["M2112"];
+    med2115 =dat["M2113"];
+    med2112 =dat["M2114"];
+    max211 =dat["M2115"];
+
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+    dps1.pop();
+
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+    dps.pop();
+
+    c=[]
+    c.push(min11["o_LeakRate"]);
+    c.push(med111["o_LeakRate"]);
+    c.push(med112["o_LeakRate"]);
+    c.push(max11["o_LeakRate"]);
+    c.push(med11["o_LeakRate"]);
+    d=[]
+    d.push(min12["o_LeakRate"]);
+    d.push(med121["o_LeakRate"]);
+    d.push(med122["o_LeakRate"]);
+    d.push(max12["o_LeakRate"]);
+    d.push(med12["o_LeakRate"]);
+    e=[]
+    e.push(min13["o_LeakRate"]);
+    e.push(med131["o_LeakRate"]);
+    e.push(med132["o_LeakRate"]);
+    e.push(max13["o_LeakRate"]);
+    e.push(med13["o_LeakRate"]);
+    f=[]
+    f.push(min14["o_LeakRate"]);
+    f.push(med141["o_LeakRate"]);
+    f.push(med142["o_LeakRate"]);
+    f.push(max14["o_LeakRate"]);
+    f.push(med14["o_LeakRate"]);
+    g=[]
+    g.push(min15["o_LeakRate"]);
+    g.push(med151["o_LeakRate"]);
+    g.push(med152["o_LeakRate"]);
+    g.push(max15["o_LeakRate"]);
+    g.push(med15["o_LeakRate"]);
+    h=[]
+    h.push(min16["o_LeakRate"]);
+    h.push(med161["o_LeakRate"]);
+    h.push(med162["o_LeakRate"]);
+    h.push(max16["o_LeakRate"]);
+    h.push(med16["o_LeakRate"]);
+    i=[]
+    i.push(min17["o_LeakRate"]);
+    i.push(med171["o_LeakRate"]);
+    i.push(med172["o_LeakRate"]);
+    i.push(max17["o_LeakRate"]);
+    i.push(med17["o_LeakRate"]);
+    j=[]
+    j.push(min18["o_LeakRate"]);
+    j.push(med181["o_LeakRate"]);
+    j.push(med182["o_LeakRate"]);
+    j.push(max18["o_LeakRate"]);
+    j.push(med18["o_LeakRate"]);
+
+    k=[]
+    k.push(min19["o_LeakRate"]);
+    k.push(med191["o_LeakRate"]);
+    k.push(med192["o_LeakRate"]);
+    k.push(max19["o_LeakRate"]);
+    k.push(med19["o_LeakRate"]);
+
+    l=[]
+    l.push(min110["o_LeakRate"]);
+    l.push(med1101["o_LeakRate"]);
+    l.push(med1102["o_LeakRate"]);
+    l.push(max110["o_LeakRate"]);
+    l.push(med110["o_LeakRate"]);
+
+    m=[]
+    m.push(0);
+    m.push(0);
+    m.push(0);
+    m.push(0);
+    m.push(0);
+
+    n=[]
+
+    n.push(min21["w_LeakRate"]);
+    n.push(med211["w_LeakRate"]);
+    n.push(med212["w_LeakRate"]);
+    n.push(max21["w_LeakRate"]);
+    n.push(med21["w_LeakRate"]);
+
+    o=[]
+    o.push(min22["w_LeakRate"]);
+    o.push(med221["w_LeakRate"]);
+    o.push(med222["w_LeakRate"]);
+    o.push(max22["w_LeakRate"]);
+    o.push(med22["w_LeakRate"]);
+
+    p=[]
+    p.push(min23["w_LeakRate"]);
+    p.push(med231["w_LeakRate"]);
+    p.push(med232["w_LeakRate"]);
+    p.push(max23["w_LeakRate"]);
+    p.push(med23["w_LeakRate"]);
+
+    q=[]
+    q.push(min24["w_LeakRate"]);
+    q.push(med241["w_LeakRate"]);
+    q.push(med242["w_LeakRate"]);
+    q.push(max24["w_LeakRate"]);
+    q.push(med24["w_LeakRate"]);
+
+    r=[]
+    r.push(min25["w_LeakRate"]);
+    r.push(med251["w_LeakRate"]);
+    r.push(med252["w_LeakRate"]);
+    r.push(max25["w_LeakRate"]);
+    r.push(med25["w_LeakRate"]);
+
+    s=[]
+    s.push(min26["w_LeakRate"]);
+    s.push(med261["w_LeakRate"]);
+    s.push(med262["w_LeakRate"]);
+    s.push(max26["w_LeakRate"]);
+    s.push(med26["w_LeakRate"]);
+
+
+    t=[]
+    t.push(min27["w_LeakRate"]);
+    t.push(med271["w_LeakRate"]);
+    t.push(med272["w_LeakRate"]);
+    t.push(max27["w_LeakRate"]);
+    t.push(med27["w_LeakRate"]);
+
+
+    u=[]
+    u.push(min28["w_LeakRate"]);
+    u.push(med281["w_LeakRate"]);
+    u.push(med282["w_LeakRate"]);
+    u.push(max28["w_LeakRate"]);
+    u.push(med28["w_LeakRate"]);
+
+
+    v=[]
+    v.push(min29["w_LeakRate"]);
+    v.push(med291["w_LeakRate"]);
+    v.push(med292["w_LeakRate"]);
+    v.push(max29["w_LeakRate"]);
+    v.push(med29["w_LeakRate"]);
+
+
+    w=[]
+    w.push(min210["w_LeakRate"]);
+    w.push(med2101["w_LeakRate"]);
+    w.push(med2102["w_LeakRate"]);
+    w.push(max210["w_LeakRate"]);
+    w.push(med210["w_LeakRate"]);
+
+
+
+    x=[]
+    x.push(0);
+    x.push(0);
+    x.push(0);
+    x.push(0);
+    x.push(0);
+    //
+    // console.log(n);
+    // console.log(o);
+    // console.log(p);
+    // console.log(q);
+    // console.log(r);
+    // console.log(s);
+    // console.log(t);
+    // console.log(u);
+    // console.log(v);
+    // console.log(w);
+    // console.log(x);
+
+    dps1.push({y:c});
+    dps1.push({y:d});
+    dps1.push({y:e});
+    dps1.push({y:f});
+    dps1.push({y:g});
+    dps1.push({y:h});
+    dps1.push({y:i});
+    dps1.push({y:j});
+    dps1.push({y:k});
+    dps1.push({y:l});
+    dps1.push({y:m});
+    dps.push({y:n});
+    dps.push({y:o});
+    dps.push({y:p});
+    dps.push({y:q});
+    dps.push({y:r});
+    dps.push({y:s});
+    dps.push({y:t});
+    dps.push({y:u});
+    dps.push({y:v});
+    dps.push({y:w});
+    dps.push({y:x});
+    //
+    // console.log(dps1);
+    //
+    // console.log(dps);
+
+});
+  chart.render();
+  chart1.render();
+};
+// updateChart();
+setInterval(function(){updateChart()}, updateInterval);
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="chartContainer1" style="height: 400px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script t6pe="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+</body>
+</html>
