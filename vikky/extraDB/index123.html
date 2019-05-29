@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+td {
+  padding: 15px;
+}
+.foo {
+  float: left;
+  width: 40px;
+  height: 10px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 2);
+}
+
+.yellow {
+  background: #efff13;
+}
+
+
+.blue {
+  background: #2213ff;
+}
+
+.red {
+  background: #ff1313;
+}
+</style>
+<body>
+<table style = "width:100%">
+<tr>
+<td>
+  <div class="w3-container">
+<center> MODEL K9K </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart1" width = "300" height = "270"></canvas>
+  </div>
+</div>
+<td>
+  <div class="w3-container">
+<center>    MODEL B4D </center>
+      <div class = "w3-display-container w3-white" style = "height:400px;">
+       <div class = "w3-display-topright">
+        <div class="foo blue"></div>
+        <font size="1">--Success</font>
+        <p></p>
+        <div class="foo yellow"></div>
+        <font size="1">--Abort</font>
+        <p></p>
+        <div class="foo red"></div>
+        <font size="1">--Fail</font>
+        <p></p>
+       </div>
+       <canvas id="chart2" width = "300" height = "270"></canvas>
+      </div>
+    </div>
+ </td>
+<td>
+
+  <div class="w3-container">
+<center>  MODEL H5FD </center>
+      <div class = "w3-display-container w3-white" style = "height:400px;">
+       <div class = "w3-display-topright">
+        <div class="foo blue"></div>
+        <font size="1">--Success</font>
+        <p></p>
+        <div class="foo yellow"></div>
+        <font size="1">--Abort</font>
+        <p></p>
+        <div class="foo red"></div>
+        <font size="1">--Fail</font>
+        <p></p>
+       </div>
+       <canvas id="chart3" width = "300" height = "270"></canvas>
+      </div>
+  </div>
+</td>
+<td>
+  <div class="w3-container">
+<center> MODEL GEN 2</center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart4" width = "300" height = "270"></canvas>
+  </div>
+  </div>
+</tr>
+<tr>
+<td>
+  <div class="w3-container">
+<center>  MODEL YL 7</center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+    <canvas id="chart5" width = "300" height = "270"></canvas>
+   </div>
+  </div>
+  </div>
+</td>
+<td>
+  <div class="w3-container">
+  <center>MODEL YL 1</center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+    <canvas id="chart6" width = "300" height = "270"></canvas>
+   </div>
+  </div>
+  </div>
+</td>
+<td>
+  <div class="w3-container">
+    <div class = "w3-display-container w3-white" style = "height:400px;">
+      <center>MODEL XFL 246 </center>
+     <div class = "w3-display-topright">
+      <div class="foo blue"></div>
+      <font size="1">--Success</font>
+      <p></p>
+      <div class="foo yellow"></div>
+      <font size="1">--Abort</font>
+      <p></p>
+      <div class="foo red"></div>
+      <font size="1">--Fail</font>
+      <p></p>
+     </div>
+     <canvas id="chart7" width = "300" height = "270"></canvas>
+    </div>
+  </div>
+<td>
+  <div class="w3-container">
+    <center>MODEL 800 CC </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart8" width = "300" height = "270"></canvas>
+  </div>
+  </div>
+</tr>
+<tr>
+<td>
+  <div class="w3-container">
+    <center>MODEL M&H </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart9" width = "300" height = "270"></canvas>
+  </div>
+  </div>
+</td>
+<td>
+  <div class="w3-container">
+    <center>MODEL X 302 </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart10" width = "300" height = "270"></canvas>
+  </div>
+  </div>
+</td>
+<td>
+  <div class="w3-container">
+    <center>MODEL T 1.05 </center>
+  <div class = "w3-display-container w3-white" style = "height:400px;">
+   <div class = "w3-display-topright">
+    <div class="foo blue"></div>
+    <font size="1">--Success</font>
+    <p></p>
+    <div class="foo yellow"></div>
+    <font size="1">--Abort</font>
+    <p></p>
+    <div class="foo red"></div>
+    <font size="1">--Fail</font>
+    <p></p>
+   </div>
+   <canvas id="chart11" width = "300" height = "270"></canvas>
+  </div>
+  </div>
+</td>
+</tr>
+</table>
+<style>
+body
+{
+  background-color: #cccccc;
+}
+</style>
+<script type="text/javascript "src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script type="text/javascript">
+var socket = io.connect('http://localhost:3000/');
+
+var classifications = ['one(Success)','zero(Abort)','two(Failiure)'];
+var colouarray = [ 'blue','yellow', 'red'];
+
+var initialData = [0, 0, 0];
+
+var ctx1 = document.getElementById("chart1");
+var ctx2 = document.getElementById("chart2");
+var ctx3 = document.getElementById("chart3");
+var ctx4 = document.getElementById("chart4");
+var ctx5 = document.getElementById("chart5");
+var ctx6 = document.getElementById("chart6");
+var ctx7 = document.getElementById("chart7");
+var ctx8 = document.getElementById("chart8");
+var ctx9 = document.getElementById("chart9");
+var ctx10 = document.getElementById("chart10");
+var ctx11 = document.getElementById("chart11");
+
+
+var socket = io.connect('http://localhost:3000/');
+socket.on('temp', function(data) { //As a temp data is received
+    dat=JSON.parse(data);
+
+
+    var data1= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: " MODEL K9K",
+        data: dat['zerOneTwo1']
+      }]
+
+    }
+    var chart1 = new Chart(ctx1, {
+    type: 'bar',
+    data: data1,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data2= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "MODEL B4D",
+        data: dat['zerOneTwo2']
+      }]
+    }
+    var chart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: data2,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data3= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: " MODEL H5FT",
+        data: dat['zerOneTwo3']
+      }]
+    }
+    var chart3 = new Chart(ctx3, {
+    type: 'bar',
+    data: data3,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data4= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: " MODEL GEN 2",
+        data: dat['zerOneTwo4']
+      }]
+    }
+    var chart4 = new Chart(ctx4, {
+    type: 'bar',
+    data: data4,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data5= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: " MODEL YL 7",
+        data: dat['zerOneTwo5']
+      }]
+    }
+    var chart5 = new Chart(ctx5, {
+    type: 'bar',
+    data: data5,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data6= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: " MODEL YL 1",
+        data: dat['zerOneTwo6']
+      }]
+    }
+    var chart6 = new Chart(ctx6, {
+    type: 'bar',
+    data: data6,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data7= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: "MODEL XFL 246",
+        data: dat['zerOneTwo7']
+      }]
+    }
+    var chart7 = new Chart(ctx7, {
+    type: 'bar',
+    data: data7,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+    var data8= {
+      labels: classifications,
+      datasets: [{
+        backgroundColor: colouarray,
+        label: " MODEL 800 CC",
+        data: dat['zerOneTwo8']
+      }]
+    }
+    var chart8 = new Chart(ctx8, {
+    type: 'bar',
+    data: data8,
+    options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100,
+                  stepSize: 10,
+                }
+              }]
+            }
+            }
+    });
+
+        var data9= {
+          labels: classifications,
+          datasets: [{
+            backgroundColor: colouarray,
+            label: " MODEL M&H",
+            data: dat['zerOneTwo9']
+          }]
+        }
+        var chart9 = new Chart(ctx9, {
+        type: 'bar',
+        data: data9,
+        options: {
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      beginAtZero: true,
+                      min: 0,
+                      max: 100,
+                      stepSize: 10,
+                    }
+                  }]
+                }
+                }
+        });
+
+            var data10= {
+              labels: classifications,
+              datasets: [{
+                backgroundColor: colouarray,
+                label: " MODEL X 302",
+                data: dat['zerOneTwo10']
+              }]
+            }
+            var chart8 = new Chart(ctx10, {
+            type: 'bar',
+            data: data10,
+            options: {
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true,
+                          min: 0,
+                          max: 100,
+                          stepSize: 10,
+                        }
+                      }]
+                    }
+                    }
+            });
+
+                var data11= {
+                  labels: classifications,
+                  datasets: [{
+                    backgroundColor: colouarray,
+                    label: " MODEL T 1.05",
+                    data: dat['zerOneTwo11']
+                  }]
+                }
+                var chart11 = new Chart(ctx11, {
+                type: 'bar',
+                data: data11,
+                options: {
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero: true,
+                              min: 0,
+                              max: 100,
+                              stepSize: 10,
+                            }
+                          }]
+                        }
+                        }
+                });
+});
+</script>
+</body>
+</html>
