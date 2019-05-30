@@ -46,8 +46,10 @@
       text-decoration: none;
       display: inline-block;
       background-color: #e7e7e7;
-      font-size: 20px;
+      font-size: 14px;
+      /* float: left; */
     }
+
 </style>
 <link rel="icon"
    type="image/png"
@@ -58,22 +60,28 @@
    <body>
      <div class="sidenav">
        <br><br><br>
-       <button class="w3-button" id="db1">Dashboard-I
-       </button><br><br>
-       <button class="w3-button"  id="db2">Dashboard-II
-       </button><br><br>
-       <button class="w3-button" id="db3">Dashboard-III
-       </button><br><br>
-       <button class="w3-button"  id="db4">Dashboard-IV
+       <button class="w3-button" id="db1">SUMMARY BY MACHINE
        </button>
-       <br><br><br>
+       <br><br>
+       <button class="w3-button" id="db1b">SUMMARY BY MODEL
+       </button>
+       <br><br>
+       <button class="w3-button"  id="db2">FLOOR DASHBOARD
+       </button><br>
+       <button class="w3-button" id="db3">STATISTICAL SUMMARY BY MACHINE
+       </button><br>
+       <button class="w3-button" id="db3b">STATISTICAL SUMMARY BY MODEL
+       </button><br>
+       <button class="w3-button"  id="db4">QUALITY CONTROL
+       </button>
+       <br><br>
        <footer class="container-fluid bg-4 text-center">
          <img src="https://www.htcinc.com/wp-content/uploads/2017/03/htc-logo_156-px-1.png" alt="HTC GLOBAL INC" width="52" height="62"><br>
          <p>© 2019 Copyright: <a href="https://www.w3schools.com">www.htcinc.com</a></p>
        </footer>
      </div>
      <div class="main">
-       <table style = "width:150%">
+       <table style = "width:120%">
        <tr>
          <td>
            <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
@@ -102,6 +110,20 @@
           <div id="chartContainer8" style="height: 300px; width: 100%;"></div>
         </td>
      </tr>
+     <tr>
+       <td>
+         <div id="chartContainer9" style="height: 300px; width: 100%;"></div>
+       </td>
+       <td>
+         <div id="chartContainer10" style="height: 300px; width: 100%;"></div>
+       </td>
+       <td>
+         <div id="chartContainer11" style="height: 300px; width: 100%;"></div>
+       </td>
+       <td>
+         <div id="chartContainer12" style="height: 300px; width: 100%;"></div>
+       </td>
+    </tr>
    </div>
    </body>
 <script src = "/socket.io/socket.io.js"></script>
@@ -111,15 +133,22 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-document.getElementById("db1").addEventListener("click", function1);
-document.getElementById("db2").addEventListener("click", function2);
-document.getElementById("db3").addEventListener("click", function3);
-document.getElementById("db4").addEventListener("click", function4);
+
+document.getElementById("db1").addEventListener("click", router1);
+document.getElementById("db2").addEventListener("click", router2);
+document.getElementById("db3").addEventListener("click", router3);
+document.getElementById("db4").addEventListener("click", router4);
+document.getElementById("db1b").addEventListener("click", router5);
+document.getElementById("db3b").addEventListener("click", router6);
+
 
 var socket1=null;
 var socket2=null;
 var socket3=null;
 var socket4=null;
+var socket5=null;
+var socket6=null;
+
 
 var inter2=null;
 var inter4=null;
@@ -132,39 +161,83 @@ var chart5=null;
 var chart6=null;
 var chart7=null;
 var chart8=null;
+var chart8=null;
+var chart9=null;
+var chart10=null;
+var chart11=null;
+var chart12=null;
+
+window.current=0;
+
+function clearer(){
+  if(chart1!=null || chart2!=null || chart9!=null){
+        chart1=null;
+        chart2=null;
+        chart3=null;
+        chart4=null;
+        chart5=null;
+        chart6=null;
+        chart7=null;
+        chart8=null;
+        chart9=null;
+        chart10=null;
+        chart11=null;
+        chart12=null;
+  }
+  if(window.current==1){
+  socket1.close();
+  socket1=null;
+  }else if(window.current==2){
+  socket2.close();
+  socket2=null;
+  clearInterval(inter2);
+  }else if(window.current==3){
+  socket3.close();
+  socket3=null;
+  }else if(window.current==4){
+  socket4.close();
+  socket4=null;
+  clearInterval(inter4);
+  }else if(window.current==5){
+  socket5.close();
+  socket5=null;
+  }else if(window.current==6){
+  socket6.close();
+  socket6=null;
+  }
+}
+
+function router1(){
+  clearer();
+  function1();
+}
+function router2(){
+  clearer();
+  function2();
+}
+function router3(){
+  clearer();
+  function3();
+}
+function router4(){
+  clearer();
+  function4();
+}
+function router5(){
+  clearer();
+  function5();
+}
+function router6(){
+  clearer();
+  function6();
+}
 
 function function1(){
-    if(socket4!=null){
-				socket4.close();
-				clearInterval(inter4);
-				console.log('closing server4');
-      }
-		if(socket2!=null){
-			socket2.close();
-			clearInterval(inter2);
-			console.log('closing server2');
-		}
-    if(socket3!=null){
-			socket3.close();
-			console.log('closing server3');
-		}
-    if(chart1!=null || chart2!=null){
-          chart1=null;
-          chart2=null;
-          chart3=null;
-          chart4=null;
-          chart5=null;
-          chart6=null;
-          chart7=null;
-          chart8=null;
-    }
+    window.current=1;
     socket1 = io('/sock1', { forceNew: true });
     socket1.on("temp", function(dataa){
       dat=JSON.parse(dataa);
-/////Clear Charts
-// console.log(dat);
 
-//////////
 //////////Draw all 8 charts
 //////////chart
             chart1 = new CanvasJS.Chart("chartContainer1", {
@@ -323,31 +396,248 @@ function function1(){
 ///////////
 }////////end of function1
 
+function function5(){
+    window.current=5;
+    socket1 = io('/sock5', { forceNew: true });
+    socket1.on("temp", function(dataa){
+      dat=JSON.parse(dataa);
+/////Clear Charts
+// console.log(dat);
+
+//////////
+//////////Draw all 12 charts
+//////////chart
+            chart1 = new CanvasJS.Chart("chartContainer1", {
+                theme: "light2",
+                title:{
+                  text: "Machine 1 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo1'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo1'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo1'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart1.render();
+///////////
+//////////chart2
+            chart2 = new CanvasJS.Chart("chartContainer2", {
+                theme: "light2",
+                title:{
+                  text: "Machine 2 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo2'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo2'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo2'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart2.render();
+//////////
+//////////chart3
+            chart3 = new CanvasJS.Chart("chartContainer3", {
+                theme: "light2",
+                title:{
+                  text: "Machine 3 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo3'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo3'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo3'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart3.render();
+//////////
+//////////chart4
+            chart4 = new CanvasJS.Chart("chartContainer4", {
+                theme: "light2",
+                title:{
+                  text: "Machine 4 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo4'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo4'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo4'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart4.render();
+///////////
+//////////chart5
+            chart5 = new CanvasJS.Chart("chartContainer5", {
+                theme: "light2",
+                title:{
+                  text: "Machine 5 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo5'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo5'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo5'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart5.render();
+///////////
+//////////chart6
+            chart6 = new CanvasJS.Chart("chartContainer6", {
+                theme: "light2",
+                title:{
+                  text: "Machine 6 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo6'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo6'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo6'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart6.render();
+///////////
+//////////chart7
+            chart7 = new CanvasJS.Chart("chartContainer7", {
+                theme: "light2",
+                title:{
+                  text: "Machine 7 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo7'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo7'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo7'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart7.render();
+///////////
+//////////chart8
+            chart8 = new CanvasJS.Chart("chartContainer8", {
+                theme: "light2",
+                title:{
+                  text: "Machine 8 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo8'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo8'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo8'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart8.render();
+
+               chart9 = new CanvasJS.Chart("chartContainer9", {
+                  theme: "light2",
+                  title:{
+                    text: "Machine 9 Leak Test Status"
+                  },
+                  data: [
+                        {
+                          type: "column",
+                          dataPoints: [
+                            { label: "Success",  y: dat['zerOneTwo9'][0], color:"blue"  },
+                            { label: "Failiure", y: dat['zerOneTwo9'][1], color:"red"},
+                            { label: "Abort", y: dat['zerOneTwo9'][2], color:"yellow"},
+                          ]
+                        }
+                  ]
+                });
+                chart9.render();
+
+                chart10 = new CanvasJS.Chart("chartContainer10", {
+                    theme: "light2",
+                    title:{
+                      text: "Machine 10 Leak Test Status"
+                    },
+                    data: [
+                          {
+                            type: "column",
+                            dataPoints: [
+                              { label: "Success",  y: dat['zerOneTwo10'][0], color:"blue"  },
+                              { label: "Failiure", y: dat['zerOneTwo10'][1], color:"red"},
+                              { label: "Abort", y: dat['zerOneTwo10'][2], color:"yellow"},
+                            ]
+                          }
+                    ]
+                  });
+                  chart10.render();
+
+                  chart11 = new CanvasJS.Chart("chartContainer11", {
+                    theme: "light2",
+                    title:{
+                      text: "Machine 11 Leak Test Status"
+                    },
+                    data: [
+                          {
+                            type: "column",
+                            dataPoints: [
+                              { label: "Success",  y: dat['zerOneTwo11'][0], color:"blue"  },
+                              { label: "Failiure", y: dat['zerOneTwo11'][1], color:"red"},
+                              { label: "Abort", y: dat['zerOneTwo11'][2], color:"yellow"},
+                            ]
+                          }
+                    ]
+                  });
+                  chart11.render();
+
+                  chart12 = new CanvasJS.Chart("chartContainer12", {
+                        theme: "light2",
+                        title:{
+                          text: "Machine 12 Leak Test Status"
+                        },
+                        data: [
+                              {
+                                type: "column",
+                                dataPoints: [
+                                  { label: "Success",  y: dat['zerOneTwo12'][0], color:"blue"  },
+                                  { label: "Failiure", y11: dat['zerOneTwo12'][1], color:"red"},
+                                  { label: "Abort", y: dat['zerOneTwo12'][2], color:"yellow"},
+                                ]
+                              }
+                        ]
+                      });
+                   chart12.render();
+              console.log("Incoming1");
+
+      });/////Socket CLose
+///////////
+}////////end of function1b
+
+
 function function2(){
-        if(socket1!=null){
-        	socket1.close();
-        	console.log('closing server1');
-        }
-        if(socket4!=null){
-          socket4.close();
-          clearInterval(inter4);
-          console.log('closing server4');
-        }
-        if(socket3!=null){
-          socket3.close();
-          console.log('closing server3');
-        }
-  /////Clear Charts
-  if(chart1!=null || chart2!=null){
-  			chart1=null;
-  			chart2=null;
-  			chart3=null;
-  			chart4=null;
-  			chart5=null;
-  			chart6=null;
-  			chart7=null;
-  			chart8=null;
-  }
+  window.current=2;
 
 	$(document).ready(function(){
 				socket2 = io('/sock2', { forceNew: true });
@@ -608,30 +898,8 @@ function function2(){
 }//////end of function2
 
 function function3(){
-    if(socket4!=null){
-				socket4.close();
-				clearInterval(inter4);
-				console.log('closing server4');
-      }
-		if(socket2!=null){
-			socket2.close();
-			clearInterval(inter2);
-			console.log('closing server2');
-		}
-    if(socket1!=null){
-			socket1.close();
-			console.log('closing server1');
-		}
-    if(chart2!=null || chart1!=null){
-          chart1=null;
-          chart2=null;
-          chart3=null;
-          chart4=null;
-          chart5=null;
-          chart6=null;
-          chart7=null;
-          chart8=null;
-    }
+  window.current=3;
+
     socket3 = io('/sock3', { forceNew: true });
     socket3.on("temp3", function(data){
       dat=JSON.parse(data);
@@ -895,31 +1163,7 @@ function function3(){
 }////////end of function3
 
 function function4(){
-  if(socket1!=null){
-  	socket1.close();
-  	console.log('closing server1');
-  }
-  if(socket2!=null){
-  socket2.close();
-  clearInterval(inter2);
-  console.log('closing server2');
-  }
-  if(socket3!=null){
-  socket3.close();
-  console.log('closing server3');
-  }
-  /////Clear Charts
-  if(chart2!=null || chart1!=null){
-  			chart1=null;
-  			chart2=null;
-  			chart3=null;
-  			chart4=null;
-  			chart5=null;
-  			chart6=null;
-  			chart7=null;
-  			chart8=null;
-  }
-
+  window.current=4;
 	$(document).ready(function(){
 				socket4 = io('/sock4', { forceNew: true });
 				var r=1;
@@ -2117,6 +2361,11 @@ sd6=Math.sqrt(s6/24);
 	};
 	inter4=setInterval(function(){updateChart()}, 3000);
 }//////end of function4
+
+function function6(){
+  window.current=6;
+  alert("to be built");
+}
 
 </script>
 

@@ -146,6 +146,7 @@ nsp1.on('connection', function(socket) {
               console.log('1 connected');
               nsp1.emit("temp", objs);
             });//// End of mysql Connection
+
 });/////namespace end for db1
 
 /////Namepace for DB2
@@ -288,10 +289,8 @@ var add_status = function (r) {
        console.log(objs);
        nsp2.emit("temp2", objs);
       });
-     connection.on('error', function(err) {
-              callback(false);
-              return;
-    });
+
+
 };
 
 
@@ -553,6 +552,7 @@ nsp3.on('connection', function(socket) {
         console.log(objs);
         nsp3.emit("temp3", objs);
     });//// End of mysql Connection
+
 });/////namespace end for db3
 
 var nsp4 = io.of('/sock4');
@@ -824,6 +824,7 @@ var add_status2 = function (param) {
               callback(false);
               return;
     });
+
 };
 
 
