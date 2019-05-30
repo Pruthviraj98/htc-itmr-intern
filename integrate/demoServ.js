@@ -825,8 +825,520 @@ var add_status2 = function (param) {
               return;
     });
 
-};
+};// namespace4 ends
 
+/////Namepace for DB5
+var nsp5 = io.of('/sock5');
+///// Call for Mysql
+nsp5.on('connection', function(socket) {
+  var sql = "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=8 and O_ProgNo=7 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+            "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=24 and O_ProgNo=23 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=16 and O_ProgNo=15 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=26 and O_ProgNo=25 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=20 and O_ProgNo=19 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=30 and O_ProgNo=29 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=2 and O_ProgNo=1 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=4 and O_ProgNo=3 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+            "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=28 and O_ProgNo=27 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=14 and O_ProgNo=13 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=18 and O_ProgNo=17 GROUP BY Leak_TestStauts order by Leak_TestStauts asc";
+  connection.query(sql, function(error, results, fields) {
+          if (error) {
+              throw error;
+            }
+            numbers1=[];
+            a1=results[0][0]['COUNT(dat_oil_intern_id)'];
+            b1=results[0][1]['COUNT(dat_oil_intern_id)'];
+            c1=results[0][2]['COUNT(dat_oil_intern_id)'];
+            x1=100*(a1/(a1+b1+c1));
+            y1=100*(b1/(a1+b1+c1));
+            z1=100*(c1/(a1+b1+c1));
+            numbers1.push(y1);
+            numbers1.push(x1);
+            numbers1.push(z1);
+            console.log(numbers1);
+
+            numbers2=[]
+            a2=results[1][0]['COUNT(dat_oil_intern_id)'];
+            b2=results[1][1]['COUNT(dat_oil_intern_id)'];
+            c2=results[1][2]['COUNT(dat_oil_intern_id)'];
+            x2=100*(a2/(a2+b2+c2));
+            y2=100*(b2/(a2+b2+c2));
+            z2=100*(c2/(a2+b2+c2));
+            numbers2.push(y2);
+            numbers2.push(x2);
+            numbers2.push(z2);
+            console.log(numbers2);
+
+            numbers3=[]
+            a3=results[2][0]['COUNT(dat_oil_intern_id)'];
+            b3=results[2][1]['COUNT(dat_oil_intern_id)'];
+            c3=results[2][2]['COUNT(dat_oil_intern_id)'];
+            x3=100*(a3/(a3+b3+c3));
+            y3=100*(b3/(a3+b3+c3));
+            z3=100*(c3/(a3+b3+c3));
+            numbers3.push(y3);
+            numbers3.push(x3);
+            numbers3.push(z3);
+            console.log(numbers3);
+
+
+
+            numbers4=[]
+            a4=results[3][0]['COUNT(dat_oil_intern_id)']
+            b4=results[3][1]['COUNT(dat_oil_intern_id)'];
+            c4=results[3][2]['COUNT(dat_oil_intern_id)'];
+            x4=100*(a4/(a4+b4+c4));
+            y4=100*(b4/(a4+b4+c4));
+            z4=100*(c4/(a4+b4+c4));
+            numbers4.push(y4);
+            numbers4.push(x4);
+            numbers4.push(z4);
+            console.log(numbers4);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
+
+            numbers5=[]
+            a5=results[4][0]['COUNT(dat_oil_intern_id)'];
+            b5=results[4][1]['COUNT(dat_oil_intern_id)'];
+            c5=results[4][2]['COUNT(dat_oil_intern_id)'];
+            x5=100*(a5/(a5+b5+c5));
+            y5=100*(b5/(a5+b5+c5));
+            z5=100*(c5/(a5+b5+c5));
+            numbers5.push(y5);
+            numbers5.push(x5);
+            numbers5.push(z5);
+            console.log(numbers5);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
+
+            numbers6=[]
+            a6=results[5][0]['COUNT(dat_oil_intern_id)'];
+            b6=results[5][1]['COUNT(dat_oil_intern_id)'];
+            c6=results[5][2]['COUNT(dat_oil_intern_id)'];
+            x6=100*(a6/(a6+b6+c6));
+            y6=100*(b6/(a6+b4+c6));
+            z6=100*(c6/(a6+b4+c6));
+            numbers6.push(y6);
+            numbers6.push(x6);
+            numbers6.push(z6);
+            console.log(numbers6);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
+
+            numbers7=[]
+            a7=results[6][0]['COUNT(dat_oil_intern_id)'];
+            b7=results[6][1]['COUNT(dat_oil_intern_id)'];
+            c7=results[6][2]['COUNT(dat_oil_intern_id)'];
+            x7=100*(a7/(a7+b7+c7));
+            y7=100*(b7/(a7+b7+c7));
+            z7=100*(c7/(a7+b7+c7));
+            numbers7.push(y7);
+            numbers7.push(x7);
+            numbers7.push(z7);
+            console.log(numbers7);      // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
+
+            numbers8=[]
+            a8=results[7][0]['COUNT(dat_oil_intern_id)'];
+            b8=results[7][1]['COUNT(dat_oil_intern_id)'];
+            c8=results[7][2]['COUNT(dat_oil_intern_id)'];
+            x8=100*(a8/(a8+b8+c8));
+            y8=100*(b8/(a8+b8+c8));
+            z8=100*(c8/(a8+b8+c8));
+            numbers8.push(y8);
+            numbers8.push(x8);
+            numbers8.push(z8);
+            console.log(numbers8);
+
+            numbers9=[]
+            a9=results[8][0]['COUNT(dat_oil_intern_id)'];
+            b9=results[8][1]['COUNT(dat_oil_intern_id)'];
+            c9=results[8][2]['COUNT(dat_oil_intern_id)'];
+            x9=100*(a9/(a9+b9+c9));
+            y9=100*(b9/(a9+b9+c9));
+            z9=100*(c9/(a9+b9+c9));
+            numbers9.push(y9);
+            numbers9.push(x9);
+            numbers9.push(z9);
+            console.log(numbers9);
+
+            numbers10=[]
+            a10=results[9][0]['COUNT(dat_oil_intern_id)'];
+            b10=results[9][1]['COUNT(dat_oil_intern_id)'];
+            c10=results[9][2]['COUNT(dat_oil_intern_id)'];
+            x10=100*(a10/(a10+b10+c10));
+            y10=100*(b10/(a10+b10+c10));
+            z10=100*(c10/(a10+b10+c10));
+            numbers10.push(y10);
+            numbers10.push(x10);
+            numbers10.push(z10);
+            console.log(numbers10);   // numbers4.push(results[3][2]['COUNT(dat_oil_intern_id)']);
+
+            numbers11=[]
+            a11=results[10][0]['COUNT(dat_oil_intern_id)'];
+            b11=0;
+            c11=0;
+            x11=100*(a11/(a11+b11+c11));
+            y11=100*(b11/(a11+b11+c11));
+            z11=100*(c11/(a11+b11+c11));
+            numbers11.push(y11);
+            numbers11.push(x11);
+            numbers11.push(z11);
+            console.log(numbers11);
+            var objs = [];
+            var obj={ "zerOneTwo1": numbers1,
+                      "zerOneTwo2": numbers2,
+                      "zerOneTwo3": numbers3,
+                      "zerOneTwo4": numbers4,
+                      "zerOneTwo5": numbers5,
+                      "zerOneTwo6": numbers6,
+                      "zerOneTwo7": numbers7,
+                      "zerOneTwo8": numbers8,
+                      "zerOneTwo9": numbers9,
+                      "zerOneTwo10": numbers10,
+                      "zerOneTwo11": numbers11,
+              };
+              var objs=JSON.stringify(obj);
+              console.log('5 connected');
+              nsp5.emit("temp5", objs);
+            });//// End of mysql Connection
+
+});/////namespace end for db5
+
+/////Namepace for DB6
+var nsp6 = io.of('/sock6');
+///// Call for Mysql
+nsp6.on('connection', function(socket) {
+  var sql = "select o_LeakRate from dat_oil_intern where  W_ProgNo=8 and O_ProgNo=7 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where  W_ProgNo=24 and O_ProgNo=23 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where W_ProgNo=16 and O_ProgNo=15  group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where  W_ProgNo=26 and O_ProgNo=25  group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where  W_ProgNo=20 and O_ProgNo=19  group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where  W_ProgNo=30 and O_ProgNo=29 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where  W_ProgNo=2 and O_ProgNo=1 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where  W_ProgNo=4 and O_ProgNo=3 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where W_ProgNo=28 and O_ProgNo=27 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where W_ProgNo=14 and O_ProgNo=13 group by o_LeakRate order by o_LeakRate asc;"+
+            "select o_LeakRate from dat_oil_intern where W_ProgNo=18 and O_ProgNo=17 group by o_LeakRate order by o_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where W_ProgNo=8 and O_ProgNo=7  group by o_LeakRate order by o_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where  W_ProgNo=24 and O_ProgNo=23 group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where  W_ProgNo=16 and O_ProgNo=15 group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where W_ProgNo=26 and O_ProgNo=25  group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where  W_ProgNo=20 and O_ProgNo=19  group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where  W_ProgNo=30 and O_ProgNo=29  group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where  W_ProgNo=2 and O_ProgNo=1 group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where  W_ProgNo=4 and O_ProgNo=3 group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where W_ProgNo=28 and O_ProgNo=27 group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where W_ProgNo=14 and O_ProgNo=13 group by w_LeakRate order by w_LeakRate asc;"+
+            "select w_LeakRate from dat_oil_intern where W_ProgNo=18 and O_ProgNo=17  group by w_LeakRate order by w_LeakRate asc";
+            connection.query(sql, function(error, results, fields) {
+              if(error) {
+                throw error;
+              }
+              for(var e=0;e<11;e++)
+               {
+                 if(e!=10)
+                 {
+                 t=[];
+                 var max=results[e][results[e].length-1];
+                 // console.log(max);
+                 var min=results[e][0];
+               var count1=results[e].length;
+               if(count1%2!=0)
+               {
+                 r=(count1+1)/2;
+                 median = results[e][r];
+               }
+               else
+               {
+                   r=(count1)/2;
+                   if(results[e][r]>=results[e][r+1])
+                   {
+                     median = results[e][r];
+                   }
+                   else
+                   {
+                     median = results[e][r+1];
+                     r++;
+                   }
+               }
+               var rr=[];
+               for(var i=r;i<results[e].length;i++)
+               {
+                 t.push(results[e][i]);
+               }
+
+               var len2=t.length;
+               if(r%2!=0)
+               {
+                 median1=results[e][(r+1)/2];
+               }
+               else
+               {
+                 if (results[e][r/2]>=results[e][(r/2)+1])
+                 {
+                       median1=results[e][r/2];
+                 }
+                 else
+                 {
+                   median1=results[e][(r/2)+1];
+                 }
+               }
+               if((len2)%2!=0)
+               {
+                 median2=t[(len2+1)/2];
+               }
+               else
+               {
+                 if(t[(len2)/2]>=t[((len2)/2)+1])
+                 {
+                   median2=t[(len2)/2];
+                 }
+                 else
+                 {
+                   median2=t[((len2)/2)+1];
+                 }
+               }
+             }
+             else
+             {
+               min1={};
+               min1["o_LeakRate"]=0;
+               median11={};
+               median11["o_LeakRate"]=0;
+               median1={};
+               median1["o_LeakRate"]=0;
+               median21={};
+               median21["o_LeakRate"]=0;
+               max1={};
+               max1["o_LeakRate"]=0;
+               resd.push(min1);
+               resd.push(median11);
+               resd.push(median1);
+               resd.push(median21);
+               resd.push(max1);
+               break;
+             }
+
+               resd.push(min);
+               resd.push(median1);
+               resd.push(median);
+               resd.push(median2);
+               resd.push(max);
+             }
+             for(var e=11;e<22;e++)
+             {
+               if(e!=21)
+          {
+               t=[];
+               var max=results[e][results[e].length-1];
+               // console.log(max);
+               var min=results[e][0];
+             var count1=results[e].length;
+             if(count1%2!=0)
+             {
+               r=(count1+1)/2;
+               median = results[e][r];
+             }
+             else
+             {
+                 r=(count1)/2;
+                 if(results[e][r]>=results[e][r+1])
+                 {
+                   median = results[e][r];
+                 }
+                 else
+                 {
+                   median = results[e][r+1];
+                   r++;
+                 }
+             }
+             var rr=[];
+             for(var i=r;i<results[e].length;i++)
+             {
+               t.push(results[e][i]);
+             }
+
+             var len2=t.length;
+             if(r%2!=0)
+             {
+               median1=results[e][(r+1)/2];
+             }
+             else
+             {
+               if (results[e][r/2]>=results[e][(r/2)+1])
+               {
+                     median1=results[e][r/2];
+               }
+               else
+               {
+                 median1=results[e][(r/2)+1];
+               }
+             }
+             if((len2)%2!=0)
+             {
+               median2=t[(len2+1)/2];
+             }
+             else
+             {
+               if(t[(len2)/2]>=t[((len2)/2)+1])
+               {
+                 median2=t[(len2)/2];
+               }
+               else
+               {
+                 median2=t[((len2)/2)+1];
+               }
+             }
+           }
+           else
+           {
+               min={};
+               min["w_LeakRate"]=0;
+               median1={};
+               median1["w_LeakRate"]=0;
+               median={};
+               median["w_LeakRate"]=0;
+               median2={};
+               median2["w_LeakRate"]=0;
+               max={};
+               max["w_LeakRate"]=0;
+               resd.push(min);
+               resd.push(median1);
+               resd.push(median);
+               resd.push(median2);
+               resd.push(max);
+                   break;
+           }
+
+             resd.push(min);
+             resd.push(median1);
+             resd.push(median);
+             resd.push(median2);
+             resd.push(max);
+             // console.log(median);
+             // console.log(median1);
+             // console.log(median2);
+             // console.log(max);
+             // console.log(min);
+           }
+           // console.log(resd[101]);
+           // for(var i=55;i<109;i++)
+           // {
+             // console.log(resd[23]);
+           // }
+               var objs = [];
+               var obj={ "M111":resd[0],
+                         "M112":resd[1],
+                         "M113":resd[2],
+                         "M114":resd[3],
+                         "M115":resd[4],
+                         "M121":resd[5],
+                         "M122":resd[6],
+                         "M123":resd[7],
+                         "M124":resd[8],
+                         "M125":resd[9],
+                         "M131":resd[10],
+                         "M132":resd[11],
+                         "M133":resd[12],
+                         "M134":resd[13],
+                         "M135":resd[14],
+                         "M141":resd[15],
+                         "M142":resd[16],
+                         "M143":resd[17],
+                         "M144":resd[18],
+                         "M145":resd[19],
+                         "M151":resd[20],
+                         "M152":resd[21],
+                         "M153":resd[22],
+                         "M154":resd[23],
+                         "M155":resd[24],
+                         "M161":resd[25],
+                         "M162":resd[26],
+                         "M163":resd[27],
+                         "M164":resd[28],
+                         "M165":resd[29],
+                         "M171":resd[30],
+                         "M172":resd[31],
+                         "M173":resd[32],
+                         "M174":resd[33],
+                         "M175":resd[34],
+                         "M181":resd[35],
+                         "M182":resd[36],
+                         "M183":resd[37],
+                         "M184":resd[38],
+                         "M185":resd[39],
+                         "M191":resd[40],
+                         "M192":resd[41],
+                         "M193":resd[42],
+                         "M194":resd[43],
+                         "M195":resd[44],
+                         "M1101":resd[45],
+                         "M1102":resd[46],
+                         "M1103":resd[47],
+                         "M1104":resd[48],
+                         "M1105":resd[49],
+                         "M1111":resd[50],
+                         "M1112":resd[51],
+                         "M1113":resd[52],
+                         "M1114":resd[53],
+                         "M1115":resd[54],
+                         "M211":resd[55],
+                         "M212":resd[56],
+                         "M213":resd[57],
+                         "M214":resd[58],
+                         "M215":resd[59],
+                         "M221":resd[60],
+                         "M222":resd[61],
+                         "M223":resd[62],
+                         "M224":resd[63],
+                         "M225":resd[64],
+                         "M231":resd[65],
+                         "M232":resd[66],
+                         "M233":resd[67],
+                         "M234":resd[68],
+                         "M235":resd[69],
+                         "M241":resd[70],
+                         "M242":resd[71],
+                         "M243":resd[72],
+                         "M244":resd[73],
+                         "M245":resd[74],
+                         "M251":resd[75],
+                         "M252":resd[76],
+                         "M253":resd[77],
+                         "M254":resd[78],
+                         "M255":resd[79],
+                         "M261":resd[80],
+                         "M262":resd[81],
+                         "M263":resd[82],
+                         "M264":resd[83],
+                         "M265":resd[84],
+                         "M271":resd[85],
+                         "M272":resd[86],
+                         "M273":resd[87],
+                         "M274":resd[88],
+                         "M275":resd[89],
+                         "M281":resd[90],
+                         "M282":resd[91],
+                         "M283":resd[92],
+                         "M284":resd[93],
+                         "M285":resd[94],
+                         "M291":resd[95],
+                         "M292":resd[96],
+                         "M293":resd[97],
+                         "M294":resd[98],
+                         "M295":resd[99],
+                         "M2101":resd[100],
+                         "M2102":resd[101],
+                         "M2103":resd[102],
+                         "M2104":resd[103],
+                         "M2105":resd[104],
+                         "M2111":resd[105],
+                         "M2112":resd[106],
+                         "M2113":resd[107],
+                         "M2114":resd[108],
+                         "M2115":resd[109],
+                     };
+
+              var objs=JSON.stringify(obj);
+              console.log('6 connected');
+              nsp6.emit("temp6", objs);
+            });//// End of mysql Connection
+});/////namespace end for db6
 
 http.listen(3000, function() {
    console.log('listening on *:3000');
