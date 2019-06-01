@@ -19,6 +19,8 @@ app.get('/', function(req, res) {
 });
 /////Namepace for DB1
 var nsp1 = io.of('/sock1');
+// require('events').EventEmitter.prototype._maxListeners = 6;
+
 ///// Call for Mysql
 nsp1.on('connection', function(socket) {
           var sql = "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where MachineNumber=1 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
@@ -154,7 +156,20 @@ var nsp2 = io.of('/sock2');
 nsp2.on('connection', function(socket) {
         console.log("2 DB Conn");
         socket.on('updateGraph2',function(r){
+            console.log("fired the status");
             add_status(r);
+        });
+        socket.on("end", function(){
+          socket.disconnect(0);
+          connection.end();
+          connection = mysql.createConnection({
+              host: 'localhost',
+              port: 3306,
+              user: 'root',
+              password: 'root',
+              database: 'internhtc',
+              multipleStatements: true
+          });
         });
 });/////namespace end for db2
 
@@ -289,7 +304,11 @@ var add_status = function (r) {
        console.log(objs);
        nsp2.emit("temp2", objs);
       });
-
+      connection.on('error', function(err) {
+               console.log(err);
+               callback(false);
+               return;
+     });
 
 };
 
@@ -560,6 +579,18 @@ nsp4.on('connection', function(socket) {
         console.log("4 DB Conn");
         socket.on('updateGraph4',function(rr){
             add_status2(rr);
+        });
+        socket.on("end", function(){
+          socket.disconnect(0);
+          connection.end();
+          connection = mysql.createConnection({
+              host: 'localhost',
+              port: 3306,
+              user: 'root',
+              password: 'root',
+              database: 'internhtc',
+              multipleStatements: true
+          });
         });
 });/////namespace end for db4
 
@@ -839,7 +870,7 @@ nsp5.on('connection', function(socket) {
              "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=30 and O_ProgNo=29 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
              "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=2 and O_ProgNo=1 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
              "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=4 and O_ProgNo=3 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
-            "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=28 and O_ProgNo=27 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
+             "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=28 and O_ProgNo=27 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
              "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=14 and O_ProgNo=13 GROUP BY Leak_TestStauts order by Leak_TestStauts asc;"+
              "SELECT COUNT(dat_oil_intern_id), Leak_TestStauts FROM dat_oil_intern where W_ProgNo=18 and O_ProgNo=17 GROUP BY Leak_TestStauts order by Leak_TestStauts asc";
   connection.query(sql, function(error, results, fields) {

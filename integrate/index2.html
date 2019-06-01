@@ -150,7 +150,9 @@ var socket6=null;
 
 
 var inter2=null;
+var inter22=null;
 var inter4=null;
+var inter42=null;
 
 var chart1=null;
 var chart2=null;
@@ -169,49 +171,58 @@ var chart12=null;
 window.current=0;
 
 function clearer(){
-  if(chart1!=null || chart2!=null || chart9!=null){
-        chart1.destroy();
-        chart1=null;
-        chart2.destroy();
-        chart2=null;
-        chart3.destroy();
-        chart3=null;
-        chart4.destroy();
-        chart4=null;
-        chart5.destroy();
-        chart5=null;
-        chart6.destroy();
-        chart6=null;
-        chart7.destroy();
-        chart7=null;
-        chart8.destroy();
-        chart8=null;
-        chart9.destroy();
-        chart9=null;
-        chart10.destroy();
-        chart10=null;
-        chart11.destroy();
-        chart11=null;
-  }
+  // if(chart1!=null || chart2!=null || chart9!=null){
+  //       chart1.destroy();
+  //       // chart1=null;
+  //       chart2.destroy();
+  //       // chart2=null;
+  //       chart3.destroy();
+  //       // chart3=null;
+  //       chart4.destroy();
+  //       // chart4=null;
+  //       chart5.destroy();
+  //       // chart5=null;
+  //       chart6.destroy();
+  //       // chart6=null;
+  //       chart7.destroy();
+  //       // chart7=null;
+  //       chart8.destroy();
+  //       // chart8=null;
+  //       chart9.destroy();
+  //       // chart9=null;
+  //       chart10.destroy();
+  //       // chart10=null;
+  //       chart11.destroy();
+  //       // chart11=null;
+  // }
   if(window.current==1){
-  socket1.close();
+  // socket1.close();
+  socket1.emit("end");
   socket1=null;
-  }else if(window.current==2){
-  socket2.close();
+  }if(window.current==2){
+  // socket2.close();
+  alert("closed 2");
+  socket2.emit("end");
   socket2=null;
   clearInterval(inter2);
-  }else if(window.current==3){
-  socket3.close();
+  clearInterval(inter22);
+  }if(window.current==3){
+  // socket3.close();
+  socket3.emit("end");
   socket3=null;
-  }else if(window.current==4){
-  socket4.close();
+  }if(window.current==4){
+  // socket4.close();
+  socket4.emit("end");
   socket4=null;
   clearInterval(inter4);
-  }else if(window.current==5){
-  socket5.close();
+  clearInterval(inter42);
+  }if(window.current==5){
+  // socket5.close();
+  socket5.emit("end");
   socket5=null;
-  }else if(window.current==6){
-  socket6.close();
+  }if(window.current==6){
+  // socket6.close();
+  socket6.emit("end");
   socket6=null;
   }
 }
@@ -648,24 +659,32 @@ function function2(){
   window.current=2;
 
 	$(document).ready(function(){
-				socket2 = io('/sock2', { forceNew: true });
+				socket2 = io('/sock2', {forceNew: true});
 				var r=1;
-				setInterval(function(){
+				inter22=setInterval(function(){
 					socket2.emit('updateGraph2',r);
 					r++;
-				}, 30000);
+				}, 3000);
 	});
 
 
   var xVal=0;
   var dataLength = 10; // number of dataPoints visible at any point
+  var dps11 = [{x:1, y:1}];
   var dps1 = [{x:1, y:1}];
+  var dps21 = [{x:1, y:1}];
   var dps2 = [{x:1, y:1}];
+  var dps31 = [{x:1, y:1}];
   var dps3 = [{x:1, y:1}];
+  var dps41 = [{x:1, y:1}];
   var dps4 = [{x:1, y:1}];
+  var dps51 = [{x:1, y:1}];
   var dps5 = [{x:1, y:1}];
+  var dps61 = [{x:1, y:1}];
   var dps6 = [{x:1, y:1}];
+  var dps71 = [{x:1, y:1}];
   var dps7 = [{x:1, y:1}];
+  var dps81 = [{x:1, y:1}];
   var dps8 = [{x:1, y:1}];
 
   chart1 = new CanvasJS.Chart("chartContainer1", {
@@ -674,13 +693,20 @@ function function2(){
   			text: "Machine 1 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps1
-  		}]
+        },{//
+    			type: "spline",
+    			markerSize: 0,
+          showInLegend: true,//
+    			dataPoints: dps11
+    		}]
   });
   chart2 = new CanvasJS.Chart("chartContainer2", {
   		exportEnabled: true,
@@ -688,12 +714,19 @@ function function2(){
   			text: "Machine 2 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps2
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps21
   		}]
   });
   chart3 = new CanvasJS.Chart("chartContainer3", {
@@ -702,12 +735,19 @@ function function2(){
   			text: "Machine 3 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps3
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps31
   		}]
   });
   chart4 = new CanvasJS.Chart("chartContainer4", {
@@ -716,12 +756,19 @@ function function2(){
   			text: "Machine 4 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps4
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps41
   		}]
   });
   chart5 = new CanvasJS.Chart("chartContainer5", {
@@ -730,12 +777,19 @@ function function2(){
   			text: "Machine 5 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps5
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps51
   		}]
   });
   chart6 = new CanvasJS.Chart("chartContainer6", {
@@ -744,12 +798,19 @@ function function2(){
   			text: "Machine 6 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps6
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps61
   		}]
   });
   chart7 = new CanvasJS.Chart("chartContainer7", {
@@ -758,12 +819,19 @@ function function2(){
   			text: "Machine 7 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps7
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps71
   		}]
   });
   chart8 = new CanvasJS.Chart("chartContainer8", {
@@ -772,12 +840,19 @@ function function2(){
   			text: "Machine 8 Oil and Water Leak Rates"
   		},
   		axisY: {
+        title: "Rates (adjusted dynamically)",//
   			includeZero: false
   		},
   		data: [{
   			type: "spline",
   			markerSize: 0,
+        showInLegend: true,//
   			dataPoints: dps8
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps81
   		}]
   });
   ///////Update the chart by socket call every time
@@ -827,28 +902,58 @@ function function2(){
 							y: newVal1
 						});
 				}
+        if(dps11[dps11.length-1].y=newVal11){
+            dps11.push({
+              x: xVal,
+              y: newVal11
+            });
+        }
 				if(dps2[dps2.length-1].y=newVal2){
 		  			dps2.push({
 		          x: xVal,
 		  				y: newVal2
 		  			});
 				}
+        if(dps21[dps21.length-1].y=newVal21){
+            dps21.push({
+              x: xVal,
+              y: newVal21
+            });
+        }
 				if(dps3[dps3.length-1].y=newVal3){
 		  			dps3.push({
 		          x: xVal,
 		  				y: newVal3
 		  			});
 				}
+        if(dps31[dps31.length-1].y=newVal31){
+            dps31.push({
+              x: xVal,
+              y: newVal31
+            });
+        }
 				if(dps4[dps4.length-1].y=newVal4){
 		  			dps4.push({
 		          x: xVal,
 		  				y: newVal4
 		  			});
 				}
+        if(dps41[dps41.length-1].y=newVal41){
+            dps41.push({
+              x: xVal,
+              y: newVal41
+            });
+        }
 				if(dps5[dps5.length-1].y=newVal5){
 		  			dps5.push({
 		          x: xVal,
 		  				y: newVal5
+		  			});
+				}
+        if(dps51[dps51.length-1].y=newVal51){
+		  			dps51.push({
+		          x: xVal,
+		  				y: newVal51
 		  			});
 				}
 				if(dps6[dps6.length-1].y=newVal6){
@@ -857,16 +962,34 @@ function function2(){
 		  				y: newVal6
 		  			});
 				}
+        if(dps61[dps61.length-1].y=newVal61){
+		  			dps61.push({
+		          x: xVal,
+		  				y: newVal61
+		  			});
+				}
 				if(dps7[dps7.length-1].y=newVal7){
 		  			dps7.push({
 		          x: xVal,
 		          y: newVal7
 		  			});
 				}
+        if(dps71[dps71.length-1].y=newVal71){
+		  			dps71.push({
+		          x: xVal,
+		          y: newVal71
+		  			});
+				}
 				if(dps8[dps8.length-1].y=newVal8){
 		  			dps8.push({
 		          x: xVal,
 		  				y: newVal8
+		  			});
+				}
+        if(dps81[dps81.length-1].y=newVal81){
+		  			dps81.push({
+		          x: xVal,
+		  				y: newVal81
 		  			});
 				}
         xVal++;
@@ -887,6 +1010,22 @@ function function2(){
   			dps7.shift();
   		}if (dps8.length > dataLength) {
   			dps8.shift();
+  		}if (dps11.length > dataLength) {
+  			dps11.shift();
+  		}if (dps21.length > dataLength) {
+  			dps21.shift();
+  		}if (dps31.length > dataLength) {
+  			dps31.shift();
+  		}if (dps41.length > dataLength) {
+  			dps41.shift();
+  		}if (dps51.length > dataLength) {
+  			dps51.shift();
+  		}if (dps61.length > dataLength) {
+  			dps61.shift();
+  		}if (dps71.length > dataLength) {
+  			dps71.shift();
+  		}if (dps81.length > dataLength) {
+  			dps81.shift();
   		}
 
   		/////////render graphs
@@ -1178,10 +1317,10 @@ function function4(){
 	$(document).ready(function(){
 				socket4 = io('/sock4', { forceNew: true });
 				var r4=1;
-				setInterval(function(){
+				inter42=setInterval(function(){
 					socket4.emit('updateGraph4',r4);
 					r4++;
-				}, 30000);
+				}, 5000);
 	});
 
       dps= [
@@ -2373,7 +2512,7 @@ sd6=Math.sqrt(s6/24);
   	console.log("Incoming4");
   });//// Socket close
 	};
-	inter4=setInterval(function(){updateChart()}, 3000);
+	inter4=setInterval(function(){updateChart()}, 5000);
 }//////end of function4
 
 function function6(){
