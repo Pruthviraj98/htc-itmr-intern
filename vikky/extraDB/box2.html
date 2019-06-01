@@ -2,6 +2,8 @@
   <head>
     <link rel="shortcut icon" href="">
     <script src="/socket.io/socket.io.js"></script>
+    <h>
+
   <script type="text/javascript ">
 window.onload = function () {
   var dps1= [
@@ -25,7 +27,7 @@ window.onload = function () {
     { x:  "MODEL GEN 2", y: [2, 3, 5, 4, 6] },
     { x:  "MODEL YL 7", y: [2, 3, 5, 4, 6] },
     { x:  "MODEL YL 1", y: [2, 3, 5, 4, 6] },
-    { x:  "MODEL XFL 24", y: [2, 3, 5, 4, 6]},
+    { x:  "MODEL XFL 246", y: [2, 3, 5, 4, 6]},
     { x: "MODEL 800 CC", y: [2, 3, 5, 4, 6]},
     { x:  "MODEL M&H",  y: [2, 3, 5, 4, 6]},
     { x: "MODEL X 302", y: [2, 3, 5, 4, 6]},
@@ -39,7 +41,8 @@ window.onload = function () {
   		text: "BOX PLOT WITH RESPECT TO OIL FOR ALL MODELS"
   	},
   	axisX: {
-  		valueFormatString: "MACHINE"
+  		// valueFormatString: "MODEL#",
+      maximum:11
   	},
   	axisY: {
   		title: "LEAK_RATE"
@@ -47,7 +50,7 @@ window.onload = function () {
   	data: [{
   		type: "boxAndWhisker",
       showInLegend: true,
-      xvalueFormatString: "MACHINE",
+      // xvalueFormatString: "MACHINE",
   		yValueFormatString: "0.0",
   		dataPoints:dps1
   	}]
@@ -59,7 +62,8 @@ window.onload = function () {
   		text: "BOX PLOT WITH RESPECT TO WATER FOR ALL MODELS"
   	},
   	axisX: {
-  		valueFormatString: "MACHINE",
+  		// valueFormatString: "MODEL#",
+      maximum:11
   	},
   	axisY: {
   		title: "LEAK_RATE"
@@ -67,7 +71,7 @@ window.onload = function () {
   	data: [{
   		type: "boxAndWhisker",
       showInLegend: true,
-      xvalueFormatString: "MACHINE",
+      // xvalueFormatString: "MACHINE",
   		yValueFormatString: "0.0",
   		dataPoints:dps
   	}]
