@@ -1,0 +1,1361 @@
+<html>
+  <head>
+    <style>
+    h1 {
+  color: RED;
+
+}
+</style>
+    <center><h1>
+
+      SIX SIGMA CONTROL CHART FOR ALL MACHINES WITH RESPECT TO WATER LEAKAGE
+    </h1></center>
+    <title>Socket.io</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+    $(document).ready(function(){
+          var socket = io();
+          var r=1;
+          setInterval(function(){
+            socket.emit('update Graph',r);
+            r++;
+          }, 30000);
+          socket.on('refresh graph',function(dat){
+            console.log(dat)
+            // $("#show_comments").append(msg + '<br /><br />');
+          });
+    });
+    </script>
+    <script>
+    window.onload = function () {
+      var dps= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps1=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps2=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+      dps3= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps4=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps5=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+
+      var dps6= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps7=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps8=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+
+      var dps9= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps10=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps11=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+
+
+      var dps12= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps13=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps14=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+
+
+      var dps15= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps16=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps17=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+
+
+
+      var dps18= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps19=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps20=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+
+
+
+
+      var dps21= [
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
+      dps22=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+      dps23=[
+        { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+        { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+      	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+        { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+      	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+        { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
+      ];
+    var chart = new CanvasJS.Chart("chartContainer", {
+
+    	animationEnabled: true,
+    	theme: "light2",
+    	title: {
+    		text: "Know the abnormality of machine 1"
+    	},
+    	axisX: {
+    		valueFormatString:"HOUR#",
+         maximum:24
+    	},
+    	axisY: {
+    		postfix: "%",
+    	//	labelFormatter: addSymbols
+    	},
+    	toolTip: {
+    		shared: true
+    	},
+    	legend: {
+    		cursor: "pointer",
+    	//	itemclick: toggleDataSeries
+    	},
+    	data: [
+    	{
+       		type: "line",
+       		name: "Actual WATER Leakrate ",
+       		showInLegend: true,
+       		yValueFormatString: "0.0",
+          dataPoints:dps
+       	},{
+         		type: "line",
+         		name: "Mean ",
+         		showInLegend: true,
+         		yValueFormatString: "0.0",
+            dataPoints:dps1
+    },{
+        type: "line",
+        name: "Stadard Deviation",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps2
+  }]});
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Know the abnormality of machine 2"
+    },
+    axisX: {
+      valueFormatString:"HOUR#",
+       maximum:24
+    },
+    axisY: {
+      postfix: "%",
+    //	labelFormatter: addSymbols
+    },
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: "pointer",
+    //  itemclick: toggleDataSeries
+    },
+    data: [
+    {
+        type: "line",
+        name: "Actual WATER Leakage rate",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps3
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps4
+  },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps5
+}]});
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+
+  animationEnabled: true,
+  theme: "light2",
+  title: {
+    text: "Know the abnormality of machine 3"
+  },
+  axisX: {
+    valueFormatString:"HOUR#",
+     maximum:24
+  },
+  axisY: {
+    postfix: "%",
+  //	labelFormatter: addSymbols
+  },
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor: "pointer",
+  //  itemclick: toggleDataSeries
+  },
+  data: [
+  {
+      type: "line",
+      name: "Actuall WATER Leakage",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps6
+    },{
+        type: "line",
+        name: "Mean ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps7
+},{
+    type: "line",
+    name: "Stadard Deviation",
+    showInLegend: true,
+    yValueFormatString: "0.0",
+    dataPoints:dps8
+}]});
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+
+  animationEnabled: true,
+  theme: "light2",
+  title: {
+    text: "Know the abnormality of machine 4"
+  },
+  axisX: {
+    valueFormatString:"HOUR#",
+     maximum:24
+  },
+  axisY: {
+    postfix: "%",
+  //	labelFormatter: addSymbols
+  },
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor: "pointer",
+  //  itemclick: toggleDataSeries
+  },
+  data: [
+  {
+      type: "line",
+      name: "Actuall WATER Leakage ",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps9
+    },{
+        type: "line",
+        name: "Mean ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps10
+},{
+    type: "line",
+    name: "Stadard Deviation",
+    showInLegend: true,
+    yValueFormatString: "0.0",
+    dataPoints:dps11
+}]});
+var chart4 = new CanvasJS.Chart("chartContainer4", {
+
+  animationEnabled: true,
+  theme: "light2",
+  title: {
+    text: "Know the abnormality of machine 5"
+  },
+  axisX: {
+    valueFormatString:"HOUR#",
+     maximum:24
+  },
+  axisY: {
+    postfix: "%",
+  //	labelFormatter: addSymbols
+  },
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor: "pointer",
+  //  itemclick: toggleDataSeries
+  },
+  data: [
+  {
+      type: "line",
+      name: "Actuall WATER Leakage ",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps12
+    },{
+        type: "line",
+        name: "Mean ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps13
+},{
+    type: "line",
+    name: "Stadard Deviation",
+    showInLegend: true,
+    yValueFormatString: "0.0",
+    dataPoints:dps14
+}]});
+var chart5 = new CanvasJS.Chart("chartContainer5", {
+
+  animationEnabled: true,
+  theme: "light2",
+  title: {
+    text: "Know the abnormality of machine 6"
+  },
+  axisX: {
+    valueFormatString:"HOUR#",
+     maximum:24
+  },
+  axisY: {
+    postfix: "%",
+  //	labelFormatter: addSymbols
+  },
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor: "pointer",
+  //  itemclick: toggleDataSeries
+  },
+  data: [
+  {
+      type: "line",
+      name: "Actuall WATER Leakage ",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps15
+    },{
+        type: "line",
+        name: "Mean ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps16
+},{
+    type: "line",
+    name: "Stadard Deviation",
+    showInLegend: true,
+    yValueFormatString: "0.0",
+    dataPoints:dps17
+}]});
+var chart6 = new CanvasJS.Chart("chartContainer6", {
+
+  animationEnabled: true,
+  theme: "light2",
+  title: {
+    text: "Know the abnormality of machine 7"
+  },
+  axisX: {
+    valueFormatString:"HOUR#",
+     maximum:24
+  },
+  axisY: {
+    postfix: "%",
+  //	labelFormatter: addSymbols
+  },
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor: "pointer",
+  //  itemclick: toggleDataSeries
+  },
+  data: [
+  {
+      type: "line",
+      name: "Actuall WATER Leakage ",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps18
+    },{
+        type: "line",
+        name: "Mean ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps19
+},{
+    type: "line",
+    name: "Stadard Deviation",
+    showInLegend: true,
+    yValueFormatString: "0.0",
+    dataPoints:dps20
+}]});
+var chart7 = new CanvasJS.Chart("chartContainer7", {
+
+  animationEnabled: true,
+  theme: "light2",
+  title: {
+    text: "Know the abnormality of machine 8"
+  },
+  axisX: {
+    valueFormatString:"HOUR#",
+     maximum:24
+  },
+  axisY: {
+    postfix: "%",
+  //	labelFormatter: addSymbols
+  },
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor: "pointer",
+  //  itemclick: toggleDataSeries
+  },
+  data: [
+  {
+      type: "line",
+      name: "Actuall WATER Leakage ",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps21
+    },{
+        type: "line",
+        name: "Mean ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps22
+},{
+    type: "line",
+    name: "Stadard Deviation",
+    showInLegend: true,
+    yValueFormatString: "0.0",
+    dataPoints:dps23
+}]});
+    chart.render();
+    chart1.render();
+    chart2.render();
+    chart3.render();
+    chart4.render();
+    chart5.render();
+    chart6.render();
+    chart7.render();
+    console.log(chart.options.data);
+    var Val1a = chart.options.data[0].dataPoints[0].y;
+    var Val2a = chart.options.data[0].dataPoints[1].y;
+    var Val3a = chart.options.data[0].dataPoints[2].y;
+    var Val4a = chart.options.data[0].dataPoints[3].y;
+    var Val5a = chart.options.data[0].dataPoints[4].y;
+    var Val6a = chart.options.data[0].dataPoints[5].y;
+    var Val7a = chart.options.data[0].dataPoints[6].y;
+    var Val8a = chart.options.data[0].dataPoints[7].y;
+    var Val9a = chart.options.data[0].dataPoints[8].y;
+    var Val10a = chart.options.data[0].dataPoints[9].y;
+    var Val11a = chart.options.data[0].dataPoints[10].y;
+    var Val12a = chart.options.data[0].dataPoints[11].y;
+    var Val13a = chart.options.data[0].dataPoints[12].y;
+    var Val14a = chart.options.data[0].dataPoints[13].y;
+    var Val15a = chart.options.data[0].dataPoints[14].y;
+    var Val16a = chart.options.data[0].dataPoints[15].y;
+    var Val17a = chart.options.data[0].dataPoints[16].y;
+    var Val18a = chart.options.data[0].dataPoints[17].y;
+    var Val19a = chart.options.data[0].dataPoints[18].y;
+    var Val20a = chart.options.data[0].dataPoints[19].y;
+    var Val21a = chart.options.data[0].dataPoints[20].y;
+    var Val22a = chart.options.data[0].dataPoints[21].y;
+    var Val23a = chart.options.data[0].dataPoints[22].y;
+    var Val24a = chart.options.data[0].dataPoints[23].y;
+    var Val1a = chart.options.data[1].dataPoints[0].y;
+    var Val2a = chart.options.data[1].dataPoints[1].y;
+    var Val3a = chart.options.data[1].dataPoints[2].y;
+    var Val4a = chart.options.data[1].dataPoints[3].y;
+    var Val5a = chart.options.data[1].dataPoints[4].y;
+    var Val6a = chart.options.data[1].dataPoints[5].y;
+    var Val7a = chart.options.data[1].dataPoints[6].y;
+    var Val8a = chart.options.data[1].dataPoints[7].y;
+    var Val9a = chart.options.data[1].dataPoints[8].y;
+    var Val10a = chart.options.data[1].dataPoints[9].y;
+    var Val11a = chart.options.data[1].dataPoints[10].y;
+    var Val12a = chart.options.data[1].dataPoints[11].y;
+    var Val13a = chart.options.data[1].dataPoints[12].y;
+    var Val14a = chart.options.data[1].dataPoints[13].y;
+    var Val15a = chart.options.data[1].dataPoints[14].y;
+    var Val16a = chart.options.data[1].dataPoints[15].y;
+    var Val17a = chart.options.data[1].dataPoints[16].y;
+    var Val18a = chart.options.data[1].dataPoints[17].y;
+    var Val19a = chart.options.data[1].dataPoints[18].y;
+    var Val20a = chart.options.data[1].dataPoints[19].y;
+    var Val21a = chart.options.data[1].dataPoints[20].y;
+    var Val22a = chart.options.data[1].dataPoints[21].y;
+    var Val23a = chart.options.data[1].dataPoints[22].y;
+    var Val24a = chart.options.data[1].dataPoints[23].y;
+    var Val1b = chart.options.data[2].dataPoints[0].y;
+    var Val2b = chart.options.data[2].dataPoints[1].y;
+    var Val3b = chart.options.data[2].dataPoints[2].y;
+    var Val4b = chart.options.data[2].dataPoints[3].y;
+    var Val5b = chart.options.data[2].dataPoints[4].y;
+    var Val6b = chart.options.data[2].dataPoints[5].y;
+    var Val7b = chart.options.data[2].dataPoints[6].y;
+    var Val8b = chart.options.data[2].dataPoints[7].y;
+    var Val9b = chart.options.data[2].dataPoints[8].y;
+    var Val10b = chart.options.data[2].dataPoints[9].y;
+    var Val11b = chart.options.data[2].dataPoints[10].y;
+    var Val12b = chart.options.data[2].dataPoints[11].y;
+    var Val13b = chart.options.data[2].dataPoints[12].y;
+    var Val14b = chart.options.data[2].dataPoints[13].y;
+    var Val15b = chart.options.data[2].dataPoints[14].y;
+    var Val16b = chart.options.data[2].dataPoints[15].y;
+    var Val17b = chart.options.data[2].dataPoints[16].y;
+    var Val18b = chart.options.data[2].dataPoints[17].y;
+    var Val19b = chart.options.data[2].dataPoints[18].y;
+    var Val20b = chart.options.data[2].dataPoints[19].y;
+    var Val21b = chart.options.data[2].dataPoints[20].y;
+    var Val22b = chart.options.data[2].dataPoints[21].y;
+    var Val23b = chart.options.data[2].dataPoints[22].y;
+    var Val24b = chart.options.data[2].dataPoints[23].y;
+    var updateInterval = 3000;
+    window.r=1;
+    // var window.socket = io.connect('http://localhost:3000/');
+
+    var updateChart = function () {
+    	window.socket = io.connect('http://localhost:3001/', {query: "foo=bar"});
+    	window.r++;
+
+      window.socket.on('temp', function(data) { //As a temp data is received
+          datr=JSON.parse(data);
+        //  console.log(datr);
+          Val11 =datr["OL1"][0];
+          Val12 =datr["OL1"][1];
+          Val13 =datr["OL1"][2];
+          Val14 =datr["OL1"][3];
+          Val15 =datr["OL1"][4];
+          Val16 =datr["OL1"][5];
+          Val17 =datr["OL1"][6];
+          Val18 =datr["OL1"][7];
+    			Val19 =datr["OL1"][8];
+    			Val110 =datr["OL1"][9];
+    			Val111 =datr["OL1"][10];
+    			Val112 =datr["OL1"][11];
+    			Val113 =datr["OL1"][12];
+    			Val114 =datr["OL1"][13];
+    			Val115 =datr["OL1"][14];
+    			Val116 =datr["OL1"][15];
+    			Val117 =datr["OL1"][16];
+    			Val118 =datr["OL1"][17];
+    			Val119 =datr["OL1"][18];
+    			Val120 =datr["OL1"][19];
+    			Val121=datr["OL1"][20];
+    			Val122 =datr["OL1"][21];
+    			Val123 =datr["OL1"][22];
+    			Val124 =datr["OL1"][23];
+          Val21 =datr["OL2"][0];
+          Val22 =datr["OL2"][1];
+          Val23 =datr["OL2"][2];
+          Val24 =datr["OL2"][3];
+          Val25 =datr["OL2"][4];
+          Val26 =datr["OL2"][5];
+          Val27 =datr["OL2"][6];
+          Val28 =datr["OL2"][7];
+    			Val29 =datr["OL2"][8];
+    			Val210 =datr["OL2"][9];
+    			Val211 =datr["OL2"][10];
+    			Val212 =datr["OL2"][11];
+    			Val213 =datr["OL2"][12];
+    			Val214 =datr["OL2"][13];
+    			Val215 =datr["OL2"][14];
+    			Val216 =datr["OL2"][15];
+    			Val217 =datr["OL2"][16];
+    			Val218 =datr["OL2"][17];
+    			Val219 =datr["OL2"][18];
+    			Val220 =datr["OL2"][19];
+    			Val221=datr["OL2"][20];
+    			Val222 =datr["OL2"][21];
+    			Val223 =datr["OL2"][22];
+    			Val224 =datr["OL2"][23];
+          Val31 =datr["OL3"][0];
+          Val32 =datr["OL3"][1];
+          Val33 =datr["OL3"][2];
+          Val34 =datr["OL3"][3];
+          Val35 =datr["OL3"][4];
+          Val36 =datr["OL3"][5];
+          Val37 =datr["OL3"][6];
+          Val38 =datr["OL3"][7];
+    			Val39 =datr["OL3"][8];
+    			Val310 =datr["OL3"][9];
+    			Val311 =datr["OL3"][10];
+    			Val312 =datr["OL3"][11];
+    			Val313 =datr["OL3"][12];
+    			Val314 =datr["OL3"][13];
+    			Val315 =datr["OL3"][14];
+    			Val316 =datr["OL3"][15];
+    			Val317 =datr["OL3"][16];
+    			Val318 =datr["OL3"][17];
+    			Val319 =datr["OL3"][18];
+    			Val320 =datr["OL3"][19];
+    			Val321=datr["OL3"][20];
+    			Val322 =datr["OL3"][21];
+    			Val323 =datr["OL3"][22];
+    			Val324 =datr["OL3"][23];
+          Val41 =datr["OL4"][0];
+          Val42 =datr["OL4"][1];
+          Val43 =datr["OL4"][2];
+          Val44 =datr["OL4"][3];
+          Val45 =datr["OL4"][4];
+          Val46 =datr["OL4"][5];
+          Val47 =datr["OL4"][6];
+          Val48 =datr["OL4"][7];
+    			Val49 =datr["OL4"][8];
+    			Val410 =datr["OL4"][9];
+    			Val411 =datr["OL4"][10];
+    			Val412 =datr["OL4"][11];
+    			Val413 =datr["OL4"][12];
+    			Val414 =datr["OL4"][13];
+    			Val415 =datr["OL4"][14];
+    			Val416 =datr["OL4"][15];
+    			Val417 =datr["OL4"][16];
+    			Val418 =datr["OL4"][17];
+    			Val419 =datr["OL4"][18];
+    			Val420 =datr["OL4"][19];
+    			Val421=datr["OL4"][20];
+    			Val422 =datr["OL4"][21];
+    			Val423 =datr["OL4"][22];
+    			Val424 =datr["OL4"][23];
+          Val51 =datr["OL5"][0];
+          Val52 =datr["OL5"][1];
+          Val53 =datr["OL5"][2];
+          Val54 =datr["OL5"][3];
+          Val55 =datr["OL5"][4];
+          Val56 =datr["OL5"][5];
+          Val57 =datr["OL5"][6];
+          Val58 =datr["OL5"][7];
+    			Val59 =datr["OL5"][8];
+    			Val510 =datr["OL5"][9];
+    			Val511 =datr["OL5"][10];
+    			Val512 =datr["OL5"][11];
+    			Val513 =datr["OL5"][12];
+    			Val514 =datr["OL5"][13];
+    			Val515 =datr["OL5"][14];
+    			Val516 =datr["OL5"][15];
+    			Val517 =datr["OL5"][16];
+    			Val518 =datr["OL5"][17];
+    			Val519 =datr["OL5"][18];
+    			Val520 =datr["OL5"][19];
+    			Val521=datr["OL5"][20];
+    			Val522 =datr["OL5"][21];
+    			Val523 =datr["OL5"][22];
+    			Val524 =datr["OL5"][23];
+          Val61 =datr["OL6"][0];
+          Val62 =datr["OL6"][1];
+          Val63 =datr["OL6"][2];
+          Val64 =datr["OL6"][3];
+          Val65 =datr["OL6"][4];
+          Val66 =datr["OL6"][5];
+          Val67 =datr["OL6"][6];
+          Val68 =datr["OL6"][7];
+    			Val69 =datr["OL6"][8];
+    			Val610 =datr["OL6"][9];
+    			Val611 =datr["OL6"][10];
+    			Val612 =datr["OL6"][11];
+    			Val613 =datr["OL6"][12];
+    			Val614 =datr["OL6"][13];
+    			Val615 =datr["OL6"][14];
+    			Val616 =datr["OL6"][15];
+    			Val617 =datr["OL6"][16];
+    			Val618 =datr["OL6"][17];
+    			Val619 =datr["OL6"][18];
+    			Val620 =datr["OL6"][19];
+    			Val621=datr["OL6"][20];
+    			Val622 =datr["OL6"][21];
+    			Val623 =datr["OL6"][22];
+    			Val624 =datr["OL6"][23];
+          Val71 =datr["OL7"][0];
+          Val72 =datr["OL7"][1];
+          Val73 =datr["OL7"][2];
+          Val74 =datr["OL7"][3];
+          Val75 =datr["OL7"][4];
+          Val76 =datr["OL7"][5];
+          Val77 =datr["OL7"][6];
+          Val78 =datr["OL7"][7];
+    			Val79 =datr["OL7"][8];
+    			Val710 =datr["OL7"][9];
+    			Val711 =datr["OL7"][10];
+    			Val712 =datr["OL7"][11];
+    			Val713 =datr["OL7"][12];
+    			Val714 =datr["OL7"][13];
+    			Val715 =datr["OL7"][14];
+    			Val716 =datr["OL7"][15];
+    			Val717 =datr["OL7"][16];
+    			Val718 =datr["OL7"][17];
+    			Val719 =datr["OL7"][18];
+    			Val720 =datr["OL7"][19];
+    			Val721=datr["OL7"][20];
+    			Val722 =datr["OL7"][21];
+    			Val723 =datr["OL7"][22];
+    			Val724 =datr["OL7"][23];
+          Val81 =datr["OL8"][0];
+          Val82 =datr["OL8"][1];
+          Val83 =datr["OL8"][2];
+          Val84 =datr["OL8"][3];
+          Val85 =datr["OL8"][4];
+          Val86 =datr["OL8"][5];
+          Val87 =datr["OL8"][6];
+          Val88 =datr["OL8"][7];
+    			Val89 =datr["OL8"][8];
+    			Val810 =datr["OL8"][9];
+    			Val811 =datr["OL8"][10];
+    			Val812 =datr["OL8"][11];
+    			Val813 =datr["OL8"][12];
+    			Val814 =datr["OL8"][13];
+    			Val815 =datr["OL8"][14];
+    			Val816 =datr["OL8"][15];
+    			Val817 =datr["OL8"][16];
+    			Val818 =datr["OL8"][17];
+    			Val819 =datr["OL8"][18];
+    			Val820 =datr["OL8"][19];
+    			Val821=datr["OL8"][20];
+    			Val822 =datr["OL8"][21];
+    			Val823 =datr["OL8"][22];
+    			Val824 =datr["OL8"][23];
+
+          dps.pop();dps.pop();dps.pop();dps.pop();
+          dps.pop();dps.pop();dps.pop();dps.pop();
+          dps.pop();dps.pop();dps.pop();dps.pop();
+          dps.pop();dps.pop();dps.pop();dps.pop();
+    			dps.pop();dps.pop();dps.pop();dps.pop();
+          dps.pop();dps.pop();dps.pop();dps.pop();
+          dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+          dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+          dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+          dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+    			dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+          dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+          dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+          dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+          dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+          dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+          dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+          dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+
+          dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+          dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+          dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+          dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+          dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+          dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+          dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+          dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+          dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+          dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+          dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+          dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+          dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+          dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+          dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+          dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+          dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+          dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+
+          dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+          dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+          dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+          dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+          dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+          dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+          dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+          dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+          dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+          dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+          dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+          dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+          dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+          dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+          dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+          dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+          dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+          dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+
+          dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+          dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+          dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+          dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+          dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+          dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+          dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+          dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+          dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+          dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+          dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+          dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+          dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+          dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+          dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+          dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+          dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+          dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+
+          dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+          dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+          dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+          dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+          dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+          dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+          dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+          dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+          dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+          dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+          dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+          dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+          dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+          dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+          dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+          dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+          dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+          dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+
+          dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+          dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+          dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+          dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+          dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+          dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+          dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+          dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+          dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+          dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+          dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+          dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+          dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+          dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+          dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+          dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+          dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+          dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+
+          dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+          dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+          dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+          dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+          dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+          dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+          dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+          dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+          dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+          dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+          dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+          dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+          dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+          dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+          dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+          dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+          dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+          dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+
+          dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+          dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+          dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+          dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+          dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+          dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+          dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+          dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+          dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+          dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+          dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+          dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+          dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+          dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+          dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+          dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+          dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+          dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+
+    			dps.push({y:Val11});dps.push({y:Val12});
+    			dps.push({y:Val13});dps.push({y:Val14});
+    			dps.push({y:Val15});dps.push({y:Val16});
+    			dps.push({y:Val17});dps.push({y:Val18});
+    			dps.push({y:Val19});dps.push({y:Val110});
+    			dps.push({y:Val111});dps.push({y:Val112});
+          dps.push({y:Val113});dps.push({y:Val114});
+          dps.push({y:Val115});dps.push({y:Val116});
+          dps.push({y:Val117});dps.push({y:Val118});
+          dps.push({y:Val119});dps.push({y:Val120});
+          dps.push({y:Val121});dps.push({y:Val122});
+          dps.push({y:Val123});dps.push({y:Val124});
+          mean=(dps[0].y+dps[1].y+dps[2].y+dps[3].y+dps[4].y+dps[5].y+dps[6].y+dps[7].y+dps[8].y+dps[9].y+dps[10].y+dps[11].y+dps[12].y+dps[13].y+dps[14].y+dps[15].y+dps[16].y+dps[17].y+dps[18].y+dps[19].y+dps[20].y+dps[21].y+dps[22].y+dps[23].y)/24;
+          s= ((dps[0].y-mean)^2)+((dps[1].y-mean)^2)+((dps[2].y-mean)^2)+((dps[3].y-mean)^2)+((dps[4].y-mean)^2)+((dps[5].y-mean)^2)+((dps[6].y-mean)^2)+((dps[7].y-mean)^2)+((dps[8].y-mean)^2)+((dps[9].y-mean)^2)+((dps[10].y-mean)^2)+((dps[11].y-mean)^2)+((dps[12].y-mean)^2)+((dps[13].y-mean)^2)+((dps[14].y-mean)^2)+((dps[15].y-mean)^2)+((dps[16].y-mean)^2)+((dps[17].y-mean)^2)+((dps[18].y-mean)^2)+((dps[19].y-mean)^2)+((dps[20].y-mean)^2)+((dps[21].y-mean)^2)+((dps[22].y-mean)^2)+((dps[23].y-mean)^2);
+          sd=Math.sqrt(s/24);
+              			dps1.push({y:mean});dps1.push({y:mean});
+              			dps1.push({y:mean});dps1.push({y:mean});
+              			dps1.push({y:mean});dps1.push({y:mean});
+              			dps1.push({y:mean});dps1.push({y:mean});
+              			dps1.push({y:mean});dps1.push({y:mean});
+              			dps1.push({y:mean});dps1.push({y:mean});
+                    dps1.push({y:mean});dps1.push({y:mean});
+                    dps1.push({y:mean});dps1.push({y:mean});
+                    dps1.push({y:mean});dps1.push({y:mean});
+                    dps1.push({y:mean});dps1.push({y:mean});
+                    dps1.push({y:mean});dps1.push({y:mean});
+                    dps1.push({y:mean});dps1.push({y:mean});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+                    dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+
+                    dps3.push({y:Val21});dps3.push({y:Val22});
+                    dps3.push({y:Val23});dps3.push({y:Val24});
+                    dps3.push({y:Val25});dps3.push({y:Val26});
+                    dps3.push({y:Val27});dps3.push({y:Val28});
+                    dps3.push({y:Val29});dps3.push({y:Val210});
+                    dps3.push({y:Val211});dps3.push({y:Val212});
+                    dps3.push({y:Val213});dps3.push({y:Val214});
+                    dps3.push({y:Val215});dps3.push({y:Val216});
+                    dps3.push({y:Val217});dps3.push({y:Val218});
+                    dps3.push({y:Val219});dps3.push({y:Val220});
+                    dps3.push({y:Val221});dps3.push({y:Val222});
+                    dps3.push({y:Val223});dps3.push({y:Val224});
+                    mean1=(dps3[0].y+dps3[1].y+dps3[2].y+dps3[3].y+dps3[4].y+dps3[5].y+dps3[6].y+dps3[7].y+dps3[8].y+dps3[9].y+dps3[10].y+dps3[11].y+dps3[12].y+dps3[13].y+dps3[14].y+dps3[15].y+dps3[16].y+dps3[17].y+dps3[18].y+dps3[19].y+dps3[20].y+dps3[21].y+dps3[22].y+dps3[23].y)/24;
+                    s1= ((dps3[0].y-mean1)^2)+((dps3[1].y-mean1)^2)+((dps3[2].y-mean1)^2)+((dps3[3].y-mean1)^2)+((dps3[4].y-mean1)^2)+((dps3[5].y-mean1)^2)+((dps3[6].y-mean1)^2)+((dps3[7].y-mean1)^2)+((dps3[8].y-mean1)^2)+((dps3[9].y-mean1)^2)+((dps3[10].y-mean1)^2)+((dps3[11].y-mean1)^2)+((dps3[12].y-mean1)^2)+((dps3[13].y-mean1)^2)+((dps3[14].y-mean1)^2)+((dps3[15].y-mean1)^2)+((dps3[16].y-mean1)^2)+((dps3[17].y-mean1)^2)+((dps3[18].y-mean1)^2)+((dps3[19].y-mean1)^2)+((dps3[20].y-mean1)^2)+((dps3[21].y-mean1)^2)+((dps3[22].y-mean1)^2)+((dps3[23].y-mean1)^2);
+                    sd1=Math.sqrt(s1/24);
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+
+                              dps6.push({y:Val31});dps6.push({y:Val32});
+                        			dps6.push({y:Val33});dps6.push({y:Val34});
+                        			dps6.push({y:Val35});dps6.push({y:Val36});
+                        			dps6.push({y:Val37});dps6.push({y:Val38});
+                        			dps6.push({y:Val39});dps6.push({y:Val310});
+                        			dps6.push({y:Val311});dps6.push({y:Val312});
+                              dps6.push({y:Val313});dps6.push({y:Val314});
+                              dps6.push({y:Val315});dps6.push({y:Val316});
+                              dps6.push({y:Val317});dps6.push({y:Val318});
+                              dps6.push({y:Val319});dps6.push({y:Val320});
+                              dps6.push({y:Val321});dps6.push({y:Val322});
+                              dps6.push({y:Val323});dps6.push({y:Val324});
+                              mean2=(dps6[0].y+dps6[1].y+dps6[2].y+dps6[3].y+dps6[4].y+dps6[5].y+dps6[6].y+dps6[7].y+dps6[8].y+dps6[9].y+dps6[10].y+dps6[11].y+dps6[12].y+dps6[13].y+dps6[14].y+dps6[15].y+dps6[16].y+dps6[17].y+dps6[18].y+dps6[19].y+dps6[20].y+dps6[21].y+dps6[22].y+dps6[23].y)/24;
+                              s2= ((dps6[0].y-mean2)^2)+((dps6[1].y-mean2)^2)+((dps6[2].y-mean2)^2)+((dps6[3].y-mean2)^2)+((dps6[4].y-mean2)^2)+((dps6[5].y-mean2)^2)+((dps6[6].y-mean2)^2)+((dps6[7].y-mean2)^2)+((dps6[8].y-mean2)^2)+((dps6[9].y-mean2)^2)+((dps6[10].y-mean2)^2)+((dps6[11].y-mean2)^2)+((dps6[12].y-mean2)^2)+((dps6[13].y-mean2)^2)+((dps6[14].y-mean2)^2)+((dps6[15].y-mean2)^2)+((dps6[16].y-mean2)^2)+((dps6[17].y-mean2)^2)+((dps6[18].y-mean2)^2)+((dps6[19].y-mean2)^2)+((dps6[20].y-mean2)^2)+((dps6[21].y-mean2)^2)+((dps6[22].y-mean2)^2)+((dps6[23].y-mean2)^2);
+                              sd2=Math.sqrt(s2/24);
+                                  			dps7.push({y:mean2});dps7.push({y:mean2});
+                                  			dps7.push({y:mean2});dps7.push({y:mean2});
+                                  			dps7.push({y:mean2});dps7.push({y:mean2});
+                                  			dps7.push({y:mean2});dps7.push({y:mean2});
+                                  			dps7.push({y:mean2});dps7.push({y:mean2});
+                                  			dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps7.push({y:mean2});dps7.push({y:mean2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+                                        dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+
+                                        dps9.push({y:Val41});dps9.push({y:Val42});
+                                  			dps9.push({y:Val43});dps9.push({y:Val44});
+                                  			dps9.push({y:Val45});dps9.push({y:Val46});
+                                  			dps9.push({y:Val47});dps9.push({y:Val48});
+                                  			dps9.push({y:Val49});dps9.push({y:Val410});
+                                  			dps9.push({y:Val411});dps9.push({y:Val412});
+                                        dps9.push({y:Val413});dps9.push({y:Val414});
+                                        dps9.push({y:Val415});dps9.push({y:Val416});
+                                        dps9.push({y:Val417});dps9.push({y:Val418});
+                                        dps9.push({y:Val419});dps9.push({y:Val420});
+                                        dps9.push({y:Val421});dps9.push({y:Val422});
+                                        dps9.push({y:Val423});dps9.push({y:Val424});
+                                        mean3=(dps9[0].y+dps9[1].y+dps9[2].y+dps9[3].y+dps9[4].y+dps9[5].y+dps9[6].y+dps9[7].y+dps9[8].y+dps9[9].y+dps9[10].y+dps9[11].y+dps9[12].y+dps9[13].y+dps9[14].y+dps9[15].y+dps9[16].y+dps9[17].y+dps9[18].y+dps9[19].y+dps9[20].y+dps9[21].y+dps9[22].y+dps9[23].y)/24;
+                                        s3= ((dps9[0].y-mean3)^2)+((dps9[1].y-mean3)^2)+((dps9[2].y-mean3)^2)+((dps9[3].y-mean3)^2)+((dps9[4].y-mean3)^2)+((dps9[5].y-mean3)^2)+((dps9[6].y-mean3)^2)+((dps9[7].y-mean3)^2)+((dps9[8].y-mean3)^2)+((dps9[9].y-mean3)^2)+((dps9[10].y-mean3)^2)+((dps9[11].y-mean3)^2)+((dps9[12].y-mean3)^2)+((dps9[13].y-mean3)^2)+((dps9[14].y-mean3)^2)+((dps9[15].y-mean3)^2)+((dps9[16].y-mean3)^2)+((dps9[17].y-mean3)^2)+((dps9[18].y-mean3)^2)+((dps9[19].y-mean3)^2)+((dps9[20].y-mean3)^2)+((dps9[21].y-mean3)^2)+((dps9[22].y-mean3)^2)+((dps9[23].y-mean3)^2);
+                                        sd3=Math.sqrt(s3/24);
+                                            			dps10.push({y:mean3});dps10.push({y:mean3});
+                                            			dps10.push({y:mean3});dps10.push({y:mean3});
+                                            			dps10.push({y:mean3});dps10.push({y:mean3});
+                                            			dps10.push({y:mean3});dps10.push({y:mean3});
+                                            			dps10.push({y:mean3});dps10.push({y:mean3});
+                                            			dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps10.push({y:mean3});dps10.push({y:mean3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+                                                  dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+
+                                                  dps12.push({y:Val51});dps12.push({y:Val52});
+                                            			dps12.push({y:Val53});dps12.push({y:Val54});
+                                            			dps12.push({y:Val55});dps12.push({y:Val56});
+                                            			dps12.push({y:Val57});dps12.push({y:Val58});
+                                            			dps12.push({y:Val59});dps12.push({y:Val510});
+                                            			dps12.push({y:Val511});dps12.push({y:Val512});
+                                                  dps12.push({y:Val513});dps12.push({y:Val514});
+                                                  dps12.push({y:Val515});dps12.push({y:Val516});
+                                                  dps12.push({y:Val517});dps12.push({y:Val518});
+                                                  dps12.push({y:Val519});dps12.push({y:Val520});
+                                                  dps12.push({y:Val521});dps12.push({y:Val522});
+                                                  dps12.push({y:Val523});dps12.push({y:Val524});
+                                                  mean4=(dps12[0].y+dps12[1].y+dps12[2].y+dps12[3].y+dps12[4].y+dps12[5].y+dps12[6].y+dps12[7].y+dps12[8].y+dps12[9].y+dps12[10].y+dps12[11].y+dps12[12].y+dps12[13].y+dps12[14].y+dps12[15].y+dps12[16].y+dps12[17].y+dps12[18].y+dps12[19].y+dps12[20].y+dps12[21].y+dps12[22].y+dps12[23].y)/24;
+                                                  s4= ((dps12[0].y-mean4)^2)+((dps12[1].y-mean4)^2)+((dps12[2].y-mean4)^2)+((dps12[3].y-mean4)^2)+((dps12[4].y-mean4)^2)+((dps12[5].y-mean4)^2)+((dps12[6].y-mean4)^2)+((dps12[7].y-mean4)^2)+((dps12[8].y-mean4)^2)+((dps12[9].y-mean4)^2)+((dps12[10].y-mean4)^2)+((dps12[11].y-mean4)^2)+((dps12[12].y-mean4)^2)+((dps12[13].y-mean4)^2)+((dps12[14].y-mean4)^2)+((dps12[15].y-mean4)^2)+((dps12[16].y-mean4)^2)+((dps12[17].y-mean4)^2)+((dps12[18].y-mean4)^2)+((dps12[19].y-mean4)^2)+((dps12[20].y-mean4)^2)+((dps12[21].y-mean4)^2)+((dps12[22].y-mean4)^2)+((dps12[23].y-mean4)^2);
+                                                  sd4=Math.sqrt(s4/24);
+                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
+                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
+                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
+                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
+                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
+                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
+                                                            dps13.push({y:mean4});dps13.push({y:mean4});
+                                                            dps13.push({y:mean4});dps13.push({y:mean4});
+                                                            dps13.push({y:mean4});dps13.push({y:mean4});
+                                                            dps13.push({y:mean4});dps13.push({y:mean4});
+                                                            dps13.push({y:mean4});dps13.push({y:mean4});
+                                                            dps13.push({y:mean4});dps13.push({y:mean4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+                                                        dps15.push({y:Val61});dps15.push({y:Val62});
+                                                        dps15.push({y:Val63});dps15.push({y:Val64});
+                                                        dps15.push({y:Val65});dps15.push({y:Val66});
+                                                        dps15.push({y:Val67});dps15.push({y:Val68});
+    dps15.push({y:Val69});dps15.push({y:Val610});
+    dps15.push({y:Val611});dps15.push({y:Val612});
+    dps15.push({y:Val613});dps15.push({y:Val614});
+    dps15.push({y:Val615});dps15.push({y:Val616});
+    dps15.push({y:Val617});dps15.push({y:Val618});
+    dps15.push({y:Val619});dps15.push({y:Val620});
+    dps15.push({y:Val621});dps15.push({y:Val622});
+    dps15.push({y:Val623});dps15.push({y:Val624});
+    mean5=(dps15[0].y+dps15[1].y+dps15[2].y+dps15[3].y+dps15[4].y+dps15[5].y+dps15[6].y+dps15[7].y+dps15[8].y+dps15[9].y+dps15[10].y+dps15[11].y+dps15[12].y+dps15[13].y+dps15[14].y+dps15[15].y+dps15[16].y+dps15[17].y+dps15[18].y+dps15[19].y+dps15[20].y+dps15[21].y+dps15[22].y+dps15[23].y)/24;
+    s5= ((dps15[0].y-mean5)^2)+((dps15[1].y-mean5)^2)+((dps15[2].y-mean5)^2)+((dps15[3].y-mean5)^2)+((dps15[4].y-mean5)^2)+((dps15[5].y-mean5)^2)+((dps15[6].y-mean5)^2)+((dps15[7].y-mean5)^2)+((dps15[8].y-mean5)^2)+((dps15[9].y-mean5)^2)+((dps15[10].y-mean5)^2)+((dps15[11].y-mean5)^2)+((dps15[12].y-mean5)^2)+((dps15[13].y-mean5)^2)+((dps15[14].y-mean5)^2)+((dps15[15].y-mean5)^2)+((dps15[16].y-mean5)^2)+((dps15[17].y-mean5)^2)+((dps15[18].y-5)^2)+((dps15[20].y-mean5)^2)+((dps15[21].y-mean5)^2)+((dps15[22].y-mean5)^2)+((dps15[23].y-mean5)^2);
+    sd5=Math.sqrt(s5/24);
+              dps16.push({y:mean5});dps16.push({y:mean5});
+              dps16.push({y:mean5});dps16.push({y:mean5});
+              dps16.push({y:mean5});dps16.push({y:mean5});
+              dps16.push({y:mean5});dps16.push({y:mean5});
+              dps16.push({y:mean5});dps16.push({y:mean5});
+              dps16.push({y:mean5});dps16.push({y:mean5});
+  dps16.push({y:mean5});dps16.push({y:mean5});
+  dps16.push({y:mean5});dps16.push({y:mean5});
+  dps16.push({y:mean5});dps16.push({y:mean5});
+  dps16.push({y:mean5});dps16.push({y:mean5});
+  dps16.push({y:mean5});dps16.push({y:mean5});
+  dps16.push({y:mean5});dps16.push({y:mean5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+//data to b6 pushe915d12
+dps18.push({y:Val71});dps18.push({y:Val72});
+dps18.push({y:Val73});dps18.push({y:Val74});
+dps18.push({y:Val75});dps18.push({y:Val76});
+dps18.push({y:Val77});dps18.push({y:Val78});
+dps18.push({y:Val79});dps18.push({y:Val710});
+dps18.push({y:Val711});dps18.push({y:Val712});
+dps18.push({y:Val713});dps18.push({y:Val714});
+dps18.push({y:Val715});dps18.push({y:Val716});
+dps18.push({y:Val717});dps18.push({y:Val718});
+dps18.push({y:Val719});dps18.push({y:Val720});
+dps18.push({y:Val721});dps18.push({y:Val722});
+dps18.push({y:Val723});dps18.push({y:Val724});
+mean6=(dps18[0].y+dps18[1].y+dps18[2].y+dps18[3].y+dps18[4].y+dps18[5].y+dps18[6].y+dps18[7].y+dps18[8].y+dps18[9].y+dps18[10].y+dps18[11].y+dps18[12].y+dps18[13].y+dps18[14].y+dps18[15].y+dps18[16].y+dps18[17].y+dps18[18].y+dps18[19].y+dps18[20].y+dps18[21].y+dps18[22].y+dps18[23].y)/24;
+s6= ((dps18[0].y-mean6)^2)+((dps18[1].y-mean6)^2)+((dps18[2].y-mean6)^2)+((dps18[3].y-mean6)^2)+((dps18[4].y-mean6)^2)+((dps18[5].y-mean6)^2)+((dps18[6].y-mean6)^2)+((dps18[7].y-mean6)^2)+((dps18[8].y-mean6)^2)+((dps18[9].y-mean6)^2)+((dps18[10].y-mean6)^2)+((dps18[11].y-mean6)^2)+((dps18[12].y-mean6)^2)+((dps18[13].y-mean6)^2)+((dps18[14].y-mean6)^2)+((dps18[15].y-mean6)^2)+((dps18[16].y-mean6)^2)+((dps18[17].y-mean6)^2)+((dps18[18].y-mean6)^2)+((dps18[19].y-mean6)^2)+((dps18[20].y-mean6)^2)+((dps18[21].y-mean6)^2)+((dps18[22].y-mean6)^2)+((dps18[23].y-mean6)^2);
+sd6=Math.sqrt(s6/24);
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps19.push({y:mean6});dps19.push({y:mean6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+
+          dps21.push({y:Val81});dps21.push({y:Val82});
+    			dps21.push({y:Val83});dps21.push({y:Val84});
+    			dps21.push({y:Val85});dps21.push({y:Val86});
+    			dps21.push({y:Val87});dps21.push({y:Val88});
+    			dps21.push({y:Val89});dps21.push({y:Val810});
+    			dps21.push({y:Val811});dps21.push({y:Val812});
+          dps21.push({y:Val813});dps21.push({y:Val814});
+          dps21.push({y:Val815});dps21.push({y:Val816});
+          dps21.push({y:Val817});dps21.push({y:Val818});
+          dps21.push({y:Val819});dps21.push({y:Val820});
+          dps21.push({y:Val821});dps21.push({y:Val822});
+          dps21.push({y:Val823});dps21.push({y:Val824});
+          mean7=(dps21[0].y+dps21[1].y+dps21[2].y+dps21[3].y+dps21[4].y+dps21[5].y+dps21[6].y+dps21[7].y+dps21[8].y+dps21[9].y+dps21[10].y+dps21[11].y+dps21[12].y+dps21[13].y+dps21[14].y+dps21[15].y+dps21[16].y+dps21[17].y+dps21[18].y+dps21[19].y+dps21[20].y+dps21[21].y+dps21[22].y+dps21[23].y)/24;
+          s7= ((dps21[0].y-mean7)^2)+((dps21[1].y-mean7)^2)+((dps21[2].y-mean7)^2)+((dps21[3].y-mean7)^2)+((dps21[4].y-mean7)^2)+((dps21[5].y-mean7)^2)+((dps21[6].y-mean7)^2)+((dps21[7].y-mean7)^2)+((dps21[8].y-mean7)^2)+((dps21[9].y-mean7)^2)+((dps21[10].y-mean7)^2)+((dps21[11].y-mean7)^2)+((dps21[12].y-mean7)^2)+((dps21[13].y-mean7)^2)+((dps21[14].y-mean7)^2)+((dps21[15].y-mean7)^2)+((dps21[16].y-mean7)^2)+((dps21[17].y-mean7)^2)+((dps21[18].y-mean7)^2)+((dps21[19].y-mean7)^2)+((dps21[20].y-mean7)^2)+((dps21[21].y-mean7)^2)+((dps21[22].y-mean7)^2)+((dps21[23].y-mean7)^2);
+          sd7=Math.sqrt(s7/24);
+              			dps22.push({y:mean7});dps22.push({y:mean7});
+              			dps22.push({y:mean7});dps22.push({y:mean7});
+              			dps22.push({y:mean7});dps22.push({y:mean7});
+              			dps22.push({y:mean7});dps22.push({y:mean7});
+              			dps22.push({y:mean7});dps22.push({y:mean7});
+              			dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps22.push({y:mean7});dps22.push({y:mean7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7})
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+
+
+        });
+        chart.render();
+        chart1.render();
+        chart2.render();
+        chart3.render();
+        chart4.render();
+        chart5.render();
+        chart6.render();
+        chart7.render();
+
+  };
+    setInterval(function(){updateChart()}, updateInterval);
+
+    // function toggleDataSeries(e) {
+    // 	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+    // 		e.dataSeries.visible = false;
+    // 	} else {
+    // 		e.dataSeries.visible = true;
+    // 	}
+    // }
+  }
+    </script>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer3" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer4" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer5" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer6" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer7" style="height: 300px; width: 100%;"></div>
+  </head>
+  </html>
