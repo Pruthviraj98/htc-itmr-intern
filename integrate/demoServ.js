@@ -1402,6 +1402,7 @@ nsp6.on('connection', function(socket) {
             });//// End of mysql Connection
 });/////namespace end for db6
 
+
 var nsp7 = io.of('/sock7');
 nsp7.on('connection', function(socket) {
         console.log("7 DB Conn");

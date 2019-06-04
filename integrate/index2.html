@@ -2629,11 +2629,10 @@ sd6=Math.sqrt(s6/24);
 
 function function6(){
   window.current=6;
-
     socket6 = io('/sock6', { forceNew: true });
     socket6.on("temp6", function(data){
       dat=JSON.parse(data);
-
+	console.log(dat);
       min11 =dat["M111"];
       med111 =dat["M112"];
       med11 =dat["M113"];
@@ -2830,100 +2829,241 @@ function function6(){
       m.push(0);
       m.push(0);
       n=[]
-      n.push(min21["w_LeakRate"]);
-      n.push(med211["w_LeakRate"]);
-      n.push(med212["w_LeakRate"]);
-      n.push(max21["w_LeakRate"]);
-      n.push(med21["w_LeakRate"]);
+    n.push(min21["W_LeakRate"]);
+    n.push(max21["W_LeakRate"]);
+    n.push(med21["W_LeakRate"]);
+    n.push(med211["W_LeakRate"]);
+    n.push(med212["W_LeakRate"]);
       o=[]
-      o.push(min22["w_LeakRate"]);
-      o.push(med221["w_LeakRate"]);
-      o.push(med222["w_LeakRate"]);
-      o.push(max22["w_LeakRate"]);
-      o.push(med22["w_LeakRate"]);
+      o.push(min22["W_LeakRate"]);
+      o.push(med221["W_LeakRate"]);
+      o.push(med222["W_LeakRate"]);
+      o.push(max22["W_LeakRate"]);
+      o.push(med22["W_LeakRate"]);
       p=[]
-      p.push(min23["w_LeakRate"]);
-      p.push(med231["w_LeakRate"]);
-      p.push(med232["w_LeakRate"]);
-      p.push(max23["w_LeakRate"]);
-      p.push(med23["w_LeakRate"]);
+      p.push(min23["W_LeakRate"]);
+      p.push(med231["W_LeakRate"]);
+      p.push(med232["W_LeakRate"]);
+      p.push(max23["W_LeakRate"]);
+      p.push(med23["W_LeakRate"]);
       q=[]
-      q.push(min24["w_LeakRate"]);
-      q.push(med241["w_LeakRate"]);
-      q.push(med242["w_LeakRate"]);
-      q.push(max24["w_LeakRate"]);
-      q.push(med24["w_LeakRate"]);
+      q.push(min24["W_LeakRate"]);
+      q.push(med241["W_LeakRate"]);
+      q.push(med242["W_LeakRate"]);
+      q.push(max24["W_LeakRate"]);
+      q.push(med24["W_LeakRate"]);
       r=[]
-      r.push(min25["w_LeakRate"]);
-      r.push(med251["w_LeakRate"]);
-      r.push(med252["w_LeakRate"]);
-      r.push(max25["w_LeakRate"]);
-      r.push(med25["w_LeakRate"]);
+      r.push(min25["W_LeakRate"]);
+      r.push(med251["W_LeakRate"]);
+      r.push(med252["W_LeakRate"]);
+      r.push(max25["W_LeakRate"]);
+      r.push(med25["W_LeakRate"]);
       s=[]
-      s.push(min26["w_LeakRate"]);
-      s.push(med261["w_LeakRate"]);
-      s.push(med262["w_LeakRate"]);
-      s.push(max26["w_LeakRate"]);
-      s.push(med26["w_LeakRate"]);
+      s.push(min26["W_LeakRate"]);
+      s.push(med261["W_LeakRate"]);
+      s.push(med262["W_LeakRate"]);
+      s.push(max26["W_LeakRate"]);
+      s.push(med26["W_LeakRate"]);
       t=[]
-      t.push(min27["w_LeakRate"]);
-      t.push(med271["w_LeakRate"]);
-      t.push(med272["w_LeakRate"]);
-      t.push(max27["w_LeakRate"]);
-      t.push(med27["w_LeakRate"]);
+      t.push(min27["W_LeakRate"]);
+      t.push(med271["W_LeakRate"]);
+      t.push(med272["W_LeakRate"]);
+      t.push(max27["W_LeakRate"]);
+      t.push(med27["W_LeakRate"]);
       u=[]
-      u.push(min28["w_LeakRate"]);
-      u.push(med281["w_LeakRate"]);
-      u.push(med282["w_LeakRate"]);
-      u.push(max28["w_LeakRate"]);
-      u.push(med28["w_LeakRate"]);
+      u.push(min28["W_LeakRate"]);
+      u.push(med281["W_LeakRate"]);
+      u.push(med282["W_LeakRate"]);
+      u.push(max28["W_LeakRate"]);
+      u.push(med28["W_LeakRate"]);
       v=[]
-      v.push(min29["w_LeakRate"]);
-      v.push(med291["w_LeakRate"]);
-      v.push(med292["w_LeakRate"]);
-      v.push(max29["w_LeakRate"]);
-      v.push(med29["w_LeakRate"]);
+      v.push(min29["W_LeakRate"]);
+      v.push(med291["W_LeakRate"]);
+      v.push(med292["W_LeakRate"]);
+      v.push(max29["W_LeakRate"]);
+      v.push(med29["W_LeakRate"]);
       w=[]
-      w.push(min210["w_LeakRate"]);
-      w.push(med2101["w_LeakRate"]);
-      w.push(med2102["w_LeakRate"]);
-      w.push(max210["w_LeakRate"]);
-      w.push(med210["w_LeakRate"]);
+      w.push(min210["W_LeakRate"]);
+      w.push(med2101["W_LeakRate"]);
+      w.push(med2102["W_LeakRate"]);
+      w.push(max210["W_LeakRate"]);
+      w.push(med210["W_LeakRate"]);
       x=[]
       x.push(0);
       x.push(0);
       x.push(0);
       x.push(0);
       x.push(0);
-
-          var dps1= [
-            { x: "MODEL K9K", y:c },
-            { x: "MODEL B4D", y:d },
-            { x: "MODEL H5FD", y:e },
-            { x: "MODEL GEN 2", y:f },
-            { x: "MODEL YL 7", y:g },
-            { x: "MODEL YL 1", y:h },
-            { x: "MODEL XFL 246", y:i},
-            { x: "MODEL 800 CC", y:j},
-            { x: "MODEL M&H", y:k},
-            { x: "MODEL X 302", y:l},
-            { x: "MODEL T 1.05 ", y:m},
+	console.log(n);
+//console.log(o);
+//console.log(p);
+//console.log(q);
+//console.log(r);
+console.log(min210);
+console.log(med2101);
+console.log(med2102);
+console.log(max210);
+console.log(med210);
+          var dps1x= [
+            {y:c },
+            { y:d },
+            { y:e },
+            { y:f },
+            { y:g },
+            { y:h },
+            { y:i },
+            { y:j },
+            { y:k },
+            { y:l },
+            { y:m },
           ];
-          var dps= [
-            { x:  "MODEL K9K",  y:n },
-            { x:  "MODEL B4D",  y:o },
-            { x:  "MODEL H5FD", y:p },
-            { x:  "MODEL GEN 2", y:q },
-            { x:  "MODEL YL 7", y:r },
-            { x:  "MODEL YL 1", y:s },
-            { x:  "MODEL XFL 24", y:t},
-            { x: "MODEL 800 CC", y:u},
-            { x:  "MODEL M&H",  y:v},
-            { x: "MODEL X 302", y:w},
-            { x: "MODEL T 1.05 ", y:x},
+          var dpsx= [
+            {  y:n },
+            { y:o },
+            {  y:p },
+            { y:q },
+            {  y:r },
+            {  y:s },
+            {  y:t},
+            {  y:u},
+            {  y:v},
+            { y:w},
+            { y:x},
           ];
-            console.log(dps);
-
+            console.log(dpsx);
+            console.log(dps1x);
+    var chart3 = new CanvasJS.Chart("chartContainer1",
+    {
+      title:{
+      text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+      },
+      data: [
+      {
+        type: "line",
+        dataPoints: [
+        { y: null },
+        { y: null},
+        { y: null },
+        { y: null },
+        { y: null }, //** null data point
+        { y: null},
+        { y: null},
+        { y: null },
+        { y: null}
+        ]
+      }]
+    });
+    chart3.render();
+      var chart4 = new CanvasJS.Chart("chartContainer3",
+      {
+        title:{
+        text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+        },
+        data: [
+        {
+          type: "line",
+          dataPoints: [
+          { y: null },
+          { y: null},
+          { y: null },
+          { y: null },
+          { y: null }, //** null data point
+          { y: null},
+          { y: null},
+          { y: null },
+          { y: null}
+          ]
+        }]
+      });
+      chart4.render();
+        var chart5 = new CanvasJS.Chart("chartContainer4",
+        {
+          title:{
+          text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+          },
+          data: [
+          {
+            type: "line",
+            dataPoints: [
+            { y: null },
+            { y: null},
+            { y: null },
+            { y: null },
+            { y: null }, //** null data point
+            { y: null},
+            { y: null},
+            { y: null },
+            { y: null}
+            ]
+          }]
+        });
+        chart5.render();
+          var chart6 = new CanvasJS.Chart("chartContainer5",
+          {
+            title:{
+            text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+            },
+            data: [
+            {
+              type: "line",
+              dataPoints: [
+              { y: null },
+              { y: null},
+              { y: null },
+              { y: null },
+              { y: null }, //** null data point
+              { y: null},
+              { y: null},
+              { y: null },
+              { y: null}
+              ]
+            }]
+          });
+          chart6.render();f
+            var chart7 = new CanvasJS.Chart("chartContainer7",
+            {
+              title:{
+              text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+              },
+              data: [
+              {
+                type: "line",
+                dataPoints: [
+                { y: null },
+                { y: null},
+                { y: null },
+                { y: null },
+                { y: null }, //** null data point
+                { y: null},
+                { y: null},
+                { y: null },
+                { y: null}
+                ]
+              }]
+            });
+            chart7.render();
+              var chart8 = new CanvasJS.Chart("chartContainer8",
+              {
+                title:{
+                text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                },
+                data: [
+                {
+                  type: "line",
+                  dataPoints: [
+                  { y: null },
+                  { y: null},
+                  { y: null },
+                  { y: null },
+                  { y: null }, //** null data point
+                  { y: null},
+                  { y: null},
+                  { y: null },
+                  { y: null}
+                  ]
+                }]
+              });
+              chart8.render();
 //////////chart1
             chart1 = new CanvasJS.Chart("chartContainer2", {
                 animationEnabled: true,
@@ -2932,7 +3072,8 @@ function function6(){
                   text: "BOX PLOT WITH RESPECT TO OIL FOR ALL MODELS"
                 },
                 axisX: {
-                  valueFormatString: "MACHINE"
+                  valueFormatString: "MODEL#",
+                  MAXIMUM:11
                 },
                 axisY: {
                   title: "LEAK_RATE"
@@ -2940,9 +3081,9 @@ function function6(){
                 data: [{
                   type: "boxAndWhisker",
                   showInLegend: true,
-                  xvalueFormatString: "MACHINE",
+                  //xvalueFormatString: "",
                   yValueFormatString: "0.0",
-                  dataPoints:dps1
+                  dataPoints:dps1x
                 }]
               });
               chart1.render();
@@ -2955,7 +3096,8 @@ function function6(){
                   text: "BOX PLOT WITH RESPECT TO WATER FOR ALL MODELS"
                 },
                 axisX: {
-                  valueFormatString: "MACHINE"
+                  valueFormatString: "MODEL#",
+		  maximum:11
                 },
                 axisY: {
                   title: "LEAK_RATE"
@@ -2963,15 +3105,15 @@ function function6(){
                 data: [{
                   type: "boxAndWhisker",
                   showInLegend: true,
-                  xvalueFormatString: "MACHINE",
+                  xvalueFormatString: "MODEL",
                   yValueFormatString: "0.0",
-                  dataPoints:dps
+                  dataPoints:dpsx
                 }]
               });
               chart2.render();
               console.log("Incoming6");
-
-      });/////Socket CLose
+      });
+/////Socket CLose
 ///////////
 }////////end of function6
 
