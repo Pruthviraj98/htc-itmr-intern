@@ -421,7 +421,7 @@ function function5(){
             chart1 = new CanvasJS.Chart("chartContainer1", {
                 theme: "light2",
                 title:{
-                  text: "Machine 1 Leak Test Status"
+                  text: "MODEL 1 Leak Test Status"
                 },
                 data: [
                       {
@@ -440,7 +440,7 @@ function function5(){
             chart2 = new CanvasJS.Chart("chartContainer2", {
                 theme: "light2",
                 title:{
-                  text: "Machine 2 Leak Test Status"
+                  text: "MODEL 2 Leak Test Status"
                 },
                 data: [
                       {
@@ -459,7 +459,7 @@ function function5(){
             chart3 = new CanvasJS.Chart("chartContainer3", {
                 theme: "light2",
                 title:{
-                  text: "Machine 3 Leak Test Status"
+                  text: "MODEL 3 Leak Test Status"
                 },
                 data: [
                       {
@@ -478,7 +478,7 @@ function function5(){
             chart4 = new CanvasJS.Chart("chartContainer4", {
                 theme: "light2",
                 title:{
-                  text: "Machine 4 Leak Test Status"
+                  text: "MODEL 4 Leak Test Status"
                 },
                 data: [
                       {
@@ -497,7 +497,7 @@ function function5(){
             chart5 = new CanvasJS.Chart("chartContainer5", {
                 theme: "light2",
                 title:{
-                  text: "Machine 5 Leak Test Status"
+                  text: "MODEL 5 Leak Test Status"
                 },
                 data: [
                       {
@@ -513,10 +513,11 @@ function function5(){
               chart5.render();
 ///////////
 //////////chart6
+console.log(dat['zerOneTwo6']);
             chart6 = new CanvasJS.Chart("chartContainer6", {
                 theme: "light2",
                 title:{
-                  text: "Machine 6 Leak Test Status"
+                  text: "MODEL 6 Leak Test Status"
                 },
                 data: [
                       {
@@ -535,7 +536,7 @@ function function5(){
             chart7 = new CanvasJS.Chart("chartContainer7", {
                 theme: "light2",
                 title:{
-                  text: "Machine 7 Leak Test Status"
+                  text: "MODEL 7 Leak Test Status"
                 },
                 data: [
                       {
@@ -554,7 +555,7 @@ function function5(){
             chart8 = new CanvasJS.Chart("chartContainer8", {
                 theme: "light2",
                 title:{
-                  text: "Machine 8 Leak Test Status"
+                  text: "MODEL 8 Leak Test Status"
                 },
                 data: [
                       {
@@ -568,11 +569,10 @@ function function5(){
                 ]
               });
               chart8.render();
-
                chart9 = new CanvasJS.Chart("chartContainer9", {
                   theme: "light2",
                   title:{
-                    text: "Machine 9 Leak Test Status"
+                    text: "MODEL 9 Leak Test Status"
                   },
                   data: [
                         {
@@ -586,11 +586,10 @@ function function5(){
                   ]
                 });
                 chart9.render();
-
                 chart10 = new CanvasJS.Chart("chartContainer10", {
                     theme: "light2",
                     title:{
-                      text: "Machine 10 Leak Test Status"
+                      text: "MODEL 10 Leak Test Status"
                     },
                     data: [
                           {
@@ -604,11 +603,10 @@ function function5(){
                     ]
                   });
                   chart10.render();
-
                   chart11 = new CanvasJS.Chart("chartContainer11", {
                     theme: "light2",
                     title:{
-                      text: "Machine 11 Leak Test Status"
+                      text: "MODEL 11 Leak Test Status"
                     },
                     data: [
                           {
@@ -623,28 +621,11 @@ function function5(){
                   });
                   chart11.render();
 
-                  // chart12 = new CanvasJS.Chart("chartContainer12", {
-                  //       theme: "light2",
-                  //       title:{
-                  //         text: "Machine 12 Leak Test Status"
-                  //       },
-                  //       data: [
-                  //             {
-                  //               type: "column",
-                  //               dataPoints: [
-                  //                 { label: "Success",  y: dat['zerOneTwo12'][0], color:"blue"  },
-                  //                 { label: "Failiure", y11: dat['zerOneTwo12'][1], color:"red"},
-                  //                 { label: "Abort", y: dat['zerOneTwo12'][2], color:"yellow"},
-                  //               ]
-                  //             }
-                  //       ]
-                  //     });
-                  //  chart12.render();
               console.log("Incoming5");
-
       });/////Socket CLose
 ///////////
 }////////end of function1b
+
 
 
 function function2(){
@@ -1041,7 +1022,6 @@ function function2(){
 
 function function3(){
   window.current=3;
-
     socket3 = io('/sock3', { forceNew: true });
     socket3.on("temp3", function(data){
       dat=JSON.parse(data);
@@ -1049,7 +1029,6 @@ function function3(){
             console.log(dat);
 //////////
 //////////Draw all 2 charts
-
           min1 =dat["min"];
           med11 =dat["median11"];
           med1 =dat["median1"];
@@ -1130,9 +1109,8 @@ function function3(){
           med18 =dat["median18"];
           med182 =dat["median182"];
           max18 =dat["max18"];
-
+          console.log(max18);
           c=[]
-          console.log(c)
           c.push(0);
           c.push(med11["o_LeakRate"]);
           c.push(med12["o_LeakRate"]);
@@ -1182,6 +1160,16 @@ function function3(){
           j.push(med82["o_LeakRate"]);
           j.push(max8["o_LeakRate"]);
           j.push(med8["o_LeakRate"]);
+          console.log(min13);
+	 console.log(min14);
+         console.log(med131);
+	 console.log(med141);
+console.log(med132);
+	 console.log(med142);
+console.log(med13);
+	 console.log(med14);
+console.log(max13);
+	 console.log(max14);
           k=[]
           k.push(0);
           k.push(med111["W_LeakRate"]);
@@ -1230,7 +1218,7 @@ function function3(){
           r.push(med182["W_LeakRate"]);
           r.push(max18["W_LeakRate"]);
           r.push(med18["W_LeakRate"]);
-            var dps1= [
+            var dps1a= [
               { y: c },
               { y: d },
               { y: e },
@@ -1240,8 +1228,7 @@ function function3(){
               { y: i },
               { y: j }
             ];
-            console.log(dps1);
-            var dps= [
+            var dpsa= [
               { y: k },
               { y: l },
               { y: m },
@@ -1251,8 +1238,138 @@ function function3(){
               { y: q },
               { y: r }
             ];
-            console.log(dps);
-
+            var chart3 = new CanvasJS.Chart("chartContainer1",
+            {
+              title:{
+              text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+              },
+              data: [
+              {
+                type: "line",
+                dataPoints: [
+                { y: null },
+                { y: null},
+                { y: null },
+                { y: null },
+                { y: null }, //** null data point
+                { y: null},
+                { y: null},
+                { y: null },
+                { y: null}
+                ]
+              }]
+            });
+            chart3.render();
+              var chart4 = new CanvasJS.Chart("chartContainer3",
+              {
+                title:{
+                text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                },
+                data: [
+                {
+                  type: "line",
+                  dataPoints: [
+                  { y: null },
+                  { y: null},
+                  { y: null },
+                  { y: null },
+                  { y: null }, //** null data point
+                  { y: null},
+                  { y: null},
+                  { y: null },
+                  { y: null}
+                  ]
+                }]
+              });
+              chart4.render();
+                var chart5 = new CanvasJS.Chart("chartContainer4",
+                {
+                  title:{
+                  text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                  },
+                  data: [
+                  {
+                    type: "line",
+                    dataPoints: [
+                    { y: null },
+                    { y: null},
+                    { y: null },
+                    { y: null },
+                    { y: null }, //** null data point
+                    { y: null},
+                    { y: null},
+                    { y: null },
+                    { y: null}
+                    ]
+                  }]
+                });
+                chart5.render();
+                  var chart6 = new CanvasJS.Chart("chartContainer5",
+                  {
+                    title:{
+                    text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                    },
+                    data: [
+                    {
+                      type: "line",
+                      dataPoints: [
+                      { y: null },
+                      { y: null},
+                      { y: null },
+                      { y: null },
+                      { y: null }, //** null data point
+                      { y: null},
+                      { y: null},
+                      { y: null },
+                      { y: null}
+                      ]
+                    }]
+                  });
+                  chart6.render();
+                    var chart7 = new CanvasJS.Chart("chartContainer7",
+                    {
+                      title:{
+                      text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                      },
+                      data: [
+                      {
+                        type: "line",
+                        dataPoints: [
+                        { y: null },
+                        { y: null},
+                        { y: null },
+                        { y: null },
+                        { y: null }, //** null data point
+                        { y: null},
+                        { y: null},
+                        { y: null },
+                        { y: null}
+                        ]
+                      }]
+                    });
+                    chart7.render();
+                      var chart8 = new CanvasJS.Chart("chartContainer8",
+                      {
+                        title:{
+                        text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                        },
+                        data: [
+                        {
+                          type: "line",
+                          dataPoints: [
+                          { y: null },
+                          { y: null},
+                          { y: null },
+                          { y: null },
+                          { y: null }, //** null data point
+                          { y: null},
+                          { y: null},
+                          { y: null },
+                          { y: null}
+                          ]
+                        }]
+                      });
+                      chart8.render();
 //////////chart1
             chart1 = new CanvasJS.Chart("chartContainer2", {
                 animationEnabled: true,
@@ -1271,7 +1388,7 @@ function function3(){
                   showInLegend: true,
                   xvalueFormatString: "MACHINE",
                   yValueFormatString: "0.0",
-                  dataPoints:dps1
+                  dataPoints:dps1a
                 }]
               });
               chart1.render();
@@ -1294,12 +1411,11 @@ function function3(){
                   showInLegend: true,
                   xvalueFormatString: "MACHINE",
                   yValueFormatString: "0.0",
-                  dataPoints:dps
+                  dataPoints:dpsa
                 }]
               });
               chart2.render();
               console.log("Incoming3");
-
       });/////Socket CLose
 ///////////
 }////////end of function3
