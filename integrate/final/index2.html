@@ -1,0 +1,3166 @@
+<!DOCTYPE html>
+<html>
+<style>
+    table, th, td {
+      border: 2px solid black;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 1px;
+    }
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .sidenav {
+      height: 100%;
+      width: 230px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+
+    .sidenav a:hover{
+      color: #f1f1f1;
+    }
+
+    .main {
+      margin-left: 200px;
+      font-size: 20px;
+      padding: 0px 10px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+    .w3-button {
+      background-color: #4CAF50;
+      border: none;
+      color: black;
+      padding: 8px 49px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      background-color: #e7e7e7;
+      font-size: 14px;
+      /* float: left; */
+    }
+
+</style>
+<link rel="icon"
+   type="image/png"
+   href="https://www.htcinc.com/wp-content/uploads/2017/03/htc-logo_156-px-1.png">
+</head>
+<title>HTC-Dashboard</title>
+   </head>
+   <body>
+     <div class="sidenav">
+       <button class="w3-button" id="db1">SUMMARY BY MACHINE
+       </button>
+       <br><br>
+       <button class="w3-button" id="db1b">SUMMARY BY MODEL
+       </button>
+       <br><br>
+       <button class="w3-button"  id="db2">FLOOR DASHBOARD
+       </button><br><br>
+       <button class="w3-button" id="db3">STATISTICAL SUMMARY BY MACHINE
+       </button><br><br>
+       <button class="w3-button" id="db3b">STATISTICAL SUMMARY BY MODEL
+       </button><br><br>
+       <button class="w3-button"  id="db4">QUALITY CONTROL
+       </button>
+       <br><br>
+       <footer class="container-fluid bg-4 text-center">
+         <img src="https://www.htcinc.com/wp-content/uploads/2017/03/htc-logo_156-px-1.png" alt="HTC GLOBAL INC" width="52" height="62"><br>
+         <p>© 2019 Copyright: <a href="https://www.w3schools.com">www.htcinc.com</a></p>
+       </footer>
+     </div>
+     <div class="main">
+       <table style = "width:120%">
+       <tr>
+         <td>
+           <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+         </td>
+         <td>
+           <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+         </td>
+         <td>
+           <div id="chartContainer3" style="height: 300px; width: 100%;"></div>
+         </td>
+         <td>
+           <div id="chartContainer4" style="height: 300px; width: 100%;"></div>
+         </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="chartContainer5" style="height: 300px; width: 100%;"></div>
+        </td>
+        <td>
+          <div id="chartContainer6" style="height: 300px; width: 100%;"></div>
+        </td>
+        <td>
+          <div id="chartContainer7" style="height: 300px; width: 100%;"></div>
+        </td>
+        <td>
+          <div id="chartContainer8" style="height: 300px; width: 100%;"></div>
+        </td>
+     </tr>
+     <tr>
+       <td>
+         <div id="chartContainer9" style="height: 300px; width: 100%;"></div>
+       </td>
+       <td>
+         <div id="chartContainer10" style="height: 300px; width: 100%;"></div>
+       </td>
+       <td>
+         <div id="chartContainer11" style="height: 300px; width: 100%;"></div>
+       </td>
+       <td>
+         <div id="chartContainer12" style="height: 300px; width: 100%;"></div>
+       </td>
+    </tr>
+   </div>
+   </body>
+<script src = "/socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+document.getElementById("db1").addEventListener("click", router1);
+document.getElementById("db2").addEventListener("click", router2);
+document.getElementById("db3").addEventListener("click", router3);
+document.getElementById("db4").addEventListener("click", router4);
+document.getElementById("db1b").addEventListener("click", router5);
+document.getElementById("db3b").addEventListener("click", router6);
+
+
+var socket1=null;
+var socket2=null;
+var socket3=null;
+var socket4=null;
+var socket5=null;
+var socket6=null;
+
+
+var inter2=null;
+var inter22=null;
+var inter4=null;
+var inter42=null;
+
+var chart1=null;
+var chart2=null;
+var chart3=null;
+var chart4=null;
+var chart5=null;
+var chart6=null;
+var chart7=null;
+var chart8=null;
+var chart8=null;
+var chart9=null;
+var chart10=null;
+var chart11=null;
+var chart12=null;
+
+window.current=0;
+
+function clearer(){
+  // if(chart1!=null || chart2!=null || chart9!=null){
+  //       chart1.destroy();
+  //       // chart1=null;
+  //       chart2.destroy();
+  //       // chart2=null;
+  //       chart3.destroy();
+  //       // chart3=null;
+  //       chart4.destroy();
+  //       // chart4=null;
+  //       chart5.destroy();
+  //       // chart5=null;
+  //       chart6.destroy();
+  //       // chart6=null;
+  //       chart7.destroy();
+  //       // chart7=null;
+  //       chart8.destroy();
+  //       // chart8=null;
+  //       chart9.destroy();
+  //       // chart9=null;
+  //       chart10.destroy();
+  //       // chart10=null;
+  //       chart11.destroy();
+  //       // chart11=null;
+  // }
+  if(window.current==1){
+  // socket1.close();
+  socket1.emit("end");
+  socket1=null;
+  }if(window.current==2){
+  // socket2.close();
+  alert("closed 2");
+  socket2.emit("end");
+  socket2=null;
+  clearInterval(inter2);
+  clearInterval(inter22);
+  }if(window.current==3){
+  // socket3.close();
+  socket3.emit("end");
+  socket3=null;
+  }if(window.current==4){
+  // socket4.close();
+  socket4.emit("end");
+  socket4=null;
+  clearInterval(inter4);
+  clearInterval(inter42);
+  }if(window.current==5){
+  // socket5.close();
+  socket5.emit("end");
+  socket5=null;
+  }if(window.current==6){
+  // socket6.close();
+  socket6.emit("end");
+  socket6=null;
+  }
+}
+
+function router1(){
+  clearer();
+  function1();
+}
+function router2(){
+  clearer();
+  function2();
+}
+function router3(){
+  clearer();
+  function3();
+}
+function router4(){
+  clearer();
+  function4();
+}
+function router5(){
+  clearer();
+  function5();
+}
+function router6(){
+  clearer();
+  function6();
+}
+
+function function1(){
+    window.current=1;
+    socket1 = io('/sock1', { forceNew: true });
+    socket1.on("temp", function(dataa){
+      dat=JSON.parse(dataa);
+
+//////////Draw all 8 charts
+//////////chart
+            chart1 = new CanvasJS.Chart("chartContainer1", {
+                theme: "light2",
+                title:{
+                  text: "Machine 1 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo1'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo1'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo1'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart1.render();
+///////////
+//////////chart2
+            chart2 = new CanvasJS.Chart("chartContainer2", {
+                theme: "light2",
+                title:{
+                  text: "Machine 2 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo2'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo2'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo2'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart2.render();
+//////////
+//////////chart3
+            chart3 = new CanvasJS.Chart("chartContainer3", {
+                theme: "light2",
+                title:{
+                  text: "Machine 3 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo3'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo3'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo3'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart3.render();
+//////////
+//////////chart4
+            chart4 = new CanvasJS.Chart("chartContainer4", {
+                theme: "light2",
+                title:{
+                  text: "Machine 4 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo4'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo4'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo4'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart4.render();
+///////////
+//////////chart5
+            chart5 = new CanvasJS.Chart("chartContainer5", {
+                theme: "light2",
+                title:{
+                  text: "Machine 5 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo5'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo5'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo5'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart5.render();
+///////////
+//////////chart6
+            chart6 = new CanvasJS.Chart("chartContainer6", {
+                theme: "light2",
+                title:{
+                  text: "Machine 6 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo6'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo6'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo6'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart6.render();
+///////////
+//////////chart7
+            chart7 = new CanvasJS.Chart("chartContainer7", {
+                theme: "light2",
+                title:{
+                  text: "Machine 7 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo7'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo7'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo7'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart7.render();
+///////////
+//////////chart8
+            chart8 = new CanvasJS.Chart("chartContainer8", {
+                theme: "light2",
+                title:{
+                  text: "Machine 8 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo8'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo8'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo8'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart8.render();
+              document.getElementById("chartContainer9").InnerHTML="";
+              document.getElementById("chartContainer10").InnerHTML="";
+              document.getElementById("chartContainer11").InnerHTML="";
+
+              console.log("Incoming1");
+
+      });/////Socket CLose
+///////////
+}////////end of function1
+
+function function5(){
+    window.current=5;
+    socket5 = io('/sock5', { forceNew: true });
+    socket5.on("temp5", function(dataa){
+      dat=JSON.parse(dataa);
+//////////Draw all 11 charts
+            chart1 = new CanvasJS.Chart("chartContainer1", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 1 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo1'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo1'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo1'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart1.render();
+///////////
+//////////chart2
+            chart2 = new CanvasJS.Chart("chartContainer2", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 2 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo2'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo2'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo2'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart2.render();
+//////////
+//////////chart3
+            chart3 = new CanvasJS.Chart("chartContainer3", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 3 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo3'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo3'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo3'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart3.render();
+//////////
+//////////chart4
+            chart4 = new CanvasJS.Chart("chartContainer4", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 4 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo4'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo4'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo4'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart4.render();
+///////////
+//////////chart5
+            chart5 = new CanvasJS.Chart("chartContainer5", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 5 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo5'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo5'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo5'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart5.render();
+///////////
+//////////chart6
+console.log(dat['zerOneTwo6']);
+            chart6 = new CanvasJS.Chart("chartContainer6", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 6 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo6'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo6'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo6'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart6.render();
+///////////
+//////////chart7
+            chart7 = new CanvasJS.Chart("chartContainer7", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 7 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo7'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo7'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo7'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart7.render();
+///////////
+//////////chart8
+            chart8 = new CanvasJS.Chart("chartContainer8", {
+                theme: "light2",
+                title:{
+                  text: "MODEL 8 Leak Test Status"
+                },
+                data: [
+                      {
+                        type: "column",
+                        dataPoints: [
+                          { label: "Success",  y: dat['zerOneTwo8'][0], color:"blue"  },
+                          { label: "Failiure", y: dat['zerOneTwo8'][1], color:"red"},
+                          { label: "Abort", y: dat['zerOneTwo8'][2], color:"yellow"},
+                        ]
+                      }
+                ]
+              });
+              chart8.render();
+
+               chart9 = new CanvasJS.Chart("chartContainer9", {
+                  theme: "light2",
+                  title:{
+                    text: "MODEL 9 Leak Test Status"
+                  },
+                  data: [
+                        {
+                          type: "column",
+                          dataPoints: [
+                            { label: "Success",  y: dat['zerOneTwo9'][0], color:"blue"  },
+                            { label: "Failiure", y: dat['zerOneTwo9'][1], color:"red"},
+                            { label: "Abort", y: dat['zerOneTwo9'][2], color:"yellow"},
+                          ]
+                        }
+                  ]
+                });
+                chart9.render();
+
+                chart10 = new CanvasJS.Chart("chartContainer10", {
+                    theme: "light2",
+                    title:{
+                      text: "MODEL 10 Leak Test Status"
+                    },
+                    data: [
+                          {
+                            type: "column",
+                            dataPoints: [
+                              { label: "Success",  y: dat['zerOneTwo10'][0], color:"blue"  },
+                              { label: "Failiure", y: dat['zerOneTwo10'][1], color:"red"},
+                              { label: "Abort", y: dat['zerOneTwo10'][2], color:"yellow"},
+                            ]
+                          }
+                    ]
+                  });
+                  chart10.render();
+
+                  chart11 = new CanvasJS.Chart("chartContainer11", {
+                    theme: "light2",
+                    title:{
+                      text: "MODEL 11 Leak Test Status"
+                    },
+                    data: [
+                          {
+                            type: "column",
+                            dataPoints: [
+                              { label: "Success",  y: dat['zerOneTwo11'][0], color:"blue"  },
+                              { label: "Failiure", y: dat['zerOneTwo11'][1], color:"red"},
+                              { label: "Abort", y: dat['zerOneTwo11'][2], color:"yellow"},
+                            ]
+                          }
+                    ]
+                  });
+                  chart11.render();
+
+                 
+              console.log("Incoming5");
+
+      });/////Socket CLose
+///////////
+}////////end of function1b
+
+
+function function2(){
+  window.current=2;
+
+	$(document).ready(function(){
+				socket2 = io('/sock2', {forceNew: true});
+				var r=1;
+				inter22=setInterval(function(){
+					socket2.emit('updateGraph2',r);
+					r++;
+				}, 3000);
+	});
+
+
+  var xVal=0;
+  var dataLength = 10; // number of dataPoints visible at any point
+  var dps11 = [{x:1, y:1}];
+  var dps1 = [{x:1, y:1}];
+  var dps21 = [{x:1, y:1}];
+  var dps2 = [{x:1, y:1}];
+  var dps31 = [{x:1, y:1}];
+  var dps3 = [{x:1, y:1}];
+  var dps41 = [{x:1, y:1}];
+  var dps4 = [{x:1, y:1}];
+  var dps51 = [{x:1, y:1}];
+  var dps5 = [{x:1, y:1}];
+  var dps61 = [{x:1, y:1}];
+  var dps6 = [{x:1, y:1}];
+  var dps71 = [{x:1, y:1}];
+  var dps7 = [{x:1, y:1}];
+  var dps81 = [{x:1, y:1}];
+  var dps8 = [{x:1, y:1}];
+
+  chart1 = new CanvasJS.Chart("chartContainer1", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 1 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps1
+        },{//
+    			type: "spline",
+    			markerSize: 0,
+          showInLegend: true,//
+    			dataPoints: dps11
+    		}]
+  });
+  chart2 = new CanvasJS.Chart("chartContainer2", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 2 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps2
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps21
+  		}]
+  });
+  chart3 = new CanvasJS.Chart("chartContainer3", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 3 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps3
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps31
+  		}]
+  });
+  chart4 = new CanvasJS.Chart("chartContainer4", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 4 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps4
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps41
+  		}]
+  });
+  chart5 = new CanvasJS.Chart("chartContainer5", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 5 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps5
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps51
+  		}]
+  });
+  chart6 = new CanvasJS.Chart("chartContainer6", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 6 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps6
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps61
+  		}]
+  });
+  chart7 = new CanvasJS.Chart("chartContainer7", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 7 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps7
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps71
+  		}]
+  });
+  chart8 = new CanvasJS.Chart("chartContainer8", {
+  		exportEnabled: true,
+  		title :{
+  			text: "Machine 8 Oil and Water Leak Rates"
+  		},
+  		axisY: {
+        title: "Rates (adjusted dynamically)",//
+  			includeZero: false
+  		},
+  		data: [{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps8
+  		},{
+  			type: "spline",
+  			markerSize: 0,
+        showInLegend: true,//
+  			dataPoints: dps81
+  		}]
+  });
+  ///////Update the chart by socket call every time
+	window.r=1;
+  updateChart=function(){
+	socket2 = io.connect('/sock2', {query: "foo=bar"}, { forceNew: true });
+	window.r++;
+	////// Call socket every time for the Data
+  socket2.on("temp2", function(data){
+  //Start Chart updation after getting data
+  		dat=JSON.parse(data);
+
+  		console.log(dat["OL1"][0]);
+
+
+  		var newVal1=dat["OL1"][0];
+  		var newVal2=dat["OL2"][0];
+  		var newVal3=dat["OL3"][0];
+  		var newVal4=dat["OL4"][0];
+  		var newVal5=dat["OL5"][0];
+  		var newVal6=dat["OL6"][0];
+  		var newVal7=dat["OL7"][0];
+  		var newVal8=dat["OL8"][0];
+
+  		var newVal11=dat["WL1"][0];
+  		var newVal21=dat["WL2"][0];
+  		var newVal31=dat["WL3"][0];
+  		var newVal41=dat["WL4"][0];
+  		var newVal51=dat["WL5"][0];
+  		var newVal61=dat["WL6"][0];
+  		var newVal71=dat["WL7"][0];
+  		var newVal81=dat["WL8"][0];
+
+  		var lab1=dat["day1"][0];
+  		var lab2=dat["day2"][0];
+  		var lab3=dat["day3"][0];
+  		var lab4=dat["day4"][0];
+  		var lab5=dat["day5"][0];
+  		var lab6=dat["day6"][0];
+  		var lab7=dat["day7"][0];
+  		var lab8=dat["day8"][0];
+
+			console.log(dps1);
+				if(dps1[dps1.length-1].y=newVal1){
+						dps1.push({
+							x: xVal,
+							y: newVal1
+						});
+				}
+        if(dps11[dps11.length-1].y=newVal11){
+            dps11.push({
+              x: xVal,
+              y: newVal11
+            });
+        }
+				if(dps2[dps2.length-1].y=newVal2){
+		  			dps2.push({
+		          x: xVal,
+		  				y: newVal2
+		  			});
+				}
+        if(dps21[dps21.length-1].y=newVal21){
+            dps21.push({
+              x: xVal,
+              y: newVal21
+            });
+        }
+				if(dps3[dps3.length-1].y=newVal3){
+		  			dps3.push({
+		          x: xVal,
+		  				y: newVal3
+		  			});
+				}
+        if(dps31[dps31.length-1].y=newVal31){
+            dps31.push({
+              x: xVal,
+              y: newVal31
+            });
+        }
+				if(dps4[dps4.length-1].y=newVal4){
+		  			dps4.push({
+		          x: xVal,
+		  				y: newVal4
+		  			});
+				}
+        if(dps41[dps41.length-1].y=newVal41){
+            dps41.push({
+              x: xVal,
+              y: newVal41
+            });
+        }
+				if(dps5[dps5.length-1].y=newVal5){
+		  			dps5.push({
+		          x: xVal,
+		  				y: newVal5
+		  			});
+				}
+        if(dps51[dps51.length-1].y=newVal51){
+		  			dps51.push({
+		          x: xVal,
+		  				y: newVal51
+		  			});
+				}
+				if(dps6[dps6.length-1].y=newVal6){
+		  			dps6.push({
+		          x: xVal,
+		  				y: newVal6
+		  			});
+				}
+        if(dps61[dps61.length-1].y=newVal61){
+		  			dps61.push({
+		          x: xVal,
+		  				y: newVal61
+		  			});
+				}
+				if(dps7[dps7.length-1].y=newVal7){
+		  			dps7.push({
+		          x: xVal,
+		          y: newVal7
+		  			});
+				}
+        if(dps71[dps71.length-1].y=newVal71){
+		  			dps71.push({
+		          x: xVal,
+		          y: newVal71
+		  			});
+				}
+				if(dps8[dps8.length-1].y=newVal8){
+		  			dps8.push({
+		          x: xVal,
+		  				y: newVal8
+		  			});
+				}
+        if(dps81[dps81.length-1].y=newVal81){
+		  			dps81.push({
+		          x: xVal,
+		  				y: newVal81
+		  			});
+				}
+        xVal++;
+  		///////Dynamic shift of axis and chart
+  		if (dps1.length > dataLength) {
+  			dps1.shift();
+  		}if (dps2.length > dataLength) {
+  			dps2.shift();
+  		}if (dps3.length > dataLength) {
+  			dps3.shift();
+  		}if (dps4.length > dataLength) {
+  			dps4.shift();
+  		}if (dps5.length > dataLength) {
+  			dps5.shift();
+  		}if (dps6.length > dataLength) {
+  			dps6.shift();
+  		}if (dps7.length > dataLength) {
+  			dps7.shift();
+  		}if (dps8.length > dataLength) {
+  			dps8.shift();
+  		}if (dps11.length > dataLength) {
+  			dps11.shift();
+  		}if (dps21.length > dataLength) {
+  			dps21.shift();
+  		}if (dps31.length > dataLength) {
+  			dps31.shift();
+  		}if (dps41.length > dataLength) {
+  			dps41.shift();
+  		}if (dps51.length > dataLength) {
+  			dps51.shift();
+  		}if (dps61.length > dataLength) {
+  			dps61.shift();
+  		}if (dps71.length > dataLength) {
+  			dps71.shift();
+  		}if (dps81.length > dataLength) {
+  			dps81.shift();
+  		}
+
+  		/////////render graphs
+  		chart1.render();
+  		chart2.render();
+  		chart3.render();
+  		chart4.render();
+  		chart5.render();
+  		chart6.render();
+  		chart7.render();
+  		chart8.render();
+      document.getElementById("chartContainer9").InnerHTML="";
+      document.getElementById("chartContainer10").InnerHTML="";
+      document.getElementById("chartContainer11").InnerHTML="";
+
+  	console.log("Incoming2");
+  });//// Socket close
+	};
+	inter2=setInterval(function(){updateChart()}, 3000);
+}//////end of function2
+
+function function3(){
+  window.current=3;
+
+    socket3 = io('/sock3', { forceNew: true });
+    socket3.on("temp3", function(data){
+      dat=JSON.parse(data);
+/////Clear Charts
+            console.log(dat);
+//////////
+//////////Draw all 2 charts
+
+          min1 =dat["min"];
+          med11 =dat["median11"];
+          med1 =dat["median1"];
+          med12 =dat["median12"];
+          max1 =dat["max1"];
+          min2 =dat["min2"];
+          med21 =dat["median21"];
+          med2 =dat["median2"];
+          med22 =dat["median22"];
+          max2 =dat["max2"];
+          min3 =dat["min3"];
+          med31 =dat["median31"];
+          med3 =dat["median3"];
+          med32 =dat["median32"];
+          max3 =dat["max3"];
+          min4 =dat["min4"];
+          med41 =dat["median41"];
+          med4 =dat["median4"];
+          med42 =dat["median42"];
+          max4 =dat["max4"];
+          min5 =dat["min5"];
+          med51 =dat["median51"];
+          med5 =dat["median5"];
+          med52 =dat["median52"];
+          max5 =dat["max5"];
+          min6 =dat["min6"];
+          med61 =dat["median61"];
+          med6 =dat["median6"];
+          med62 =dat["median62"];
+          max6 =dat["max6"];
+          min7 =dat["min7"];
+          med71 =dat["median71"];
+          med7 =dat["median7"];
+          med72 =dat["median72"];
+          max7 =dat["max7"];
+          min8 =dat["min8"];
+          med81 =dat["median81"];
+          med8 =dat["median8"];
+          med82 =dat["median82"];
+          max8 =dat["max8"];
+          min11 =dat["min1"];
+          med111 =dat["median111"];
+          med211 =dat["median211"];
+          med112 =dat["median112"];
+          max11 =dat["max11"];
+          min12 =dat["min12"];
+          med121 =dat["median121"];
+          med212 =dat["median212"];
+          med122 =dat["median122"];
+          max12 =dat["max12"];
+          min13 =dat["min13"];
+          med131 =dat["median131"];
+          med13 =dat["median13"];
+          med132 =dat["median132"];
+          max13 =dat["max13"];
+          min14 =dat["min14"];
+          med141 =dat["median141"];
+          med14 =dat["median14"];
+          med142 =dat["median142"];
+          max14 =dat["max14"];
+          min15 =dat["min15"];
+          med151 =dat["median151"];
+          med15 =dat["median15"];
+          med152 =dat["median152"];
+          max15 =dat["max15"];
+          min16 =dat["min16"];
+          med161 =dat["median161"];
+          med16 =dat["median16"];
+          med162 =dat["median162"];
+          max16 =dat["max16"];
+          min17 =dat["min17"];
+          med171 =dat["median171"];
+          med17 =dat["median17"];
+          med172 =dat["median172"];
+          max17 =dat["max17"];
+          min18 =dat["min18"];
+          med181 =dat["median181"];
+          med18 =dat["median18"];
+          med182 =dat["median182"];
+          max18 =dat["max18"];
+          console.log(max18); 
+          c=[]
+          c.push(0);
+          c.push(med11["o_LeakRate"]);
+          c.push(med12["o_LeakRate"]);
+          c.push(max1["o_LeakRate"]);
+          c.push(med1["o_LeakRate"]);
+          d=[]
+          d.push(min2["o_LeakRate"]);
+          d.push(med21["o_LeakRate"]);
+          d.push(med22["o_LeakRate"]);
+          d.push(max2["o_LeakRate"]);
+          d.push(med2["o_LeakRate"]);
+          console.log(d)
+          e=[]
+          e.push(min3["o_LeakRate"]);
+          e.push(med31["o_LeakRate"]);
+          e.push(med32["o_LeakRate"]);
+          e.push(max3["o_LeakRate"]);
+          e.push(med3["o_LeakRate"]);
+          console.log(e)
+          f=[]
+          f.push(min4["o_LeakRate"]);
+          f.push(med41["o_LeakRate"]);
+          f.push(med42["o_LeakRate"]);
+          f.push(max4["o_LeakRate"]);
+          f.push(med4["o_LeakRate"]);
+          g=[]
+          g.push(min5["o_LeakRate"]);
+          g.push(med51["o_LeakRate"]);
+          g.push(med52["o_LeakRate"]);
+          g.push(max5["o_LeakRate"]);
+          g.push(med5["o_LeakRate"]);
+          h=[]
+          h.push(min6["o_LeakRate"]);
+          h.push(med61["o_LeakRate"]);
+          h.push(med62["o_LeakRate"]);
+          h.push(max6["o_LeakRate"]);
+          h.push(med6["o_LeakRate"]);
+          i=[]
+          i.push(min7["o_LeakRate"]);
+          i.push(med71["o_LeakRate"]);
+          i.push(med72["o_LeakRate"]);
+          i.push(max7["o_LeakRate"]);
+          i.push(med7["o_LeakRate"]);
+          j=[]
+          j.push(min8["o_LeakRate"]);
+          j.push(med81["o_LeakRate"]);
+          j.push(med82["o_LeakRate"]);
+          j.push(max8["o_LeakRate"]);
+          j.push(med8["o_LeakRate"]);
+          console.log(min13);
+	 console.log(min14);
+         console.log(med131);
+	 console.log(med141);
+console.log(med132);
+	 console.log(med142);
+console.log(med13);
+	 console.log(med14);
+console.log(max13);
+	 console.log(max14);
+
+          k=[]
+          k.push(0);
+          k.push(med111["W_LeakRate"]);
+          k.push(med112["W_LeakRate"]);
+          k.push(max11["W_LeakRate"]);
+          k.push(med211["W_LeakRate"]);
+          l=[]
+          l.push(min12["W_LeakRate"]);
+          l.push(med121["W_LeakRate"]);
+          l.push(med122["W_LeakRate"]);
+          l.push(max12["W_LeakRate"]);
+          l.push(med212["W_LeakRate"]);
+          m=[]
+          m.push(min13["W_LeakRate"]);
+          m.push(med131["W_LeakRate"]);
+          m.push(med132["W_LeakRate"]);
+          m.push(max13["W_LeakRate"]);
+          m.push(med13["W_LeakRate"]);
+          n=[]
+          n.push(min14["W_LeakRate"]);
+          n.push(med141["W_LeakRate"]);
+          n.push(med142["W_LeakRate"]);
+          n.push(max14["W_LeakRate"]);
+          n.push(med14["W_LeakRate"]);
+          o=[]
+          o.push(min15["W_LeakRate"]);
+          o.push(med151["W_LeakRate"]);
+          o.push(med152["W_LeakRate"]);
+          o.push(max15["W_LeakRate"]);
+          o.push(med15["W_LeakRate"]);
+          p=[]
+          p.push(min16["W_LeakRate"]);
+          p.push(med161["W_LeakRate"]);
+          p.push(med162["W_LeakRate"]);
+          p.push(max16["W_LeakRate"]);
+          p.push(med16["W_LeakRate"]);
+          q=[]
+          q.push(min17["W_LeakRate"]);
+          q.push(med171["W_LeakRate"]);
+          q.push(med172["W_LeakRate"]);
+          q.push(max17["W_LeakRate"]);
+          q.push(med17["W_LeakRate"]);
+          r=[]
+          r.push(min18["W_LeakRate"]);
+          r.push(med181["W_LeakRate"]);
+          r.push(med182["W_LeakRate"]);
+          r.push(max18["W_LeakRate"]);
+          r.push(med18["W_LeakRate"]);
+            var dps1a= [
+              { y: c },
+              { y: d },
+              { y: e },
+              { y: f },
+              { y: g },
+              { y: h },
+              { y: i },
+              { y: j }
+            ];
+
+            var dpsa= [
+              { y: k },
+              { y: l },
+              { y: m },
+              { y: n },
+              { y: o },
+              { y: p },
+              { y: q },
+              { y: r }
+            ];
+
+            var chart3 = new CanvasJS.Chart("chartContainer1",
+            {
+              title:{
+              text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+              },
+              data: [
+              {
+                type: "line",
+                dataPoints: [
+                { y: null },
+                { y: null},
+                { y: null },
+                { y: null },
+                { y: null }, //** null data point
+                { y: null},
+                { y: null},
+                { y: null },
+                { y: null}
+                ]
+              }]
+            });
+
+            chart3.render();
+
+              var chart4 = new CanvasJS.Chart("chartContainer3",
+              {
+                title:{
+                text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                },
+                data: [
+                {
+                  type: "line",
+                  dataPoints: [
+                  { y: null },
+                  { y: null},
+                  { y: null },
+                  { y: null },
+                  { y: null }, //** null data point
+                  { y: null},
+                  { y: null},
+                  { y: null },
+                  { y: null}
+                  ]
+                }]
+              });
+
+              chart4.render();
+
+                var chart5 = new CanvasJS.Chart("chartContainer4",
+                {
+                  title:{
+                  text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                  },
+                  data: [
+                  {
+                    type: "line",
+                    dataPoints: [
+                    { y: null },
+                    { y: null},
+                    { y: null },
+                    { y: null },
+                    { y: null }, //** null data point
+                    { y: null},
+                    { y: null},
+                    { y: null },
+                    { y: null}
+                    ]
+                  }]
+                });
+                chart5.render();
+
+                  var chart6 = new CanvasJS.Chart("chartContainer5",
+                  {
+                    title:{
+                    text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                    },
+                    data: [
+                    {
+                      type: "line",
+                      dataPoints: [
+                      { y: null },
+                      { y: null},
+                      { y: null },
+                      { y: null },
+                      { y: null }, //** null data point
+                      { y: null},
+                      { y: null},
+                      { y: null },
+                      { y: null}
+                      ]
+                    }]
+                  });
+                  chart6.render();
+
+                    var chart7 = new CanvasJS.Chart("chartContainer7",
+                    {
+                      title:{
+                      text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                      },
+                      data: [
+                      {
+                        type: "line",
+                        dataPoints: [
+                        { y: null },
+                        { y: null},
+                        { y: null },
+                        { y: null },
+                        { y: null }, //** null data point
+                        { y: null},
+                        { y: null},
+                        { y: null },
+                        { y: null}
+                        ]
+                      }]
+                    });
+
+                    chart7.render();
+
+                      var chart8 = new CanvasJS.Chart("chartContainer8",
+                      {
+                        title:{
+                        text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                        },
+                        data: [
+                        {
+                          type: "line",
+                          dataPoints: [
+                          { y: null },
+                          { y: null},
+                          { y: null },
+                          { y: null },
+                          { y: null }, //** null data point
+                          { y: null},
+                          { y: null},
+                          { y: null },
+                          { y: null}
+                          ]
+                        }]
+                      });
+
+                      chart8.render();
+
+
+//////////chart1
+            chart1 = new CanvasJS.Chart("chartContainer2", {
+                animationEnabled: true,
+                theme:"light",
+                title:{
+                  text: "BOX PLOT WITH RESPECT TO OIL FOR ALL MACHINES"
+                },
+                axisX: {
+                  valueFormatString: "MACHINE"
+                },
+                axisY: {
+                  title: "LEAK_RATE"
+                },
+                data: [{
+                  type: "boxAndWhisker",
+                  showInLegend: true,
+                  xvalueFormatString: "MACHINE",
+                  yValueFormatString: "0.0",
+                  dataPoints:dps1a
+                }]
+              });
+              chart1.render();
+///////////
+//////////chart2
+              chart2 = new CanvasJS.Chart("chartContainer6", {
+                animationEnabled: true,
+                theme:"light",
+                title:{
+                  text: "BOX PLOT WITH RESPECT TO WATER FOR ALL MACHINES"
+                },
+                axisX: {
+                  valueFormatString: "MACHINE"
+                },
+                axisY: {
+                  title: "LEAK_RATE"
+                },
+                data: [{
+                  type: "boxAndWhisker",
+                  showInLegend: true,
+                  xvalueFormatString: "MACHINE",
+                  yValueFormatString: "0.0",
+                  dataPoints:dpsa
+                }]
+              });
+              chart2.render();
+              console.log("Incoming3");
+
+      });/////Socket CLose
+///////////
+}////////end of function3
+
+function function4(){
+  window.current=4;
+	$(document).ready(function(){
+				socket4 = io('/sock4', { forceNew: true });
+				var r4=1;
+				inter42=setInterval(function(){
+					socket4.emit('updateGraph4',r4);
+					r4++;
+				}, 5000);
+	});
+
+      dps= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps1=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps2=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps3= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps4=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps5=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps6= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps7=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps8=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps9= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps10=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps11=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps12= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps13=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps14=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps15= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps16=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps17=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps18= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps19=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps20=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps21= [
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      dps22=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      dps23=[
+        { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
+        { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
+        { x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
+        { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
+        { x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
+        { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      ];
+      chart1 = new CanvasJS.Chart("chartContainer1", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+          text: "Know the abnormality of machine 1"
+        },
+        axisX: {
+          valueFormatString:"HOUR",
+           maximum:24
+        },
+        axisY: {
+          postfix: "%",
+        //	labelFormatter: addSymbols
+        },
+        toolTip: {
+          shared: true
+        },
+        legend: {
+          cursor: "pointer",
+        //	itemclick: toggleDataSeries
+        },
+        data: [
+        {
+            type: "line",
+            name: "Actual OIL Leakrate ",
+            showInLegend: true,
+            yValueFormatString: "0.0",
+            dataPoints:dps
+          },{
+              type: "line",
+              name: "Mean ",
+              showInLegend: true,
+              yValueFormatString: "0.0",
+              dataPoints:dps1
+      },{
+          type: "line",
+          name: "Stadard Deviation",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps2
+      }]});
+    chart2 = new CanvasJS.Chart("chartContainer2", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+        text: "Know the abnormality of machine 2"
+      },
+      axisX: {
+        valueFormatString:"HOUR",
+         maximum:24
+      },
+      axisY: {
+        postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+          type: "line",
+          name: "Actual Leakage rate",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps3
+        },{
+            type: "line",
+            name: "Mean ",
+            showInLegend: true,
+            yValueFormatString: "0.0",
+            dataPoints:dps4
+      },{
+        type: "line",
+        name: "Stadard Deviation",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps5
+      }]});
+    chart3 = new CanvasJS.Chart("chartContainer3", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Know the abnormality of machine 3"
+      },
+      axisX: {
+      valueFormatString:"HOUR",
+       maximum:24
+      },
+      axisY: {
+      postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+      shared: true
+      },
+      legend: {
+      cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+        type: "line",
+        name: "Actuall OIL Leakage",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps6
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps7
+      },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps8
+    }]});
+      chart4 = new CanvasJS.Chart("chartContainer4", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Know the abnormality of machine 4"
+      },
+      axisX: {
+      valueFormatString:"HOUR",
+       maximum:24
+      },
+      axisY: {
+      postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+      shared: true
+      },
+      legend: {
+      cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+        type: "line",
+        name: "Actuall OIL Leakage ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps9
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps10
+      },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps11
+      }]});
+      chart5 = new CanvasJS.Chart("chartContainer5", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Know the abnormality of machine 5"
+      },
+      axisX: {
+      valueFormatString:"HOUR",
+       maximum:24
+      },
+      axisY: {
+      postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+      shared: true
+      },
+      legend: {
+      cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+        type: "line",
+        name: "Actuall OIL Leakage ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps12
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps13
+      },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps14
+      }]});
+      chart6 = new CanvasJS.Chart("chartContainer6", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Know the abnormality of machine 6"
+      },
+      axisX: {
+      valueFormatString:"HOUR",
+       maximum:24
+      },
+      axisY: {
+      postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+      shared: true
+      },
+      legend: {
+      cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+        type: "line",
+        name: "Actuall OIL Leakage ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps15
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps16
+      },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps17
+      }]});
+      chart7 = new CanvasJS.Chart("chartContainer7", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Know the abnormality of machine 7"
+      },
+      axisX: {
+      valueFormatString:"HOUR",
+       maximum:24
+      },
+      axisY: {
+      postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+      shared: true
+      },
+      legend: {
+      cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+        type: "line",
+        name: "Actuall OIL Leakage ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps18
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps19
+      },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps20
+      }]});
+      chart8 = new CanvasJS.Chart("chartContainer8", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Know the abnormality of machine 8"
+      },
+      axisX: {
+      valueFormatString:"HOUR",
+       maximum:24
+      },
+      axisY: {
+      postfix: "%",
+      //	labelFormatter: addSymbols
+      },
+      toolTip: {
+      shared: true
+      },
+      legend: {
+      cursor: "pointer",
+      //  itemclick: toggleDataSeries
+      },
+      data: [
+      {
+        type: "line",
+        name: "Actuall OIL Leakage ",
+        showInLegend: true,
+        yValueFormatString: "0.0",
+        dataPoints:dps21
+      },{
+          type: "line",
+          name: "Mean ",
+          showInLegend: true,
+          yValueFormatString: "0.0",
+          dataPoints:dps22
+      },{
+      type: "line",
+      name: "Stadard Deviation",
+      showInLegend: true,
+      yValueFormatString: "0.0",
+      dataPoints:dps23
+      }]});
+
+
+  ///////Update the chart by socket call every time
+	window.r4=1;
+  updateChart=function(){
+	socket4 = io.connect('/sock4', {query: "foo=bar"}, { forceNew: true });
+	window.r4++;
+	////// Call socket every time for the Data
+  socket4.on("temp4", function(data){
+  //Start Chart updation after getting data
+  datr=JSON.parse(data);
+  console.log(datr);
+  Val11 =datr["OL1"][0];
+  Val12 =datr["OL1"][1];
+  Val13 =datr["OL1"][2];
+  Val14 =datr["OL1"][3];
+  Val15 =datr["OL1"][4];
+  Val16 =datr["OL1"][5];
+  Val17 =datr["OL1"][6];
+  Val18 =datr["OL1"][7];
+  Val19 =datr["OL1"][8];
+  Val110 =datr["OL1"][9];
+  Val111 =datr["OL1"][10];
+  Val112 =datr["OL1"][11];
+  Val113 =datr["OL1"][12];
+  Val114 =datr["OL1"][13];
+  Val115 =datr["OL1"][14];
+  Val116 =datr["OL1"][15];
+  Val117 =datr["OL1"][16];
+  Val118 =datr["OL1"][17];
+  Val119 =datr["OL1"][18];
+  Val120 =datr["OL1"][19];
+  Val121=datr["OL1"][20];
+  Val122 =datr["OL1"][21];
+  Val123 =datr["OL1"][22];
+  Val124 =datr["OL1"][23];
+  Val21 =datr["OL2"][0];
+  Val22 =datr["OL2"][1];
+  Val23 =datr["OL2"][2];
+  Val24 =datr["OL2"][3];
+  Val25 =datr["OL2"][4];
+  Val26 =datr["OL2"][5];
+  Val27 =datr["OL2"][6];
+  Val28 =datr["OL2"][7];
+  Val29 =datr["OL2"][8];
+  Val210 =datr["OL2"][9];
+  Val211 =datr["OL2"][10];
+  Val212 =datr["OL2"][11];
+  Val213 =datr["OL2"][12];
+  Val214 =datr["OL2"][13];
+  Val215 =datr["OL2"][14];
+  Val216 =datr["OL2"][15];
+  Val217 =datr["OL2"][16];
+  Val218 =datr["OL2"][17];
+  Val219 =datr["OL2"][18];
+  Val220 =datr["OL2"][19];
+  Val221=datr["OL2"][20];
+  Val222 =datr["OL2"][21];
+  Val223 =datr["OL2"][22];
+  Val224 =datr["OL2"][23];
+  Val31 =datr["OL3"][0];
+  Val32 =datr["OL3"][1];
+  Val33 =datr["OL3"][2];
+  Val34 =datr["OL3"][3];
+  Val35 =datr["OL3"][4];
+  Val36 =datr["OL3"][5];
+  Val37 =datr["OL3"][6];
+  Val38 =datr["OL3"][7];
+  Val39 =datr["OL3"][8];
+  Val310 =datr["OL3"][9];
+  Val311 =datr["OL3"][10];
+  Val312 =datr["OL3"][11];
+  Val313 =datr["OL3"][12];
+  Val314 =datr["OL3"][13];
+  Val315 =datr["OL3"][14];
+  Val316 =datr["OL3"][15];
+  Val317 =datr["OL3"][16];
+  Val318 =datr["OL3"][17];
+  Val319 =datr["OL3"][18];
+  Val320 =datr["OL3"][19];
+  Val321=datr["OL3"][20];
+  Val322 =datr["OL3"][21];
+  Val323 =datr["OL3"][22];
+  Val324 =datr["OL3"][23];
+  Val41 =datr["OL4"][0];
+  Val42 =datr["OL4"][1];
+  Val43 =datr["OL4"][2];
+  Val44 =datr["OL4"][3];
+  Val45 =datr["OL4"][4];
+  Val46 =datr["OL4"][5];
+  Val47 =datr["OL4"][6];
+  Val48 =datr["OL4"][7];
+  Val49 =datr["OL4"][8];
+  Val410 =datr["OL4"][9];
+  Val411 =datr["OL4"][10];
+  Val412 =datr["OL4"][11];
+  Val413 =datr["OL4"][12];
+  Val414 =datr["OL4"][13];
+  Val415 =datr["OL4"][14];
+  Val416 =datr["OL4"][15];
+  Val417 =datr["OL4"][16];
+  Val418 =datr["OL4"][17];
+  Val419 =datr["OL4"][18];
+  Val420 =datr["OL4"][19];
+  Val421=datr["OL4"][20];
+  Val422 =datr["OL4"][21];
+  Val423 =datr["OL4"][22];
+  Val424 =datr["OL4"][23];
+  Val51 =datr["OL5"][0];
+  Val52 =datr["OL5"][1];
+  Val53 =datr["OL5"][2];
+  Val54 =datr["OL5"][3];
+  Val55 =datr["OL5"][4];
+  Val56 =datr["OL5"][5];
+  Val57 =datr["OL5"][6];
+  Val58 =datr["OL5"][7];
+  Val59 =datr["OL5"][8];
+  Val510 =datr["OL5"][9];
+  Val511 =datr["OL5"][10];
+  Val512 =datr["OL5"][11];
+  Val513 =datr["OL5"][12];
+  Val514 =datr["OL5"][13];
+  Val515 =datr["OL5"][14];
+  Val516 =datr["OL5"][15];
+  Val517 =datr["OL5"][16];
+  Val518 =datr["OL5"][17];
+  Val519 =datr["OL5"][18];
+  Val520 =datr["OL5"][19];
+  Val521=datr["OL5"][20];
+  Val522 =datr["OL5"][21];
+  Val523 =datr["OL5"][22];
+  Val524 =datr["OL5"][23];
+  Val61 =datr["OL6"][0];
+  Val62 =datr["OL6"][1];
+  Val63 =datr["OL6"][2];
+  Val64 =datr["OL6"][3];
+  Val65 =datr["OL6"][4];
+  Val66 =datr["OL6"][5];
+  Val67 =datr["OL6"][6];
+  Val68 =datr["OL6"][7];
+  Val69 =datr["OL6"][8];
+  Val610 =datr["OL6"][9];
+  Val611 =datr["OL6"][10];
+  Val612 =datr["OL6"][11];
+  Val613 =datr["OL6"][12];
+  Val614 =datr["OL6"][13];
+  Val615 =datr["OL6"][14];
+  Val616 =datr["OL6"][15];
+  Val617 =datr["OL6"][16];
+  Val618 =datr["OL6"][17];
+  Val619 =datr["OL6"][18];
+  Val620 =datr["OL6"][19];
+  Val621=datr["OL6"][20];
+  Val622 =datr["OL6"][21];
+  Val623 =datr["OL6"][22];
+  Val624 =datr["OL6"][23];
+  Val71 =datr["OL7"][0];
+  Val72 =datr["OL7"][1];
+  Val73 =datr["OL7"][2];
+  Val74 =datr["OL7"][3];
+  Val75 =datr["OL7"][4];
+  Val76 =datr["OL7"][5];
+  Val77 =datr["OL7"][6];
+  Val78 =datr["OL7"][7];
+  Val79 =datr["OL7"][8];
+  Val710 =datr["OL7"][9];
+  Val711 =datr["OL7"][10];
+  Val712 =datr["OL7"][11];
+  Val713 =datr["OL7"][12];
+  Val714 =datr["OL7"][13];
+  Val715 =datr["OL7"][14];
+  Val716 =datr["OL7"][15];
+  Val717 =datr["OL7"][16];
+  Val718 =datr["OL7"][17];
+  Val719 =datr["OL7"][18];
+  Val720 =datr["OL7"][19];
+  Val721=datr["OL7"][20];
+  Val722 =datr["OL7"][21];
+  Val723 =datr["OL7"][22];
+  Val724 =datr["OL7"][23];
+  Val81 =datr["OL8"][0];
+  Val82 =datr["OL8"][1];
+  Val83 =datr["OL8"][2];
+  Val84 =datr["OL8"][3];
+  Val85 =datr["OL8"][4];
+  Val86 =datr["OL8"][5];
+  Val87 =datr["OL8"][6];
+  Val88 =datr["OL8"][7];
+  Val89 =datr["OL8"][8];
+  Val810 =datr["OL8"][9];
+  Val811 =datr["OL8"][10];
+  Val812 =datr["OL8"][11];
+  Val813 =datr["OL8"][12];
+  Val814 =datr["OL8"][13];
+  Val815 =datr["OL8"][14];
+  Val816 =datr["OL8"][15];
+  Val817 =datr["OL8"][16];
+  Val818 =datr["OL8"][17];
+  Val819 =datr["OL8"][18];
+  Val820 =datr["OL8"][19];
+  Val821=datr["OL8"][20];
+  Val822 =datr["OL8"][21];
+  Val823 =datr["OL8"][22];
+  Val824 =datr["OL8"][23];
+  dps.pop();dps.pop();dps.pop();dps.pop();
+  dps.pop();dps.pop();dps.pop();dps.pop();
+  dps.pop();dps.pop();dps.pop();dps.pop();
+  dps.pop();dps.pop();dps.pop();dps.pop();
+  dps.pop();dps.pop();dps.pop();dps.pop();
+  dps.pop();dps.pop();dps.pop();dps.pop();
+  dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+  dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+  dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+  dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+  dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+  dps1.pop();dps1.pop();dps1.pop();dps1.pop();
+  dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+  dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+  dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+  dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+  dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+  dps2.pop();dps2.pop();dps2.pop();dps2.pop();
+  dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+  dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+  dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+  dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+  dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+  dps3.pop();dps3.pop();dps3.pop();dps3.pop();
+  dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+  dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+  dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+  dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+  dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+  dps4.pop();dps4.pop();dps4.pop();dps4.pop();
+  dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+  dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+  dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+  dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+  dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+  dps5.pop();dps5.pop();dps5.pop();dps5.pop();
+  dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+  dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+  dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+  dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+  dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+  dps6.pop();dps6.pop();dps6.pop();dps6.pop();
+  dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+  dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+  dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+  dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+  dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+  dps7.pop();dps7.pop();dps7.pop();dps7.pop();
+  dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+  dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+  dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+  dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+  dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+  dps8.pop();dps8.pop();dps8.pop();dps8.pop();
+  dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+  dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+  dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+  dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+  dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+  dps9.pop();dps9.pop();dps9.pop();dps9.pop();
+  dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+  dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+  dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+  dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+  dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+  dps10.pop();dps10.pop();dps10.pop();dps10.pop();
+  dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+  dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+  dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+  dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+  dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+  dps11.pop();dps11.pop();dps11.pop();dps11.pop();
+  dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+  dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+  dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+  dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+  dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+  dps12.pop();dps12.pop();dps12.pop();dps12.pop();
+  dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+  dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+  dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+  dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+  dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+  dps13.pop();dps13.pop();dps13.pop();dps13.pop();
+  dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+  dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+  dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+  dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+  dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+  dps14.pop();dps14.pop();dps14.pop();dps14.pop();
+  dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+  dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+  dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+  dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+  dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+  dps15.pop();dps15.pop();dps15.pop();dps15.pop();
+  dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+  dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+  dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+  dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+  dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+  dps16.pop();dps16.pop();dps16.pop();dps16.pop();
+  dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+  dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+  dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+  dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+  dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+  dps17.pop();dps17.pop();dps17.pop();dps17.pop();
+  dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+  dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+  dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+  dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+  dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+  dps18.pop();dps18.pop();dps18.pop();dps18.pop();
+  dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+  dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+  dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+  dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+  dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+  dps19.pop();dps19.pop();dps19.pop();dps19.pop();
+  dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+  dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+  dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+  dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+  dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+  dps20.pop();dps20.pop();dps20.pop();dps20.pop();
+  dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+  dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+  dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+  dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+  dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+  dps21.pop();dps21.pop();dps21.pop();dps21.pop();
+  dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+  dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+  dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+  dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+  dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+  dps22.pop();dps22.pop();dps22.pop();dps22.pop();
+  dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+  dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+  dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+  dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+  dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+  dps23.pop();dps23.pop();dps23.pop();dps23.pop();
+  dps.push({y:Val11});dps.push({y:Val12});
+  dps.push({y:Val13});dps.push({y:Val14});
+  dps.push({y:Val15});dps.push({y:Val16});
+  dps.push({y:Val17});dps.push({y:Val18});
+  dps.push({y:Val19});dps.push({y:Val110});
+  dps.push({y:Val111});dps.push({y:Val112});
+  dps.push({y:Val113});dps.push({y:Val114});
+  dps.push({y:Val115});dps.push({y:Val116});
+  dps.push({y:Val117});dps.push({y:Val118});
+  dps.push({y:Val119});dps.push({y:Val120});
+  dps.push({y:Val121});dps.push({y:Val122});
+  dps.push({y:Val123});dps.push({y:Val124});
+  mean=(dps[0].y+dps[1].y+dps[2].y+dps[3].y+dps[4].y+dps[5].y+dps[6].y+dps[7].y+dps[8].y+dps[9].y+dps[10].y+dps[11].y+dps[12].y+dps[13].y+dps[14].y+dps[15].y+dps[16].y+dps[17].y+dps[18].y+dps[19].y+dps[20].y+dps[21].y+dps[22].y+dps[23].y)/24;
+  s= ((dps[0].y-mean)^2)+((dps[1].y-mean)^2)+((dps[2].y-mean)^2)+((dps[3].y-mean)^2)+((dps[4].y-mean)^2)+((dps[5].y-mean)^2)+((dps[6].y-mean)^2)+((dps[7].y-mean)^2)+((dps[8].y-mean)^2)+((dps[9].y-mean)^2)+((dps[10].y-mean)^2)+((dps[11].y-mean)^2)+((dps[12].y-mean)^2)+((dps[13].y-mean)^2)+((dps[14].y-mean)^2)+((dps[15].y-mean)^2)+((dps[16].y-mean)^2)+((dps[17].y-mean)^2)+((dps[18].y-mean)^2)+((dps[19].y-mean)^2)+((dps[20].y-mean)^2)+((dps[21].y-mean)^2)+((dps[22].y-mean)^2)+((dps[23].y-mean)^2);
+  sd=Math.sqrt(s/24);
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps1.push({y:mean});dps1.push({y:mean});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps2.push({y:sd});dps2.push({y:sd});
+            dps3.push({y:Val21});dps3.push({y:Val22});
+            dps3.push({y:Val23});dps3.push({y:Val24});
+            dps3.push({y:Val25});dps3.push({y:Val26});
+            dps3.push({y:Val27});dps3.push({y:Val28});
+            dps3.push({y:Val29});dps3.push({y:Val210});
+            dps3.push({y:Val211});dps3.push({y:Val212});
+            dps3.push({y:Val213});dps3.push({y:Val214});
+            dps3.push({y:Val215});dps3.push({y:Val216});
+            dps3.push({y:Val217});dps3.push({y:Val218});
+            dps3.push({y:Val219});dps3.push({y:Val220});
+            dps3.push({y:Val221});dps3.push({y:Val222});
+            dps3.push({y:Val223});dps3.push({y:Val224});
+            mean1=(dps3[0].y+dps3[1].y+dps3[2].y+dps3[3].y+dps3[4].y+dps3[5].y+dps3[6].y+dps3[7].y+dps3[8].y+dps3[9].y+dps3[10].y+dps3[11].y+dps3[12].y+dps3[13].y+dps3[14].y+dps3[15].y+dps3[16].y+dps3[17].y+dps3[18].y+dps3[19].y+dps3[20].y+dps3[21].y+dps3[22].y+dps3[23].y)/24;
+            s1= ((dps3[0].y-mean1)^2)+((dps3[1].y-mean1)^2)+((dps3[2].y-mean1)^2)+((dps3[3].y-mean1)^2)+((dps3[4].y-mean1)^2)+((dps3[5].y-mean1)^2)+((dps3[6].y-mean1)^2)+((dps3[7].y-mean1)^2)+((dps3[8].y-mean1)^2)+((dps3[9].y-mean1)^2)+((dps3[10].y-mean1)^2)+((dps3[11].y-mean1)^2)+((dps3[12].y-mean1)^2)+((dps3[13].y-mean1)^2)+((dps3[14].y-mean1)^2)+((dps3[15].y-mean1)^2)+((dps3[16].y-mean1)^2)+((dps3[17].y-mean1)^2)+((dps3[18].y-mean1)^2)+((dps3[19].y-mean1)^2)+((dps3[20].y-mean1)^2)+((dps3[21].y-mean1)^2)+((dps3[22].y-mean1)^2)+((dps3[23].y-mean1)^2);
+            sd1=Math.sqrt(s1/24);
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps4.push({y:mean1});dps4.push({y:mean1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps5.push({y:sd1});dps5.push({y:sd1});
+                      dps6.push({y:Val31});dps6.push({y:Val32});
+                      dps6.push({y:Val33});dps6.push({y:Val34});
+                      dps6.push({y:Val35});dps6.push({y:Val36});
+                      dps6.push({y:Val37});dps6.push({y:Val38});
+                      dps6.push({y:Val39});dps6.push({y:Val310});
+                      dps6.push({y:Val311});dps6.push({y:Val312});
+                      dps6.push({y:Val313});dps6.push({y:Val314});
+                      dps6.push({y:Val315});dps6.push({y:Val316});
+                      dps6.push({y:Val317});dps6.push({y:Val318});
+                      dps6.push({y:Val319});dps6.push({y:Val320});
+                      dps6.push({y:Val321});dps6.push({y:Val322});
+                      dps6.push({y:Val323});dps6.push({y:Val324});
+                      mean2=(dps6[0].y+dps6[1].y+dps6[2].y+dps6[3].y+dps6[4].y+dps6[5].y+dps6[6].y+dps6[7].y+dps6[8].y+dps6[9].y+dps6[10].y+dps6[11].y+dps6[12].y+dps6[13].y+dps6[14].y+dps6[15].y+dps6[16].y+dps6[17].y+dps6[18].y+dps6[19].y+dps6[20].y+dps6[21].y+dps6[22].y+dps6[23].y)/24;
+                      s2= ((dps6[0].y-mean2)^2)+((dps6[1].y-mean2)^2)+((dps6[2].y-mean2)^2)+((dps6[3].y-mean2)^2)+((dps6[4].y-mean2)^2)+((dps6[5].y-mean2)^2)+((dps6[6].y-mean2)^2)+((dps6[7].y-mean2)^2)+((dps6[8].y-mean2)^2)+((dps6[9].y-mean2)^2)+((dps6[10].y-mean2)^2)+((dps6[11].y-mean2)^2)+((dps6[12].y-mean2)^2)+((dps6[13].y-mean2)^2)+((dps6[14].y-mean2)^2)+((dps6[15].y-mean2)^2)+((dps6[16].y-mean2)^2)+((dps6[17].y-mean2)^2)+((dps6[18].y-mean2)^2)+((dps6[19].y-mean2)^2)+((dps6[20].y-mean2)^2)+((dps6[21].y-mean2)^2)+((dps6[22].y-mean2)^2)+((dps6[23].y-mean2)^2);
+                      sd2=Math.sqrt(s2/24);
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps7.push({y:mean2});dps8.push({y:mean2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps8.push({y:sd2});dps8.push({y:sd2});
+                                dps9.push({y:Val41});dps9.push({y:Val42});
+                                dps9.push({y:Val43});dps9.push({y:Val44});
+                                dps9.push({y:Val45});dps9.push({y:Val46});
+                                dps9.push({y:Val47});dps9.push({y:Val48});
+                                dps9.push({y:Val49});dps9.push({y:Val410});
+                                dps9.push({y:Val411});dps9.push({y:Val412});
+                                dps9.push({y:Val413});dps9.push({y:Val414});
+                                dps9.push({y:Val415});dps9.push({y:Val416});
+                                dps9.push({y:Val417});dps9.push({y:Val418});
+                                dps9.push({y:Val419});dps9.push({y:Val420});
+                                dps9.push({y:Val421});dps9.push({y:Val422});
+                                dps9.push({y:Val423});dps9.push({y:Val424});
+                                mean3=(dps9[0].y+dps9[1].y+dps9[2].y+dps9[3].y+dps9[4].y+dps9[5].y+dps9[6].y+dps9[7].y+dps9[8].y+dps9[9].y+dps9[10].y+dps9[11].y+dps9[12].y+dps9[13].y+dps9[14].y+dps9[15].y+dps9[16].y+dps9[17].y+dps9[18].y+dps9[19].y+dps9[20].y+dps9[21].y+dps9[22].y+dps9[23].y)/24;
+                                s3= ((dps9[0].y-mean3)^2)+((dps9[1].y-mean3)^2)+((dps9[2].y-mean3)^2)+((dps9[3].y-mean3)^2)+((dps9[4].y-mean3)^2)+((dps9[5].y-mean3)^2)+((dps9[6].y-mean3)^2)+((dps9[7].y-mean3)^2)+((dps9[8].y-mean3)^2)+((dps9[9].y-mean3)^2)+((dps9[10].y-mean3)^2)+((dps9[11].y-mean3)^2)+((dps9[12].y-mean3)^2)+((dps9[13].y-mean3)^2)+((dps9[14].y-mean3)^2)+((dps9[15].y-mean3)^2)+((dps9[16].y-mean3)^2)+((dps9[17].y-mean3)^2)+((dps9[18].y-mean3)^2)+((dps9[19].y-mean3)^2)+((dps9[20].y-mean3)^2)+((dps9[21].y-mean3)^2)+((dps9[22].y-mean3)^2)+((dps9[23].y-mean3)^2);
+                                sd3=Math.sqrt(s3/24);
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps10.push({y:mean3});dps10.push({y:mean3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps11.push({y:sd3});dps11.push({y:sd3});
+                                          dps12.push({y:Val51});dps12.push({y:Val52});
+                                          dps12.push({y:Val53});dps12.push({y:Val54});
+                                          dps12.push({y:Val55});dps12.push({y:Val56});
+                                          dps12.push({y:Val57});dps12.push({y:Val58});
+                                          dps12.push({y:Val59});dps12.push({y:Val510});
+                                          dps12.push({y:Val511});dps12.push({y:Val512});
+                                          dps12.push({y:Val513});dps12.push({y:Val514});
+                                          dps12.push({y:Val515});dps12.push({y:Val516});
+                                          dps12.push({y:Val517});dps12.push({y:Val518});
+                                          dps12.push({y:Val519});dps12.push({y:Val520});
+                                          dps12.push({y:Val521});dps12.push({y:Val522});
+                                          dps12.push({y:Val523});dps12.push({y:Val524});
+                                          mean4=(dps12[0].y+dps12[1].y+dps12[2].y+dps12[3].y+dps12[4].y+dps12[5].y+dps12[6].y+dps12[7].y+dps12[8].y+dps12[9].y+dps12[10].y+dps12[11].y+dps12[12].y+dps12[13].y+dps12[14].y+dps12[15].y+dps12[16].y+dps12[17].y+dps12[18].y+dps12[19].y+dps12[20].y+dps12[21].y+dps12[22].y+dps12[23].y)/24;
+                                          s4= ((dps12[0].y-mean4)^2)+((dps12[1].y-mean4)^2)+((dps12[2].y-mean4)^2)+((dps12[3].y-mean4)^2)+((dps12[4].y-mean4)^2)+((dps12[5].y-mean4)^2)+((dps12[6].y-mean4)^2)+((dps12[7].y-mean4)^2)+((dps12[8].y-mean4)^2)+((dps12[9].y-mean4)^2)+((dps12[10].y-mean4)^2)+((dps12[11].y-mean4)^2)+((dps12[12].y-mean4)^2)+((dps12[13].y-mean4)^2)+((dps12[14].y-mean4)^2)+((dps12[15].y-mean4)^2)+((dps12[16].y-mean4)^2)+((dps12[17].y-mean4)^2)+((dps12[18].y-mean4)^2)+((dps12[19].y-mean4)^2)+((dps12[20].y-mean4)^2)+((dps12[21].y-mean4)^2)+((dps12[22].y-mean4)^2)+((dps12[23].y-mean4)^2);
+                                          sd4=Math.sqrt(s4/24);
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps13.push({y:mean4});dps13.push({y:mean4});
+                                                    dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps14.push({y:sd4});dps14.push({y:sd4});                                                           dps14.push({y:sd4});dps14.push({y:sd4});
+                                                dps15.push({y:Val61});dps15.push({y:Val62});
+                                                dps15.push({y:Val63});dps15.push({y:Val64});
+                                                dps15.push({y:Val65});dps15.push({y:Val66});
+                                                dps15.push({y:Val67});dps15.push({y:Val68});
+dps15.push({y:Val69});dps15.push({y:Val610});
+dps15.push({y:Val611});dps15.push({y:Val612});
+dps15.push({y:Val613});dps15.push({y:Val614});
+dps15.push({y:Val615});dps15.push({y:Val616});
+dps15.push({y:Val617});dps15.push({y:Val618});
+dps15.push({y:Val619});dps15.push({y:Val620});
+dps15.push({y:Val621});dps15.push({y:Val622});
+dps15.push({y:Val623});dps15.push({y:Val624});
+mean5=(dps15[0].y+dps15[1].y+dps15[2].y+dps15[3].y+dps15[4].y+dps15[5].y+dps15[6].y+dps15[7].y+dps15[8].y+dps15[9].y+dps15[10].y+dps15[11].y+dps15[12].y+dps15[13].y+dps15[14].y+dps15[15].y+dps15[16].y+dps15[17].y+dps15[18].y+dps15[19].y+dps15[20].y+dps15[21].y+dps15[22].y+dps15[23].y)/24;
+s5= ((dps15[0].y-mean5)^2)+((dps15[1].y-mean5)^2)+((dps15[2].y-mean5)^2)+((dps15[3].y-mean5)^2)+((dps15[4].y-mean5)^2)+((dps15[5].y-mean5)^2)+((dps15[6].y-mean5)^2)+((dps15[7].y-mean5)^2)+((dps15[8].y-mean5)^2)+((dps15[9].y-mean5)^2)+((dps15[10].y-mean5)^2)+((dps15[11].y-mean5)^2)+((dps15[12].y-mean5)^2)+((dps15[13].y-mean5)^2)+((dps15[14].y-mean5)^2)+((dps15[15].y-mean5)^2)+((dps15[16].y-mean5)^2)+((dps15[17].y-mean5)^2)+((dps15[18].y-5)^2)+((dps15[20].y-mean5)^2)+((dps15[21].y-mean5)^2)+((dps15[22].y-mean5)^2)+((dps15[23].y-mean5)^2);
+sd5=Math.sqrt(s5/24);
+      dps16.push({y:mean5});dps16.push({y:mean5});
+      dps16.push({y:mean5});dps16.push({y:mean5});
+      dps16.push({y:mean5});dps16.push({y:mean5});
+      dps16.push({y:mean5});dps16.push({y:mean5});
+      dps16.push({y:mean5});dps16.push({y:mean5});
+      dps16.push({y:mean5});dps16.push({y:mean5});
+dps16.push({y:mean5});dps16.push({y:mean5});
+dps16.push({y:mean5});dps16.push({y:mean5});
+dps16.push({y:mean5});dps16.push({y:mean5});
+dps16.push({y:mean5});dps16.push({y:mean5});
+dps16.push({y:mean5});dps16.push({y:mean5});
+dps16.push({y:mean5});dps16.push({y:mean5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+dps17.push({y:sd5});dps17.push({y:sd5});
+//data to b6 pushe915d12
+dps18.push({y:Val71});dps18.push({y:Val72});
+dps18.push({y:Val73});dps18.push({y:Val74});
+dps18.push({y:Val75});dps18.push({y:Val76});
+dps18.push({y:Val77});dps18.push({y:Val78});
+dps18.push({y:Val79});dps18.push({y:Val710});
+dps18.push({y:Val711});dps18.push({y:Val712});
+dps18.push({y:Val713});dps18.push({y:Val714});
+dps18.push({y:Val715});dps18.push({y:Val716});
+dps18.push({y:Val717});dps18.push({y:Val718});
+dps18.push({y:Val719});dps18.push({y:Val720});
+dps18.push({y:Val721});dps18.push({y:Val722});
+dps18.push({y:Val723});dps18.push({y:Val724});
+mean6=(dps18[0].y+dps18[1].y+dps18[2].y+dps18[3].y+dps18[4].y+dps18[5].y+dps18[6].y+dps18[7].y+dps18[8].y+dps18[9].y+dps18[10].y+dps18[11].y+dps18[12].y+dps18[13].y+dps18[14].y+dps18[15].y+dps18[16].y+dps18[17].y+dps18[18].y+dps18[19].y+dps18[20].y+dps18[21].y+dps18[22].y+dps18[23].y)/24;
+s6= ((dps18[0].y-mean6)^2)+((dps18[1].y-mean6)^2)+((dps18[2].y-mean6)^2)+((dps18[3].y-mean6)^2)+((dps18[4].y-mean6)^2)+((dps18[5].y-mean6)^2)+((dps18[6].y-mean6)^2)+((dps18[7].y-mean6)^2)+((dps18[8].y-mean6)^2)+((dps18[9].y-mean6)^2)+((dps18[10].y-mean6)^2)+((dps18[11].y-mean6)^2)+((dps18[12].y-mean6)^2)+((dps18[13].y-mean6)^2)+((dps18[14].y-mean6)^2)+((dps18[15].y-mean6)^2)+((dps18[16].y-mean6)^2)+((dps18[17].y-mean6)^2)+((dps18[18].y-mean6)^2)+((dps18[19].y-mean6)^2)+((dps18[20].y-mean6)^2)+((dps18[21].y-mean6)^2)+((dps18[22].y-mean6)^2)+((dps18[23].y-mean6)^2);
+sd6=Math.sqrt(s6/24);
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps19.push({y:mean6});dps19.push({y:mean6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps20.push({y:sd6});dps20.push({y:sd6});
+  dps21.push({y:Val81});dps21.push({y:Val82});
+  dps21.push({y:Val83});dps21.push({y:Val84});
+  dps21.push({y:Val85});dps21.push({y:Val86});
+  dps21.push({y:Val87});dps21.push({y:Val88});
+  dps21.push({y:Val89});dps21.push({y:Val810});
+  dps21.push({y:Val811});dps21.push({y:Val812});
+  dps21.push({y:Val813});dps21.push({y:Val814});
+  dps21.push({y:Val815});dps21.push({y:Val816});
+  dps21.push({y:Val817});dps21.push({y:Val818});
+  dps21.push({y:Val819});dps21.push({y:Val820});
+  dps21.push({y:Val821});dps21.push({y:Val822});
+  dps21.push({y:Val823});dps21.push({y:Val824});
+  mean7=(dps21[0].y+dps21[1].y+dps21[2].y+dps21[3].y+dps21[4].y+dps21[5].y+dps21[6].y+dps21[7].y+dps21[8].y+dps21[9].y+dps21[10].y+dps21[11].y+dps21[12].y+dps21[13].y+dps21[14].y+dps21[15].y+dps21[16].y+dps21[17].y+dps21[18].y+dps21[19].y+dps21[20].y+dps21[21].y+dps21[22].y+dps21[23].y)/24;
+  s7= ((dps21[0].y-mean7)^2)+((dps21[1].y-mean7)^2)+((dps21[2].y-mean7)^2)+((dps21[3].y-mean7)^2)+((dps21[4].y-mean7)^2)+((dps21[5].y-mean7)^2)+((dps21[6].y-mean7)^2)+((dps21[7].y-mean7)^2)+((dps21[8].y-mean7)^2)+((dps21[9].y-mean7)^2)+((dps21[10].y-mean7)^2)+((dps21[11].y-mean7)^2)+((dps21[12].y-mean7)^2)+((dps21[13].y-mean7)^2)+((dps21[14].y-mean7)^2)+((dps21[15].y-mean7)^2)+((dps21[16].y-mean7)^2)+((dps21[17].y-mean7)^2)+((dps21[18].y-mean7)^2)+((dps21[19].y-mean7)^2)+((dps21[20].y-mean7)^2)+((dps21[21].y-mean7)^2)+((dps21[22].y-mean7)^2)+((dps21[23].y-mean7)^2);
+  sd7=Math.sqrt(s7/24);
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps22.push({y:mean7});dps22.push({y:mean7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7});
+            dps23.push({y:sd7});dps23.push({y:sd7})
+            dps23.push({y:sd7});dps23.push({y:sd7});
+
+  		/////////render graphs
+  		chart1.render();
+  		chart2.render();
+  		chart3.render();
+  		chart4.render();
+  		chart5.render();
+  		chart6.render();
+  		chart7.render();
+  		chart8.render();
+      document.getElementById("chartContainer9").InnerHTML="";
+      document.getElementById("chartContainer10").InnerHTML="";
+      document.getElementById("chartContainer11").InnerHTML="";
+
+  	console.log("Incoming4");
+  });//// Socket close
+	};
+	inter4=setInterval(function(){updateChart()}, 5000);
+}//////end of function4
+
+function function6(){
+  window.current=6;
+
+    socket6 = io('/sock6', { forceNew: true });
+    socket6.on("temp6", function(data){
+      dat=JSON.parse(data);
+	console.log(dat);
+      min11 =dat["M111"];
+      med111 =dat["M112"];
+      med11 =dat["M113"];
+      med112 =dat["M114"];
+      max11 =dat["M115"];
+      // console.log(dat);
+      min12 =dat["M121"];
+      med121 =dat["M122"];
+      med12 =dat["M123"];
+      med122 =dat["M124"];
+      max12 =dat["M125"];
+      // console.log(dat);
+      min13 =dat["M131"];
+      med131 =dat["M132"];
+      med13 =dat["M133"];
+      med132 =dat["M134"];
+      max13 =dat["M135"];
+      // console.log(dat);
+      min14 =dat["M141"];
+      med141 =dat["M142"];
+      med14 =dat["M143"];
+      med142 =dat["M144"];
+      max14 =dat["M145"];
+      // console.log(dat);
+      min15 =dat["M151"];
+      med151 =dat["M152"];
+      med15 =dat["M153"];
+      med152 =dat["M154"];
+      max15 =dat["M155"];
+      // console.log(dat);
+      min16 =dat["M161"];
+      med161 =dat["M162"];
+      med16 =dat["M163"];
+      med162 =dat["M164"];
+      max16 =dat["M165"];
+      // console.log(dat);
+      min17 =dat["M171"];
+      med171 =dat["M172"];
+      med17 =dat["M173"];
+      med172 =dat["M174"];
+      max17 =dat["M175"];
+      // console.log(dat);
+      min18 =dat["M181"];
+      med181 =dat["M182"];
+      med18 =dat["M183"];
+      med182 =dat["M184"];
+      max18 =dat["M185"];
+      // console.log(dat);
+      min19 =dat["M191"];
+      med191 =dat["M192"];
+      med19 =dat["M193"];
+      med192 =dat["M194"];
+      max19 =dat["M195"];
+      // console.log(dat);
+      min110 =dat["M1101"];
+      med1101 =dat["M1102"];
+      med110 =dat["M1103"];
+      med1102 =dat["M1104"];
+      max110 =dat["M1105"];
+      // console.log(dat);
+      min111 =dat["M1111"];
+      med1111 =dat["M1112"];
+      med1115 =dat["M1113"];
+      med1112 =dat["M1114"];
+      max111 =dat["M1115"];
+      // console.log(dat);
+      min21 =dat["M211"];
+      med211 =dat["M215"];
+      med21 =dat["M214"];
+      med212 =dat["M213"];
+      max21 =dat["M212"];
+      // console.log(dat);
+      min22 =dat["M221"];
+      med221 =dat["M222"];
+      med22 =dat["M223"];
+      med222 =dat["M224"];
+      max22 =dat["M225"];
+      // console.log(dat);
+      min23 =dat["M231"];
+      med231 =dat["M232"];
+      med23 =dat["M233"];
+      med232 =dat["M234"];
+      max23 =dat["M235"];
+      // console.log(dat);
+      min24 =dat["M241"];
+      med241 =dat["M242"];
+      med24 =dat["M243"];
+      med242 =dat["M244"];
+      max24 =dat["M245"];
+      // console.log(dat);
+      min25 =dat["M251"];
+      med251 =dat["M252"];
+      med25 =dat["M253"];
+      med252 =dat["M254"];
+      max25 =dat["M255"];
+      // console.log(dat);
+      min26 =dat["M261"];
+      med261 =dat["M262"];
+      med26 =dat["M263"];
+      med262 =dat["M264"];
+      max26 =dat["M265"];
+      // console.log(dat);
+      min27 =dat["M271"];
+      med271 =dat["M272"];
+      med27 =dat["M273"];
+      med272 =dat["M274"];
+      max27 =dat["M275"];
+      // console.log(dat);
+      min28 =dat["M281"];
+      med281 =dat["M282"];
+      med28 =dat["M283"];
+      med282 =dat["M284"];
+      max28 =dat["M285"];
+      min29 =dat["M291"];
+      med291 =dat["M292"];
+      med29 =dat["M293"];
+      med292 =dat["M294"];
+      max29 =dat["M295"];
+      min210 =dat["M2101"];
+      med2101 =dat["M2102"];
+      med210 =dat["M2103"];
+      med2102 =dat["M2104"];
+      max210 =dat["M2105"];
+      min211 =dat["M2111"];
+      med2111 =dat["M2112"];
+      med2115 =dat["M2113"];
+      med2112 =dat["M2114"];
+      max211 =dat["M2115"];
+
+    
+      c=[]
+      c.push(min11["o_LeakRate"]);
+      c.push(med111["o_LeakRate"]);
+      c.push(med112["o_LeakRate"]);
+      c.push(max11["o_LeakRate"]);
+      c.push(med11["o_LeakRate"]);
+      d=[]
+      d.push(min12["o_LeakRate"]);
+      d.push(med121["o_LeakRate"]);
+      d.push(med122["o_LeakRate"]);
+      d.push(max12["o_LeakRate"]);
+      d.push(med12["o_LeakRate"]);
+      e=[]
+      e.push(min13["o_LeakRate"]);
+      e.push(med131["o_LeakRate"]);
+      e.push(med132["o_LeakRate"]);
+      e.push(max13["o_LeakRate"]);
+      e.push(med13["o_LeakRate"]);
+      f=[]
+      f.push(min14["o_LeakRate"]);
+      f.push(med141["o_LeakRate"]);
+      f.push(med142["o_LeakRate"]);
+      f.push(max14["o_LeakRate"]);
+      f.push(med14["o_LeakRate"]);
+      g=[]
+      g.push(min15["o_LeakRate"]);
+      g.push(med151["o_LeakRate"]);
+      g.push(med152["o_LeakRate"]);
+      g.push(max15["o_LeakRate"]);
+      g.push(med15["o_LeakRate"]);
+      h=[]
+      h.push(min16["o_LeakRate"]);
+      h.push(med161["o_LeakRate"]);
+      h.push(med162["o_LeakRate"]);
+      h.push(max16["o_LeakRate"]);
+      h.push(med16["o_LeakRate"]);
+      i=[]
+      i.push(min17["o_LeakRate"]);
+      i.push(med171["o_LeakRate"]);
+      i.push(med172["o_LeakRate"]);
+      i.push(max17["o_LeakRate"]);
+      i.push(med17["o_LeakRate"]);
+      j=[]
+      j.push(min18["o_LeakRate"]);
+      j.push(med181["o_LeakRate"]);
+      j.push(med182["o_LeakRate"]);
+      j.push(max18["o_LeakRate"]);
+      j.push(med18["o_LeakRate"]);
+      k=[]
+      k.push(min19["o_LeakRate"]);
+      k.push(med191["o_LeakRate"]);
+      k.push(med192["o_LeakRate"]);
+      k.push(max19["o_LeakRate"]);
+      k.push(med19["o_LeakRate"]);
+      l=[]
+      l.push(min110["o_LeakRate"]);
+      l.push(med1101["o_LeakRate"]);
+      l.push(med1102["o_LeakRate"]);
+      l.push(max110["o_LeakRate"]);
+      l.push(med110["o_LeakRate"]);
+      m=[]
+      m.push(0);
+      m.push(0);
+      m.push(0);
+      m.push(0);
+      m.push(0);
+      n=[]    
+
+    n.push(min21["W_LeakRate"]);
+    n.push(max21["W_LeakRate"]);
+    n.push(med21["W_LeakRate"]);
+    n.push(med211["W_LeakRate"]);
+    n.push(med212["W_LeakRate"]);
+
+      o=[]
+      o.push(min22["W_LeakRate"]);
+      o.push(med221["W_LeakRate"]);
+      o.push(med222["W_LeakRate"]);
+      o.push(max22["W_LeakRate"]);
+      o.push(med22["W_LeakRate"]);
+      p=[]
+      p.push(min23["W_LeakRate"]);
+      p.push(med231["W_LeakRate"]);
+      p.push(med232["W_LeakRate"]);
+      p.push(max23["W_LeakRate"]);
+      p.push(med23["W_LeakRate"]);
+      q=[]
+      q.push(min24["W_LeakRate"]);
+      q.push(med241["W_LeakRate"]);
+      q.push(med242["W_LeakRate"]);
+      q.push(max24["W_LeakRate"]);
+      q.push(med24["W_LeakRate"]);
+      r=[]
+      r.push(min25["W_LeakRate"]);
+      r.push(med251["W_LeakRate"]);
+      r.push(med252["W_LeakRate"]);
+      r.push(max25["W_LeakRate"]);
+      r.push(med25["W_LeakRate"]);
+      s=[]
+      s.push(min26["W_LeakRate"]);
+      s.push(med261["W_LeakRate"]);
+      s.push(med262["W_LeakRate"]);
+      s.push(max26["W_LeakRate"]);
+      s.push(med26["W_LeakRate"]);
+      t=[]
+      t.push(min27["W_LeakRate"]);
+      t.push(med271["W_LeakRate"]);
+      t.push(med272["W_LeakRate"]);
+      t.push(max27["W_LeakRate"]);
+      t.push(med27["W_LeakRate"]);
+      u=[]
+      u.push(min28["W_LeakRate"]);
+      u.push(med281["W_LeakRate"]);
+      u.push(med282["W_LeakRate"]);
+      u.push(max28["W_LeakRate"]);
+      u.push(med28["W_LeakRate"]);
+      v=[]
+      v.push(min29["W_LeakRate"]);
+      v.push(med291["W_LeakRate"]);
+      v.push(med292["W_LeakRate"]);
+      v.push(max29["W_LeakRate"]);
+      v.push(med29["W_LeakRate"]);
+      w=[]
+      w.push(min210["W_LeakRate"]);
+      w.push(med2101["W_LeakRate"]);
+      w.push(med2102["W_LeakRate"]);
+      w.push(max210["W_LeakRate"]);
+      w.push(med210["W_LeakRate"]);
+      x=[]
+      x.push(0);
+      x.push(0);
+      x.push(0);
+      x.push(0);
+      x.push(0);
+	console.log(n);
+//console.log(o);
+//console.log(p);
+//console.log(q);
+//console.log(r);
+console.log(min210);
+console.log(med2101);
+console.log(med2102);
+console.log(max210);
+console.log(med210);
+
+          var dps1x= [
+            {y:c },
+            { y:d },
+            { y:e },
+            { y:f },
+            { y:g },
+            { y:h },
+            { y:i },
+            { y:j },
+            { y:k },
+            { y:l },
+            { y:m },
+          ];
+          var dpsx= [
+            {  y:n },
+            { y:o },
+            {  y:p },
+            { y:q },
+            {  y:r },
+            {  y:s },
+            {  y:t},
+            {  y:u},
+            {  y:v},
+            { y:w},
+            { y:x},
+          ];
+            console.log(dpsx);
+            console.log(dps1x);
+
+    var chart3 = new CanvasJS.Chart("chartContainer1",
+    {
+      title:{
+      text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+      },
+      data: [
+      {
+        type: "line",
+        dataPoints: [
+        { y: null },
+        { y: null},
+        { y: null },
+        { y: null },
+        { y: null }, //** null data point
+        { y: null},
+        { y: null},
+        { y: null },
+        { y: null}
+        ]
+      }]
+    });
+
+    chart3.render();
+
+      var chart4 = new CanvasJS.Chart("chartContainer3",
+      {
+        title:{
+        text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+        },
+        data: [
+        {
+          type: "line",
+          dataPoints: [
+          { y: null },
+          { y: null},
+          { y: null },
+          { y: null },
+          { y: null }, //** null data point
+          { y: null},
+          { y: null},
+          { y: null },
+          { y: null}
+          ]
+        }]
+      });
+
+      chart4.render();
+
+        var chart5 = new CanvasJS.Chart("chartContainer4",
+        {
+          title:{
+          text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+          },
+          data: [
+          {
+            type: "line",
+            dataPoints: [
+            { y: null },
+            { y: null},
+            { y: null },
+            { y: null },
+            { y: null }, //** null data point
+            { y: null},
+            { y: null},
+            { y: null },
+            { y: null}
+            ]
+          }]
+        });
+        chart5.render();
+
+          var chart6 = new CanvasJS.Chart("chartContainer5",
+          {
+            title:{
+            text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+            },
+            data: [
+            {
+              type: "line",
+              dataPoints: [
+              { y: null },
+              { y: null},
+              { y: null },
+              { y: null },
+              { y: null }, //** null data point
+              { y: null},
+              { y: null},
+              { y: null },
+              { y: null}
+              ]
+            }]
+          });
+          chart6.render();f
+
+            var chart7 = new CanvasJS.Chart("chartContainer7",
+            {
+              title:{
+              text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+              },
+              data: [
+              {
+                type: "line",
+                dataPoints: [
+                { y: null },
+                { y: null},
+                { y: null },
+                { y: null },
+                { y: null }, //** null data point
+                { y: null},
+                { y: null},
+                { y: null },
+                { y: null}
+                ]
+              }]
+            });
+
+            chart7.render();
+
+              var chart8 = new CanvasJS.Chart("chartContainer8",
+              {
+                title:{
+                text: "GRAPHS WITH SOME MORE BOX PLOT"  //**Change the title here
+                },
+                data: [
+                {
+                  type: "line",
+                  dataPoints: [
+                  { y: null },
+                  { y: null},
+                  { y: null },
+                  { y: null },
+                  { y: null }, //** null data point
+                  { y: null},
+                  { y: null},
+                  { y: null },
+                  { y: null}
+                  ]
+                }]
+              });
+
+              chart8.render();
+//////////chart1
+            chart1 = new CanvasJS.Chart("chartContainer2", {
+                animationEnabled: true,
+                theme:"light",
+                title:{
+                  text: "BOX PLOT WITH RESPECT TO OIL FOR ALL MODELS"
+                },
+                axisX: {
+                  valueFormatString: "MODEL#",
+                  MAXIMUM:11
+                },
+                axisY: {
+                  title: "LEAK_RATE"
+                },
+                data: [{
+                  type: "boxAndWhisker",
+                  showInLegend: true,
+                  //xvalueFormatString: "",
+                  yValueFormatString: "0.0",
+                  dataPoints:dps1x
+                }]
+              });
+              chart1.render();
+///////////
+//////////chart2
+              chart2 = new CanvasJS.Chart("chartContainer6", {
+                animationEnabled: true,
+                theme:"light",
+                title:{
+                  text: "BOX PLOT WITH RESPECT TO WATER FOR ALL MODELS"
+                },
+                axisX: {
+                  valueFormatString: "MODEL#",
+		  maximum:11
+                },
+                axisY: {
+                  title: "LEAK_RATE"
+                },
+                data: [{
+                  type: "boxAndWhisker",
+                  showInLegend: true,
+                  xvalueFormatString: "MODEL",
+                  yValueFormatString: "0.0",
+                  dataPoints:dpsx
+                }]
+              });
+              chart2.render();
+
+              console.log("Incoming6");
+
+      });
+
+/////Socket CLose
+///////////
+}////////end of function6
+
+</script>
+
+<!-- Footer -->
+</html>
