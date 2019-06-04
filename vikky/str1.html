@@ -1,5 +1,15 @@
 <html>
   <head>
+    <style>
+    h1 {
+  color: RED;
+
+}
+</style>
+    <center><h1>
+
+      SIX SIGMA CONTROL CHART FOR ALL MACHINES WITH RESPECT TO OIL LEAKAGE
+    </h1></center>
     <title>Socket.io</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -20,210 +30,229 @@
     });
     </script>
     <script>
+    var mean1=[{x:0}];
+    var mean11=[{x:0}];
+    var mean12=[{x:0}];
+    var mean13=[{x:0}];
+    var mean14=[{x:0}];
+    var mean15=[{x:0}];
+    var mean16=[{x:0}];
+    var mean17=[{x:0}];
+
+    var sd1=[{x:0}];
+    var sd11=[{x:0}];
+    var sd12=[{x:0}];
+    var sd13=[{x:0}];
+    var sd14=[{x:0}];
+    var sd15=[{x:0}];
+    var sd16=[{x:0}];
+    var sd17=[{x:0}];
     window.onload = function () {
     var dps= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps1=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps2=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
     dps3= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps4=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps5=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
 
     var dps6= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps7=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps8=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
 
     var dps9= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps10=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps11=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
 
 
     var dps12= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps13=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps14=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
 
 
     var dps15= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps16=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps17=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
 
 
 
     var dps18= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps19=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps20=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
 
 
 
 
     var dps21= [
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },];
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },];
     dps22=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
     dps23=[
-      { x: "1", y: 5.0 },{ x: "2", y: 5.0 },{ x: "3", y: 5.0 },{ x: "4", y: 5.0 },
-      { x: "5", y: 5.0 },{ x: "6", y: 5.0 },{ x: "7", y: 5.0 },{ x: "8", y: 5.0 },
-    	{ x: "9", y: 5.0 },{ x: "10", y: 5.0 },{ x: "11", y: 5.0 },{ x: "12", y: 5.0 },
-      { x: "13", y: 5.0 },{ x: "14", y: 5.0 },{ x: "15", y: 5.0 },{ x: "16", y: 5.0 },
-    	{ x: "17", y: 5.0 },{ x: "18", y: 5.0 },{ x: "19", y: 5.0 },{ x: "20", y: 5.0 },
-      { x: "21", y: 5.0 },{ x: "22", y: 5.0 },{ x: "23", y: 5.0 },{ x: "24", y: 5.0 },
+      { x: "HOUR1", y: 5.0 },{ x: "HOUR2", y: 5.0 },{ x: "HOUR3", y: 5.0 },{ x: "HOUR4", y: 5.0 },
+      { x: "HOUR5", y: 5.0 },{ x: "HOUR6", y: 5.0 },{ x: "HOUR7", y: 5.0 },{ x: "HOUR8", y: 5.0 },
+    	{ x: "HOUR9", y: 5.0 },{ x: "HOUR10", y: 5.0 },{ x: "HOUR11", y: 5.0 },{ x: "HOUR12", y: 5.0 },
+      { x: "HOUR13", y: 5.0 },{ x: "HOUR14", y: 5.0 },{ x: "HOUR15", y: 5.0 },{ x: "HOUR16", y: 5.0 },
+    	{ x: "HOUR17", y: 5.0 },{ x: "HOUR18", y: 5.0 },{ x: "HOUR19", y: 5.0 },{ x: "HOUR20", y: 5.0 },
+      { x: "HOUR21", y: 5.0 },{ x: "HOUR22", y: 5.0 },{ x: "HOUR23", y: 5.0 },{ x: "HOUR24", y: 5.0 },
     ];
+
+
     var chart = new CanvasJS.Chart("chartContainer", {
 
     	animationEnabled: true,
@@ -232,11 +261,11 @@
     		text: "Know the abnormality of machine 1"
     	},
     	axisX: {
-    		valueFormatString:"HOUR",
+    		valueFormatString:"HOUR#",
          maximum:24
     	},
     	axisY: {
-    		postfix: "%",
+    		postfix: "",
     	//	labelFormatter: addSymbols
     	},
     	toolTip: {
@@ -251,32 +280,32 @@
        		type: "line",
        		name: "Actual OIL Leakrate ",
        		showInLegend: true,
-       		yValueFormatString: "0.0",
+       		yValueFoHOURrmatString: "0.0",
           dataPoints:dps
        	},{
          		type: "line",
-         		name: "Mean ",
+         		name: "Mean:"+mean1["x"]+"",
          		showInLegend: true,
          		yValueFormatString: "0.0",
             dataPoints:dps1
     },{
         type: "line",
-        name: "Stadard Deviation",
+        name: "UCL:"+3*sd1["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps2
-  }]});
+  }
+]});
   var chart1 = new CanvasJS.Chart("chartContainer1", {
 
-    animationEnabled: true,
+    animationEnablHOURed: true,
     theme: "light2",
     title: {
       text: "Know the abnormality of machine 2"
     },
     axisX: {
-      valueFormatString:"HOUR",
-       maximum:24
-    },
+      valueFormatString:"HOUR#",
+       maximum:24    },
     axisY: {
       postfix: "%",
     //	labelFormatter: addSymbols
@@ -286,24 +315,24 @@
     },
     legend: {
       cursor: "pointer",
-    //  itemclick: toggleDataSeries
+    //  itemclick: toggleDataSerieHOURs
     },
     data: [
     {
         type: "line",
-        name: "Actual Leakage rate",
+        name: "Actual OIL Leakage rate",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps3
       },{
           type: "line",
-          name: "Mean ",
+          name: "Mean:"+mean11["x"]+"",
           showInLegend: true,
           yValueFormatString: "0.0",
           dataPoints:dps4
   },{
       type: "line",
-      name: "Stadard Deviation",
+      name: "UCL:"+3*sd11["x"]+"",
       showInLegend: true,
       yValueFormatString: "0.0",
       dataPoints:dps5
@@ -316,7 +345,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
     text: "Know the abnormality of machine 3"
   },
   axisX: {
-    valueFormatString:"HOUR",
+    valueFormatString:"HOUR#",
      maximum:24
   },
   axisY: {
@@ -339,13 +368,13 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
       dataPoints:dps6
     },{
         type: "line",
-        name: "Mean ",
+        name: "Mean:"+mean12["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps7
 },{
     type: "line",
-    name: "Stadard Deviation",
+    name: "UCL:"+3*sd12["x"]+"",
     showInLegend: true,
     yValueFormatString: "0.0",
     dataPoints:dps8
@@ -358,7 +387,7 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
     text: "Know the abnormality of machine 4"
   },
   axisX: {
-    valueFormatString:"HOUR",
+    valueFormatString:"HOUR#",
      maximum:24
   },
   axisY: {
@@ -381,13 +410,13 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
       dataPoints:dps9
     },{
         type: "line",
-        name: "Mean ",
+        name: "Mean:"+mean13["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps10
 },{
     type: "line",
-    name: "Stadard Deviation",
+    name: "UCL:"+3*sd13["x"]+"",
     showInLegend: true,
     yValueFormatString: "0.0",
     dataPoints:dps11
@@ -400,7 +429,7 @@ var chart4 = new CanvasJS.Chart("chartContainer4", {
     text: "Know the abnormality of machine 5"
   },
   axisX: {
-    valueFormatString:"HOUR",
+    valueFormatString:"HOUR#",
      maximum:24
   },
   axisY: {
@@ -423,13 +452,13 @@ var chart4 = new CanvasJS.Chart("chartContainer4", {
       dataPoints:dps12
     },{
         type: "line",
-        name: "Mean ",
+        name: "Mean:"+mean14["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps13
 },{
     type: "line",
-    name: "Stadard Deviation",
+    name: "UCL:"+3*sd14["x"]+"",
     showInLegend: true,
     yValueFormatString: "0.0",
     dataPoints:dps14
@@ -442,7 +471,7 @@ var chart5 = new CanvasJS.Chart("chartContainer5", {
     text: "Know the abnormality of machine 6"
   },
   axisX: {
-    valueFormatString:"HOUR",
+    valueFormatString:"HOUR#",
      maximum:24
   },
   axisY: {
@@ -465,13 +494,13 @@ var chart5 = new CanvasJS.Chart("chartContainer5", {
       dataPoints:dps15
     },{
         type: "line",
-        name: "Mean ",
+        name: "Mean:"+mean15["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps16
 },{
     type: "line",
-    name: "Stadard Deviation",
+    name: "UCL:"+3*sd15["x"]+"",
     showInLegend: true,
     yValueFormatString: "0.0",
     dataPoints:dps17
@@ -484,7 +513,7 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
     text: "Know the abnormality of machine 7"
   },
   axisX: {
-    valueFormatString:"HOUR",
+    valueFormatString:"HOUR#",
      maximum:24
   },
   axisY: {
@@ -507,13 +536,13 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
       dataPoints:dps18
     },{
         type: "line",
-        name: "Mean ",
+        name: "Mean:"+mean16["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps19
 },{
     type: "line",
-    name: "Stadard Deviation",
+    name: "UCL:"+3*sd16["x"]+"",
     showInLegend: true,
     yValueFormatString: "0.0",
     dataPoints:dps20
@@ -526,7 +555,7 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
     text: "Know the abnormality of machine 8"
   },
   axisX: {
-    valueFormatString:"HOUR",
+    valueFormatString:"HOUR#",
      maximum:24
   },
   axisY: {
@@ -549,13 +578,13 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
       dataPoints:dps21
     },{
         type: "line",
-        name: "Mean ",
+        name: "Mean:"+mean17["x"]+"",
         showInLegend: true,
         yValueFormatString: "0.0",
         dataPoints:dps22
 },{
     type: "line",
-    name: "Stadard Deviation",
+    name: "UCL:"+3*sd17["x"]+"",
     showInLegend: true,
     yValueFormatString: "0.0",
     dataPoints:dps23
@@ -569,198 +598,6 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
     chart6.render();
     chart7.render();
     console.log(chart.options.data);
-    var Val1a = chart.options.data[0].dataPoints[0].y;
-    var Val2a = chart.options.data[0].dataPoints[1].y;
-    var Val3a = chart.options.data[0].dataPoints[2].y;
-    var Val4a = chart.options.data[0].dataPoints[3].y;
-    var Val5a = chart.options.data[0].dataPoints[4].y;
-    var Val6a = chart.options.data[0].dataPoints[5].y;
-    var Val7a = chart.options.data[0].dataPoints[6].y;
-    var Val8a = chart.options.data[0].dataPoints[7].y;
-    var Val9a = chart.options.data[0].dataPoints[8].y;
-    var Val10a = chart.options.data[0].dataPoints[9].y;
-    var Val11a = chart.options.data[0].dataPoints[10].y;
-    var Val12a = chart.options.data[0].dataPoints[11].y;
-    var Val13a = chart.options.data[0].dataPoints[12].y;
-    var Val14a = chart.options.data[0].dataPoints[13].y;
-    var Val15a = chart.options.data[0].dataPoints[14].y;
-    var Val16a = chart.options.data[0].dataPoints[15].y;
-    var Val17a = chart.options.data[0].dataPoints[16].y;
-    var Val18a = chart.options.data[0].dataPoints[17].y;
-    var Val19a = chart.options.data[0].dataPoints[18].y;
-    var Val20a = chart.options.data[0].dataPoints[19].y;
-    var Val21a = chart.options.data[0].dataPoints[20].y;
-    var Val22a = chart.options.data[0].dataPoints[21].y;
-    var Val23a = chart.options.data[0].dataPoints[22].y;
-    var Val24a = chart.options.data[0].dataPoints[23].y;
-    var Val1a = chart.options.data[1].dataPoints[0].y;
-    var Val2a = chart.options.data[1].dataPoints[1].y;
-    var Val3a = chart.options.data[1].dataPoints[2].y;
-    var Val4a = chart.options.data[1].dataPoints[3].y;
-    var Val5a = chart.options.data[1].dataPoints[4].y;
-    var Val6a = chart.options.data[1].dataPoints[5].y;
-    var Val7a = chart.options.data[1].dataPoints[6].y;
-    var Val8a = chart.options.data[1].dataPoints[7].y;
-    var Val9a = chart.options.data[1].dataPoints[8].y;
-    var Val10a = chart.options.data[1].dataPoints[9].y;
-    var Val11a = chart.options.data[1].dataPoints[10].y;
-    var Val12a = chart.options.data[1].dataPoints[11].y;
-    var Val13a = chart.options.data[1].dataPoints[12].y;
-    var Val14a = chart.options.data[1].dataPoints[13].y;
-    var Val15a = chart.options.data[1].dataPoints[14].y;
-    var Val16a = chart.options.data[1].dataPoints[15].y;
-    var Val17a = chart.options.data[1].dataPoints[16].y;
-    var Val18a = chart.options.data[1].dataPoints[17].y;
-    var Val19a = chart.options.data[1].dataPoints[18].y;
-    var Val20a = chart.options.data[1].dataPoints[19].y;
-    var Val21a = chart.options.data[1].dataPoints[20].y;
-    var Val22a = chart.options.data[1].dataPoints[21].y;
-    var Val23a = chart.options.data[1].dataPoints[22].y;
-    var Val24a = chart.options.data[1].dataPoints[23].y;
-    var Val1b = chart.options.data[2].dataPoints[0].y;
-    var Val2b = chart.options.data[2].dataPoints[1].y;
-    var Val3b = chart.options.data[2].dataPoints[2].y;
-    var Val4b = chart.options.data[2].dataPoints[3].y;
-    var Val5b = chart.options.data[2].dataPoints[4].y;
-    var Val6b = chart.options.data[2].dataPoints[5].y;
-    var Val7b = chart.options.data[2].dataPoints[6].y;
-    var Val8b = chart.options.data[2].dataPoints[7].y;
-    var Val9b = chart.options.data[2].dataPoints[8].y;
-    var Val10b = chart.options.data[2].dataPoints[9].y;
-    var Val11b = chart.options.data[2].dataPoints[10].y;
-    var Val12b = chart.options.data[2].dataPoints[11].y;
-    var Val13b = chart.options.data[2].dataPoints[12].y;
-    var Val14b = chart.options.data[2].dataPoints[13].y;
-    var Val15b = chart.options.data[2].dataPoints[14].y;
-    var Val16b = chart.options.data[2].dataPoints[15].y;
-    var Val17b = chart.options.data[2].dataPoints[16].y;
-    var Val18b = chart.options.data[2].dataPoints[17].y;
-    var Val19b = chart.options.data[2].dataPoints[18].y;
-    var Val20b = chart.options.data[2].dataPoints[19].y;
-    var Val21b = chart.options.data[2].dataPoints[20].y;
-    var Val22b = chart.options.data[2].dataPoints[21].y;
-    var Val23b = chart.options.data[2].dataPoints[22].y;
-    var Val24b = chart.options.data[2].dataPoints[23].y;
-    // var Val1c = chart.options.data[3].dataPoints[0].y;
-    // var Val2c = chart.options.data[3].dataPoints[1].y;
-    // var Val3c = chart.options.data[3].dataPoints[2].y;
-    // var Val4c = chart.options.data[3].dataPoints[3].y;
-    // var Val5c = chart.options.data[3].dataPoints[4].y;
-    // var Val6c = chart.options.data[3].dataPoints[5].y;
-    // var Val7c = chart.options.data[3].dataPoints[6].y;
-    // var Val8c = chart.options.data[3].dataPoints[7].y;
-    // var Val9c = chart.options.data[3].dataPoints[8].y;
-    // var Val10c = chart.options.data[3].dataPoints[9].y;
-    // var Val11c = chart.options.data[3].dataPoints[10].y;
-    // var Val12c = chart.options.data[3].dataPoints[11].y;
-    // var Val13c = chart.options.data[3].dataPoints[12].y;
-    // var Val14c = chart.options.data[3].dataPoints[13].y;
-    // var Val15c = chart.options.data[3].dataPoints[14].y;
-    // var Val16c = chart.options.data[3].dataPoints[15].y;
-    // var Val17c = chart.options.data[3].dataPoints[16].y;
-    // var Val18c = chart.options.data[3].dataPoints[17].y;
-    // var Val19c = chart.options.data[3].dataPoints[18].y;
-    // var Val20c = chart.options.data[3].dataPoints[19].y;
-    // var Val21c = chart.options.data[3].dataPoints[20].y;
-    // var Val22c = chart.options.data[3].dataPoints[21].y;
-    // var Val23c = chart.options.data[3].dataPoints[22].y;
-    // var Val24c = chart.options.data[3].dataPoints[23].y;
-    // var Val1d = chart.options.data[4].dataPoints[0].y;
-    // var Val2d = chart.options.data[4].dataPoints[1].y;
-    // var Val3d = chart.options.data[4].dataPoints[2].y;
-    // var Val4d = chart.options.data[4].dataPoints[3].y;
-    // var Val5d = chart.options.data[4].dataPoints[4].y;
-    // var Val6d = chart.options.data[4].dataPoints[5].y;
-    // var Val7d = chart.options.data[4].dataPoints[6].y;
-    // var Val8d = chart.options.data[4].dataPoints[7].y;
-    // var Val9d = chart.options.data[4].dataPoints[8].y;
-    // var Val10d = chart.options.data[4].dataPoints[9].y;
-    // var Val11d = chart.options.data[4].dataPoints[10].y;
-    // var Val12d = chart.options.data[4].dataPoints[11].y;
-    // var Val13d = chart.options.data[4].dataPoints[12].y;
-    // var Val14d = chart.options.data[4].dataPoints[13].y;
-    // var Val15d = chart.options.data[4].dataPoints[14].y;
-    // var Val16d = chart.options.data[4].dataPoints[15].y;
-    // var Val17d = chart.options.data[4].dataPoints[16].y;
-    // var Val18d = chart.options.data[4].dataPoints[17].y;
-    // var Val19d = chart.options.data[4].dataPoints[18].y;
-    // var Val20d = chart.options.data[4].dataPoints[19].y;
-    // var Val21d = chart.options.data[4].dataPoints[20].y;
-    // var Val22d = chart.options.data[4].dataPoints[21].y;
-    // var Val23d = chart.options.data[4].dataPoints[22].y;
-    // var Val24d = chart.options.data[4].dataPoints[23].y;
-    // var Val1e = chart.options.data[5].dataPoints[0].y;
-    // var Val2e = chart.options.data[5].dataPoints[1].y;
-    // var Val3e = chart.options.data[5].dataPoints[2].y;
-    // var Val4e = chart.options.data[5].dataPoints[3].y;
-    // var Val5e = chart.options.data[5].dataPoints[4].y;
-    // var Val6e = chart.options.data[5].dataPoints[5].y;
-    // var Val7e = chart.options.data[5].dataPoints[6].y;
-    // var Val8e = chart.options.data[5].dataPoints[7].y;
-    // var Val9e = chart.options.data[5].dataPoints[8].y;
-    // var Val10e = chart.options.data[5].dataPoints[9].y;
-    // var Val11e = chart.options.data[5].dataPoints[10].y;
-    // var Val12e = chart.options.data[5].dataPoints[11].y;
-    // var Val13e = chart.options.data[5].dataPoints[12].y;
-    // var Val14e = chart.options.data[5].dataPoints[13].y;
-    // var Val15e = chart.options.data[5].dataPoints[14].y;
-    // var Val16e = chart.options.data[5].dataPoints[15].y;
-    // var Val17e = chart.options.data[5].dataPoints[16].y;
-    // var Val18e = chart.options.data[5].dataPoints[17].y;
-    // var Val19e = chart.options.data[5].dataPoints[18].y;
-    // var Val20e = chart.options.data[5].dataPoints[19].y;
-    // var Val21e = chart.options.data[5].dataPoints[20].y;
-    // var Val22e = chart.options.data[5].dataPoints[21].y;
-    // var Val23e = chart.options.data[5].dataPoints[22].y;
-    // var Val24e = chart.options.data[5].dataPoints[23].y;
-    // var Val1f = chart.options.data[6].dataPoints[0].y;
-    // var Val2f = chart.options.data[6].dataPoints[1].y;
-    // var Val3f = chart.options.data[6].dataPoints[2].y;
-    // var Val4f = chart.options.data[6].dataPoints[3].y;
-    // var Val5f = chart.options.data[6].dataPoints[4].y;
-    // var Val6f = chart.options.data[6].dataPoints[5].y;
-    // var Val7f = chart.options.data[6].dataPoints[6].y;
-    // var Val8f = chart.options.data[6].dataPoints[7].y;
-    // var Val9f = chart.options.data[6].dataPoints[8].y;
-    // var Val10f = chart.options.data[6].dataPoints[9].y;
-    // var Val11f = chart.options.data[6].dataPoints[10].y;
-    // var Val12f = chart.options.data[6].dataPoints[11].y;
-    // var Val13f = chart.options.data[6].dataPoints[12].y;
-    // var Val14f = chart.options.data[6].dataPoints[13].y;
-    // var Val15f = chart.options.data[6].dataPoints[14].y;
-    // var Val16f = chart.options.data[6].dataPoints[15].y;
-    // var Val17f = chart.options.data[6].dataPoints[16].y;
-    // var Val18f = chart.options.data[6].dataPoints[17].y;
-    // var Val19f = chart.options.data[6].dataPoints[18].y;
-    // var Val20f = chart.options.data[6].dataPoints[19].y;
-    // var Val21f = chart.options.data[6].dataPoints[20].y;
-    // var Val22f = chart.options.data[6].dataPoints[21].y;
-    // var Val23f = chart.options.data[6].dataPoints[22].y;
-    // var Val24f = chart.options.data[6].dataPoints[23].y;
-    // var Val1g = chart.options.data[7].dataPoints[0].y;
-    // var Val2g = chart.options.data[7].dataPoints[1].y;
-    // var Val3g = chart.options.data[7].dataPoints[2].y;
-    // var Val4g = chart.options.data[7].dataPoints[3].y;
-    // var Val5g = chart.options.data[7].dataPoints[4].y;
-    // var Val6g = chart.options.data[7].dataPoints[5].y;
-    // var Val7g = chart.options.data[7].dataPoints[6].y;
-    // var Val8g = chart.options.data[7].dataPoints[7].y;
-    // var Val9g = chart.options.data[7].dataPoints[8].y;
-    // var Val10g = chart.options.data[7].dataPoints[9].y;
-    // var Val11g = chart.options.data[7].dataPoints[10].y;
-    // var Val12g = chart.options.data[7].dataPoints[11].y;
-    // var Val13g = chart.options.data[7].dataPoints[12].y;
-    // var Val14g = chart.options.data[7].dataPoints[13].y;
-    // var Val15g = chart.options.data[7].dataPoints[14].y;
-    // var Val16g = chart.options.data[7].dataPoints[15].y;
-    // var Val17g = chart.options.data[7].dataPoints[16].y;
-    // var Val18g = chart.options.data[7].dataPoints[17].y;
-    // var Val19g = chart.options.data[7].dataPoints[18].y;
-    // var Val20g = chart.options.data[7].dataPoints[19].y;
-    // var Val21g = chart.options.data[7].dataPoints[20].y;
-    // var Val22g = chart.options.data[7].dataPoints[21].y;
-    // var Val23g = chart.options.data[7].dataPoints[22].y;
-    // var Val24g = chart.options.data[7].dataPoints[23].y;
     var updateInterval = 3000;
     window.r=1;
     // var window.socket = io.connect('http://localhost:3000/');
@@ -1117,7 +954,7 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
           dps23.pop();dps23.pop();dps23.pop();dps23.pop();
           dps23.pop();dps23.pop();dps23.pop();dps23.pop();
 
-    			dps.push({y:Val11});dps.push({y:Val12});
+    			dps.push({x:"HOUR1",y:Val11});dps.push({y:Val12});
     			dps.push({y:Val13});dps.push({y:Val14});
     			dps.push({y:Val15});dps.push({y:Val16});
     			dps.push({y:Val17});dps.push({y:Val18});
@@ -1132,72 +969,72 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
           mean=(dps[0].y+dps[1].y+dps[2].y+dps[3].y+dps[4].y+dps[5].y+dps[6].y+dps[7].y+dps[8].y+dps[9].y+dps[10].y+dps[11].y+dps[12].y+dps[13].y+dps[14].y+dps[15].y+dps[16].y+dps[17].y+dps[18].y+dps[19].y+dps[20].y+dps[21].y+dps[22].y+dps[23].y)/24;
           s= ((dps[0].y-mean)^2)+((dps[1].y-mean)^2)+((dps[2].y-mean)^2)+((dps[3].y-mean)^2)+((dps[4].y-mean)^2)+((dps[5].y-mean)^2)+((dps[6].y-mean)^2)+((dps[7].y-mean)^2)+((dps[8].y-mean)^2)+((dps[9].y-mean)^2)+((dps[10].y-mean)^2)+((dps[11].y-mean)^2)+((dps[12].y-mean)^2)+((dps[13].y-mean)^2)+((dps[14].y-mean)^2)+((dps[15].y-mean)^2)+((dps[16].y-mean)^2)+((dps[17].y-mean)^2)+((dps[18].y-mean)^2)+((dps[19].y-mean)^2)+((dps[20].y-mean)^2)+((dps[21].y-mean)^2)+((dps[22].y-mean)^2)+((dps[23].y-mean)^2);
           sd=Math.sqrt(s/24);
-              			dps1.push({y:mean});dps1.push({y:mean});
-              			dps1.push({y:mean});dps1.push({y:mean});
-              			dps1.push({y:mean});dps1.push({y:mean});
-              			dps1.push({y:mean});dps1.push({y:mean});
-              			dps1.push({y:mean});dps1.push({y:mean});
-              			dps1.push({y:mean});dps1.push({y:mean});
-                    dps1.push({y:mean});dps1.push({y:mean});
-                    dps1.push({y:mean});dps1.push({y:mean});
-                    dps1.push({y:mean});dps1.push({y:mean});
-                    dps1.push({y:mean});dps1.push({y:mean});
-                    dps1.push({y:mean});dps1.push({y:mean});
-                    dps1.push({y:mean});dps1.push({y:mean});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
-                    dps2.push({y:sd});dps2.push({y:sd});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps1.push({y:mean});dps1.push({y:mean});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps2.push({y:mean+3*sd});dps2.push({y:mean+3*sd});
+          dps3.push({y:Val21});dps3.push({y:Val22});
+          dps3.push({y:Val23});dps3.push({y:Val24});
+          dps3.push({y:Val25});dps3.push({y:Val26});
+          dps3.push({y:Val27});dps3.push({y:Val28});
+          dps3.push({y:Val29});dps3.push({y:Val210});
+          dps3.push({y:Val211});dps3.push({y:Val212});
+          dps3.push({y:Val213});dps3.push({y:Val214});
+          dps3.push({y:Val215});dps3.push({y:Val216});
+          dps3.push({y:Val217});dps3.push({y:Val218});
+          dps3.push({y:Val219});dps3.push({y:Val220});
+          dps3.push({y:Val221});dps3.push({y:Val222});
+          dps3.push({y:Val223});dps3.push({y:Val224});
+          mean1=(dps3[0].y+dps3[1].y+dps3[2].y+dps3[3].y+dps3[4].y+dps3[5].y+dps3[6].y+dps3[7].y+dps3[8].y+dps3[9].y+dps3[10].y+dps3[11].y+dps3[12].y+dps3[13].y+dps3[14].y+dps3[15].y+dps3[16].y+dps3[17].y+dps3[18].y+dps3[19].y+dps3[20].y+dps3[21].y+dps3[22].y+dps3[23].y)/24;
+          s1= ((dps3[0].y-mean1)^2)+((dps3[1].y-mean1)^2)+((dps3[2].y-mean1)^2)+((dps3[3].y-mean1)^2)+((dps3[4].y-mean1)^2)+((dps3[5].y-mean1)^2)+((dps3[6].y-mean1)^2)+((dps3[7].y-mean1)^2)+((dps3[8].y-mean1)^2)+((dps3[9].y-mean1)^2)+((dps3[10].y-mean1)^2)+((dps3[11].y-mean1)^2)+((dps3[12].y-mean1)^2)+((dps3[13].y-mean1)^2)+((dps3[14].y-mean1)^2)+((dps3[15].y-mean1)^2)+((dps3[16].y-mean1)^2)+((dps3[17].y-mean1)^2)+((dps3[18].y-mean1)^2)+((dps3[19].y-mean1)^2)+((dps3[20].y-mean1)^2)+
+          ((dps3[21].y-mean1)^2)+((dps3[22].y-mean1)^2)+((dps3[23].y-mean1)^2);
+          sd1=Math.sqrt(s1/24);
+                    dps4.push({y:mean1});dps4.push({y:mean1});
+                    dps4.push({y:mean1});dps4.push({y:mean1});
+                    dps4.push({y:mean1});dps4.push({y:mean1});
+                    dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps4.push({y:mean1});dps4.push({y:mean1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
+                              dps5.push({y:mean1+3*sd1});dps5.push({y:mean1+3*sd1});
 
-                    dps3.push({y:Val21});dps3.push({y:Val22});
-                    dps3.push({y:Val23});dps3.push({y:Val24});
-                    dps3.push({y:Val25});dps3.push({y:Val26});
-                    dps3.push({y:Val27});dps3.push({y:Val28});
-                    dps3.push({y:Val29});dps3.push({y:Val210});
-                    dps3.push({y:Val211});dps3.push({y:Val212});
-                    dps3.push({y:Val213});dps3.push({y:Val214});
-                    dps3.push({y:Val215});dps3.push({y:Val216});
-                    dps3.push({y:Val217});dps3.push({y:Val218});
-                    dps3.push({y:Val219});dps3.push({y:Val220});
-                    dps3.push({y:Val221});dps3.push({y:Val222});
-                    dps3.push({y:Val223});dps3.push({y:Val224});
-                    mean1=(dps3[0].y+dps3[1].y+dps3[2].y+dps3[3].y+dps3[4].y+dps3[5].y+dps3[6].y+dps3[7].y+dps3[8].y+dps3[9].y+dps3[10].y+dps3[11].y+dps3[12].y+dps3[13].y+dps3[14].y+dps3[15].y+dps3[16].y+dps3[17].y+dps3[18].y+dps3[19].y+dps3[20].y+dps3[21].y+dps3[22].y+dps3[23].y)/24;
-                    s1= ((dps3[0].y-mean1)^2)+((dps3[1].y-mean1)^2)+((dps3[2].y-mean1)^2)+((dps3[3].y-mean1)^2)+((dps3[4].y-mean1)^2)+((dps3[5].y-mean1)^2)+((dps3[6].y-mean1)^2)+((dps3[7].y-mean1)^2)+((dps3[8].y-mean1)^2)+((dps3[9].y-mean1)^2)+((dps3[10].y-mean1)^2)+((dps3[11].y-mean1)^2)+((dps3[12].y-mean1)^2)+((dps3[13].y-mean1)^2)+((dps3[14].y-mean1)^2)+((dps3[15].y-mean1)^2)+((dps3[16].y-mean1)^2)+((dps3[17].y-mean1)^2)+((dps3[18].y-mean1)^2)+((dps3[19].y-mean1)^2)+((dps3[20].y-mean1)^2)+((dps3[21].y-mean1)^2)+((dps3[22].y-mean1)^2)+((dps3[23].y-mean1)^2);
-                    sd1=Math.sqrt(s1/24);
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps4.push({y:mean1});dps4.push({y:mean1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-                              dps5.push({y:sd1});dps5.push({y:sd1});
-
-                              dps6.push({y:Val31});dps6.push({y:Val32});
+                              dps6.push({x:"HOUR1",y:Val31});dps6.push({y:Val32});
                         			dps6.push({y:Val33});dps6.push({y:Val34});
                         			dps6.push({y:Val35});dps6.push({y:Val36});
                         			dps6.push({y:Val37});dps6.push({y:Val38});
@@ -1212,113 +1049,116 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
                               mean2=(dps6[0].y+dps6[1].y+dps6[2].y+dps6[3].y+dps6[4].y+dps6[5].y+dps6[6].y+dps6[7].y+dps6[8].y+dps6[9].y+dps6[10].y+dps6[11].y+dps6[12].y+dps6[13].y+dps6[14].y+dps6[15].y+dps6[16].y+dps6[17].y+dps6[18].y+dps6[19].y+dps6[20].y+dps6[21].y+dps6[22].y+dps6[23].y)/24;
                               s2= ((dps6[0].y-mean2)^2)+((dps6[1].y-mean2)^2)+((dps6[2].y-mean2)^2)+((dps6[3].y-mean2)^2)+((dps6[4].y-mean2)^2)+((dps6[5].y-mean2)^2)+((dps6[6].y-mean2)^2)+((dps6[7].y-mean2)^2)+((dps6[8].y-mean2)^2)+((dps6[9].y-mean2)^2)+((dps6[10].y-mean2)^2)+((dps6[11].y-mean2)^2)+((dps6[12].y-mean2)^2)+((dps6[13].y-mean2)^2)+((dps6[14].y-mean2)^2)+((dps6[15].y-mean2)^2)+((dps6[16].y-mean2)^2)+((dps6[17].y-mean2)^2)+((dps6[18].y-mean2)^2)+((dps6[19].y-mean2)^2)+((dps6[20].y-mean2)^2)+((dps6[21].y-mean2)^2)+((dps6[22].y-mean2)^2)+((dps6[23].y-mean2)^2);
                               sd2=Math.sqrt(s2/24);
-                                  			dps7.push({y:mean2});dps8.push({y:mean2});
-                                  			dps7.push({y:mean2});dps8.push({y:mean2});
-                                  			dps7.push({y:mean2});dps8.push({y:mean2});
-                                  			dps7.push({y:mean2});dps8.push({y:mean2});
-                                  			dps7.push({y:mean2});dps8.push({y:mean2});
-                                  			dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps7.push({y:mean2});dps8.push({y:mean2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
-                                        dps8.push({y:sd2});dps8.push({y:sd2});
 
-                                        dps9.push({y:Val41});dps9.push({y:Val42});
-                                  			dps9.push({y:Val43});dps9.push({y:Val44});
-                                  			dps9.push({y:Val45});dps9.push({y:Val46});
-                                  			dps9.push({y:Val47});dps9.push({y:Val48});
-                                  			dps9.push({y:Val49});dps9.push({y:Val410});
-                                  			dps9.push({y:Val411});dps9.push({y:Val412});
-                                        dps9.push({y:Val413});dps9.push({y:Val414});
-                                        dps9.push({y:Val415});dps9.push({y:Val416});
-                                        dps9.push({y:Val417});dps9.push({y:Val418});
-                                        dps9.push({y:Val419});dps9.push({y:Val420});
-                                        dps9.push({y:Val421});dps9.push({y:Val422});
-                                        dps9.push({y:Val423});dps9.push({y:Val424});
-                                        mean3=(dps9[0].y+dps9[1].y+dps9[2].y+dps9[3].y+dps9[4].y+dps9[5].y+dps9[6].y+dps9[7].y+dps9[8].y+dps9[9].y+dps9[10].y+dps9[11].y+dps9[12].y+dps9[13].y+dps9[14].y+dps9[15].y+dps9[16].y+dps9[17].y+dps9[18].y+dps9[19].y+dps9[20].y+dps9[21].y+dps9[22].y+dps9[23].y)/24;
-                                        s3= ((dps9[0].y-mean3)^2)+((dps9[1].y-mean3)^2)+((dps9[2].y-mean3)^2)+((dps9[3].y-mean3)^2)+((dps9[4].y-mean3)^2)+((dps9[5].y-mean3)^2)+((dps9[6].y-mean3)^2)+((dps9[7].y-mean3)^2)+((dps9[8].y-mean3)^2)+((dps9[9].y-mean3)^2)+((dps9[10].y-mean3)^2)+((dps9[11].y-mean3)^2)+((dps9[12].y-mean3)^2)+((dps9[13].y-mean3)^2)+((dps9[14].y-mean3)^2)+((dps9[15].y-mean3)^2)+((dps9[16].y-mean3)^2)+((dps9[17].y-mean3)^2)+((dps9[18].y-mean3)^2)+((dps9[19].y-mean3)^2)+((dps9[20].y-mean3)^2)+((dps9[21].y-mean3)^2)+((dps9[22].y-mean3)^2)+((dps9[23].y-mean3)^2);
-                                        sd3=Math.sqrt(s3/24);
-                                            			dps10.push({y:mean3});dps10.push({y:mean3});
-                                            			dps10.push({y:mean3});dps10.push({y:mean3});
-                                            			dps10.push({y:mean3});dps10.push({y:mean3});
-                                            			dps10.push({y:mean3});dps10.push({y:mean3});
-                                            			dps10.push({y:mean3});dps10.push({y:mean3});
-                                            			dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps10.push({y:mean3});dps10.push({y:mean3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
-                                                  dps11.push({y:sd3});dps11.push({y:sd3});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps7.push({y:mean2});dps7.push({y:mean2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
+    dps8.push({y:mean2+3*sd2});dps8.push({y:mean2+3*sd2});
 
-                                                  dps12.push({y:Val51});dps12.push({y:Val52});
-                                            			dps12.push({y:Val53});dps12.push({y:Val54});
-                                            			dps12.push({y:Val55});dps12.push({y:Val56});
-                                            			dps12.push({y:Val57});dps12.push({y:Val58});
-                                            			dps12.push({y:Val59});dps12.push({y:Val510});
-                                            			dps12.push({y:Val511});dps12.push({y:Val512});
-                                                  dps12.push({y:Val513});dps12.push({y:Val514});
-                                                  dps12.push({y:Val515});dps12.push({y:Val516});
-                                                  dps12.push({y:Val517});dps12.push({y:Val518});
-                                                  dps12.push({y:Val519});dps12.push({y:Val520});
-                                                  dps12.push({y:Val521});dps12.push({y:Val522});
-                                                  dps12.push({y:Val523});dps12.push({y:Val524});
-                                                  mean4=(dps12[0].y+dps12[1].y+dps12[2].y+dps12[3].y+dps12[4].y+dps12[5].y+dps12[6].y+dps12[7].y+dps12[8].y+dps12[9].y+dps12[10].y+dps12[11].y+dps12[12].y+dps12[13].y+dps12[14].y+dps12[15].y+dps12[16].y+dps12[17].y+dps12[18].y+dps12[19].y+dps12[20].y+dps12[21].y+dps12[22].y+dps12[23].y)/24;
-                                                  s4= ((dps12[0].y-mean4)^2)+((dps12[1].y-mean4)^2)+((dps12[2].y-mean4)^2)+((dps12[3].y-mean4)^2)+((dps12[4].y-mean4)^2)+((dps12[5].y-mean4)^2)+((dps12[6].y-mean4)^2)+((dps12[7].y-mean4)^2)+((dps12[8].y-mean4)^2)+((dps12[9].y-mean4)^2)+((dps12[10].y-mean4)^2)+((dps12[11].y-mean4)^2)+((dps12[12].y-mean4)^2)+((dps12[13].y-mean4)^2)+((dps12[14].y-mean4)^2)+((dps12[15].y-mean4)^2)+((dps12[16].y-mean4)^2)+((dps12[17].y-mean4)^2)+((dps12[18].y-mean4)^2)+((dps12[19].y-mean4)^2)+((dps12[20].y-mean4)^2)+((dps12[21].y-mean4)^2)+((dps12[22].y-mean4)^2)+((dps12[23].y-mean4)^2);
-                                                  sd4=Math.sqrt(s4/24);
-                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
-                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
-                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
-                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
-                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
-                                                      			dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps13.push({y:mean4});dps13.push({y:mean4});
-                                                            dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps14.push({y:sd4});dps14.push({y:sd4});                                                           dps14.push({y:sd4});dps14.push({y:sd4});
-                                                        dps15.push({y:Val61});dps15.push({y:Val62});
-                                                        dps15.push({y:Val63});dps15.push({y:Val64});
-                                                        dps15.push({y:Val65});dps15.push({y:Val66});
-                                                        dps15.push({y:Val67});dps15.push({y:Val68});
+    dps9.push({y:Val41});dps9.push({y:Val42});
+    dps9.push({y:Val43});dps9.push({y:Val44});
+    dps9.push({y:Val45});dps9.push({y:Val46});
+    dps9.push({y:Val47});dps9.push({y:Val48});
+    dps9.push({y:Val49});dps9.push({y:Val410});
+    dps9.push({y:Val411});dps9.push({y:Val412});
+    dps9.push({y:Val413});dps9.push({y:Val414});
+    dps9.push({y:Val415});dps9.push({y:Val416});
+    dps9.push({y:Val417});dps9.push({y:Val418});
+    dps9.push({y:Val419});dps9.push({y:Val420});
+    dps9.push({y:Val421});dps9.push({y:Val422});
+    dps9.push({y:Val423});dps9.push({y:Val424});
+    mean3=(dps9[0].y+dps9[1].y+dps9[2].y+dps9[3].y+dps9[4].y+dps9[5].y+dps9[6].y+dps9[7].y+dps9[8].y+dps9[9].y+dps9[10].y+dps9[11].y+dps9[12].y+dps9[13].y+dps9[14].y+dps9[15].y+dps9[16].y+dps9[17].y+dps9[18].y+dps9[19].y+dps9[20].y+dps9[21].y+dps9[22].y+dps9[23].y)/24;
+    s3= ((dps9[0].y-mean3)^2)+((dps9[1].y-mean3)^2)+((dps9[2].y-mean3)^2)+((dps9[3].y-mean3)^2)+((dps9[4].y-mean3)^2)+((dps9[5].y-mean3)^2)+((dps9[6].y-mean3)^2)+((dps9[7].y-mean3)^2)+((dps9[8].y-mean3)^2)+((dps9[9].y-mean3)^2)+((dps9[10].y-mean3)^2)+((dps9[11].y-mean3)^2)+((dps9[12].y-mean3)^2)+((dps9[13].y-mean3)^2)+((dps9[14].y-mean3)^2)+((dps9[15].y-mean3)^2)+((dps9[16].y-mean3)^2)+((dps9[17].y-mean3)^2)+((dps9[18].y-mean3)^2)+((dps9[19].y-mean3)^2)+((dps9[20].y-mean3)^2)+((dps9[21].y-mean3)^2)+((dps9[22].y-mean3)^2)+((dps9[23].y-mean3)^2);
+    sd3=Math.sqrt(s3/24);
+
+        			dps10.push({y:mean3});dps10.push({y:mean3});
+        			dps10.push({y:mean3});dps10.push({y:mean3});
+        			dps10.push({y:mean3});dps10.push({y:mean3});
+        			dps10.push({y:mean3});dps10.push({y:mean3});
+        			dps10.push({y:mean3});dps10.push({y:mean3});
+        			dps10.push({y:mean3});dps10.push({y:mean3});
+              dps10.push({y:mean3});dps10.push({y:mean3});
+              dps10.push({y:mean3});dps10.push({y:mean3});
+              dps10.push({y:mean3});dps10.push({y:mean3});
+              dps10.push({y:mean3});dps10.push({y:mean3});
+    dps10.push({y:mean3});dps10.push({y:mean3});
+    dps10.push({y:mean3});dps10.push({y:mean3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+    dps11.push({y:mean3+3*sd3});dps11.push({y:mean3+3*sd3});
+
+    dps12.push({x:"HOUR1",y:Val51});dps12.push({y:Val52});
+    dps12.push({y:Val53});dps12.push({y:Val54});
+    dps12.push({y:Val55});dps12.push({y:Val56});
+    dps12.push({y:Val57});dps12.push({y:Val58});
+    dps12.push({y:Val59});dps12.push({y:Val510});
+    dps12.push({y:Val511});dps12.push({y:Val512});
+    dps12.push({y:Val513});dps12.push({y:Val514});
+    dps12.push({y:Val515});dps12.push({y:Val516});
+    dps12.push({y:Val517});dps12.push({y:Val518});
+    dps12.push({y:Val519});dps12.push({y:Val520});
+    dps12.push({y:Val521});dps12.push({y:Val522});
+    dps12.push({y:Val523});dps12.push({y:Val524});
+    mean4=(dps12[0].y+dps12[1].y+dps12[2].y+dps12[3].y+dps12[4].y+dps12[5].y+dps12[6].y+dps12[7].y+dps12[8].y+dps12[9].y+dps12[10].y+dps12[11].y+dps12[12].y+dps12[13].y+dps12[14].y+dps12[15].y+dps12[16].y+dps12[17].y+dps12[18].y+dps12[19].y+dps12[20].y+dps12[21].y+dps12[22].y+dps12[23].y)/24;
+    s4= ((dps12[0].y-mean4)^2)+((dps12[1].y-mean4)^2)+((dps12[2].y-mean4)^2)+((dps12[3].y-mean4)^2)+((dps12[4].y-mean4)^2)+((dps12[5].y-mean4)^2)+((dps12[6].y-mean4)^2)+((dps12[7].y-mean4)^2)+((dps12[8].y-mean4)^2)+((dps12[9].y-mean4)^2)+((dps12[10].y-mean4)^2)+((dps12[11].y-mean4)^2)+((dps12[12].y-mean4)^2)+((dps12[13].y-mean4)^2)+((dps12[14].y-mean4)^2)+((dps12[15].y-mean4)^2)+((dps12[16].y-mean4)^2)+((dps12[17].y-mean4)^2)+((dps12[18].y-mean4)^2)+((dps12[19].y-mean4)^2)+((dps12[20].y-mean4)^2)+((dps12[21].y-mean4)^2)+((dps12[22].y-mean4)^2)+((dps12[23].y-mean4)^2);
+    sd4=Math.sqrt(s4/24);
+        			dps13.push({y:mean4});dps13.push({y:mean4});
+        			dps13.push({y:mean4});dps13.push({y:mean4});
+        			dps13.push({y:mean4});dps13.push({y:mean4});
+        			dps13.push({y:mean4});dps13.push({y:mean4});
+        			dps13.push({y:mean4});dps13.push({y:mean4});
+        			dps13.push({y:mean4});dps13.push({y:mean4});
+              dps13.push({y:mean4});dps13.push({y:mean4});
+              dps13.push({y:mean4});dps13.push({y:mean4});
+              dps13.push({y:mean4});dps13.push({y:mean4});
+              dps13.push({y:mean4});dps13.push({y:mean4});
+              dps13.push({y:mean4});dps13.push({y:mean4});
+              dps13.push({y:mean4});dps13.push({y:mean4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps14.push({y:mean4+3*sd4});dps14.push({y:mean4+3*sd4});
+    dps15.push({y:Val61});dps15.push({y:Val62});
+    dps15.push({y:Val63});dps15.push({y:Val64});
+    dps15.push({y:Val65});dps15.push({y:Val66});
+    dps15.push({y:Val67});dps15.push({y:Val68});
     dps15.push({y:Val69});dps15.push({y:Val610});
     dps15.push({y:Val611});dps15.push({y:Val612});
     dps15.push({y:Val613});dps15.push({y:Val614});
@@ -1330,6 +1170,7 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
     mean5=(dps15[0].y+dps15[1].y+dps15[2].y+dps15[3].y+dps15[4].y+dps15[5].y+dps15[6].y+dps15[7].y+dps15[8].y+dps15[9].y+dps15[10].y+dps15[11].y+dps15[12].y+dps15[13].y+dps15[14].y+dps15[15].y+dps15[16].y+dps15[17].y+dps15[18].y+dps15[19].y+dps15[20].y+dps15[21].y+dps15[22].y+dps15[23].y)/24;
     s5= ((dps15[0].y-mean5)^2)+((dps15[1].y-mean5)^2)+((dps15[2].y-mean5)^2)+((dps15[3].y-mean5)^2)+((dps15[4].y-mean5)^2)+((dps15[5].y-mean5)^2)+((dps15[6].y-mean5)^2)+((dps15[7].y-mean5)^2)+((dps15[8].y-mean5)^2)+((dps15[9].y-mean5)^2)+((dps15[10].y-mean5)^2)+((dps15[11].y-mean5)^2)+((dps15[12].y-mean5)^2)+((dps15[13].y-mean5)^2)+((dps15[14].y-mean5)^2)+((dps15[15].y-mean5)^2)+((dps15[16].y-mean5)^2)+((dps15[17].y-mean5)^2)+((dps15[18].y-5)^2)+((dps15[20].y-mean5)^2)+((dps15[21].y-mean5)^2)+((dps15[22].y-mean5)^2)+((dps15[23].y-mean5)^2);
     sd5=Math.sqrt(s5/24);
+
               dps16.push({y:mean5});dps16.push({y:mean5});
               dps16.push({y:mean5});dps16.push({y:mean5});
               dps16.push({y:mean5});dps16.push({y:mean5});
@@ -1342,20 +1183,20 @@ var chart7 = new CanvasJS.Chart("chartContainer7", {
   dps16.push({y:mean5});dps16.push({y:mean5});
   dps16.push({y:mean5});dps16.push({y:mean5});
   dps16.push({y:mean5});dps16.push({y:mean5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
-  dps17.push({y:sd5});dps17.push({y:sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
+  dps17.push({y:mean5+3*sd5});dps17.push({y:mean5+3*sd5});
 //data to b6 pushe915d12
-dps18.push({y:Val71});dps18.push({y:Val72});
+dps18.push({x:"HOUR1",y:Val71});dps18.push({y:Val72});
 dps18.push({y:Val73});dps18.push({y:Val74});
 dps18.push({y:Val75});dps18.push({y:Val76});
 dps18.push({y:Val77});dps18.push({y:Val78});
@@ -1382,18 +1223,18 @@ sd6=Math.sqrt(s6/24);
           dps19.push({y:mean6});dps19.push({y:mean6});
           dps19.push({y:mean6});dps19.push({y:mean6});
           dps19.push({y:mean6});dps19.push({y:mean6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
-          dps20.push({y:sd6});dps20.push({y:sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
+          dps20.push({y:mean6+3*sd6});dps20.push({y:mean6+3*sd6});
 
           dps21.push({y:Val81});dps21.push({y:Val82});
     			dps21.push({y:Val83});dps21.push({y:Val84});
@@ -1410,7 +1251,8 @@ sd6=Math.sqrt(s6/24);
           mean7=(dps21[0].y+dps21[1].y+dps21[2].y+dps21[3].y+dps21[4].y+dps21[5].y+dps21[6].y+dps21[7].y+dps21[8].y+dps21[9].y+dps21[10].y+dps21[11].y+dps21[12].y+dps21[13].y+dps21[14].y+dps21[15].y+dps21[16].y+dps21[17].y+dps21[18].y+dps21[19].y+dps21[20].y+dps21[21].y+dps21[22].y+dps21[23].y)/24;
           s7= ((dps21[0].y-mean7)^2)+((dps21[1].y-mean7)^2)+((dps21[2].y-mean7)^2)+((dps21[3].y-mean7)^2)+((dps21[4].y-mean7)^2)+((dps21[5].y-mean7)^2)+((dps21[6].y-mean7)^2)+((dps21[7].y-mean7)^2)+((dps21[8].y-mean7)^2)+((dps21[9].y-mean7)^2)+((dps21[10].y-mean7)^2)+((dps21[11].y-mean7)^2)+((dps21[12].y-mean7)^2)+((dps21[13].y-mean7)^2)+((dps21[14].y-mean7)^2)+((dps21[15].y-mean7)^2)+((dps21[16].y-mean7)^2)+((dps21[17].y-mean7)^2)+((dps21[18].y-mean7)^2)+((dps21[19].y-mean7)^2)+((dps21[20].y-mean7)^2)+((dps21[21].y-mean7)^2)+((dps21[22].y-mean7)^2)+((dps21[23].y-mean7)^2);
           sd7=Math.sqrt(s7/24);
-              			dps22.push({y:mean7});dps22.push({y:mean7});
+          
+              			dps22.push({x:"HOUR1",y:mean7});dps22.push({y:mean7});
               			dps22.push({y:mean7});dps22.push({y:mean7});
               			dps22.push({y:mean7});dps22.push({y:mean7});
               			dps22.push({y:mean7});dps22.push({y:mean7});
@@ -1422,18 +1264,18 @@ sd6=Math.sqrt(s6/24);
                     dps22.push({y:mean7});dps22.push({y:mean7});
                     dps22.push({y:mean7});dps22.push({y:mean7});
                     dps22.push({y:mean7});dps22.push({y:mean7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7});
-                    dps23.push({y:sd7});dps23.push({y:sd7})
-                    dps23.push({y:sd7});dps23.push({y:sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7})
+                    dps23.push({y:mean7+3*sd7});dps23.push({y:mean7+3*sd7});
 
 
         });
